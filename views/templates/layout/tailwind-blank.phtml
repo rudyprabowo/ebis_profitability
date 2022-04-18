@@ -1,0 +1,70 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $me
+ */
+$me = $this;
+// !d($me);
+?>
+<!-- blank layout -->
+<?=$me->doctype()?>
+<?php
+$content = $me->content;
+// zdebug($content);die();
+$vars = $me->vars();
+// !d($vars);die();
+$_vars = $vars['_vars_']??[];
+$module = $_vars['module']??"";
+$controller = $_vars['controller']??"";
+$controller = str_replace("Controller", "", $controller);
+$action = $_vars['action']??"";
+$layout = $_vars['layout']??"";
+// !d($layout);die();
+$active_menu = $me->active_menu??"";
+unset($vars['content']);
+?>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <?=$me->headMeta()?>
+  <?=$me->headTitle()->setAutoEscape(false)?>
+  <?=$me->headLink(['rel' => 'shortcut icon', 'type' => 'image/gif', 'href' => $me->basePath() . '/img/fav.ico']);?>
+  <!-- <script src="/js-lib/alpine-js/spruce.umd.js"></script>
+  <script src="/js-lib/alpine-js/alpine.min.js" defer></script> -->
+  <script src="/js-lib/alpine-js/morph-3.7.1.min.js" defer></script>
+  <script src="/js-lib/alpine-js/intersect-3.7.1.min.js" defer></script>
+  <script src="/js-lib/alpine-js/persist-3.7.1.min.js" defer></script>
+  <script src="/js-lib/alpine-js/trap-3.7.1.min.js" defer></script>
+  <script src="/js-lib/alpine-js/collapse-3.7.1.min.js" defer></script>
+  <script src="/js-lib/alpine-js/alpinejs-3.7.1.min.js" defer></script>
+  <!-- <script src="/dist/js/vendor/alpine-js/alpine-ie11.min.js" defer></script> -->
+  <link rel="stylesheet" href="<?=$this->basePath("font/inter/inter.css");?>">
+  <link rel="stylesheet" href="<?=$this->basePath("css-lib/remix-icon/remixicon.css");?>">
+  <link rel="stylesheet" href="<?=$this->basePath("css-lib/spinner/spinner.css");?>">
+  <link rel="stylesheet" href="<?=$this->basePath("css-lib/animate/animate.min.min.css");?>">
+
+  <?=$me->partial('partial-css.phtml', ['_vars' => $_vars,'_module'=>$module,'_controller'=>$controller,'_action'=>$action,'_layout'=>$layout,'_active_menu'=>$active_menu]);?>
+
+  <?=$me->headStyle()?>
+  <style>
+    [x-cloak] {
+      display: none !important;
+    }
+  </style>
+</head>
+
+<body class="antialiased font-sans bg-gray-50">
+  <?= $content; ?>
+  <script src="<?=$me->basePath("js-lib/lodash/lodash.js");?>"></script>
+  <script src="<?=$me->basePath("js-lib/validate/validate.min.js");?>"></script>
+
+  <!-- END GLOBAL MANDATORY SCRIPTS -->
+  <script src="<?=$me->basePath("js/him/validate.js");?>"></script>
+  <?=$me->headScript();?>
+
+  <?=$me->partial('partial-js.phtml', ['_vars' => $_vars,'_module'=>$module,'_controller'=>$controller,'_action'=>$action,'_layout'=>$layout,'_active_menu'=>$active_menu]);?>
+  <?=$me->inlineScript()?>
+</body>
+
+</html>

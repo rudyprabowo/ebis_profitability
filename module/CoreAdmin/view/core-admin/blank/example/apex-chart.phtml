@@ -1,0 +1,169 @@
+<?php
+$me       = $this;
+$headLink = $me->headLink();
+$headLink->appendStylesheet($me->basePath("css-lib/apexcharts/apexcharts.css"));
+$headScript = $me->headScript();
+$headScript->appendFile($me->basePath("js-lib/lodash/lodash.js"));
+$headScript->appendFile($me->basePath("js-lib/apexcharts/apexcharts.min.js"));
+?>
+<div class="rounded-lg bg-gray-200 overflow-hidden shadow divide-y divide-gray-200 sm:divide-y-0 sm:grid sm:grid-cols-2 sm:gap-px">
+  <div class="rounded-tl-lg rounded-tr-lg sm:rounded-tr-none relative group bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+    <div>
+      <span class="rounded-lg inline-flex p-3 bg-teal-50 text-teal-700 ring-4 ring-white">
+        LINE CHART
+      </span>
+    </div>
+    <div class="mt-8" id="line_chart">
+    </div>
+  </div>
+
+  <div class="sm:rounded-tr-lg relative group bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+    <div>
+      <span class="rounded-lg inline-flex p-3 bg-purple-50 text-purple-700 ring-4 ring-white">
+        AREA CHART
+      </span>
+    </div>
+    <div class="mt-8" id="area_chart">
+    </div>
+  </div>
+
+  <div class="relative group bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+    <div>
+      <span class="rounded-lg inline-flex p-3 bg-sky-50 text-sky-700 ring-4 ring-white">
+        COLUMN CHART
+      </span>
+    </div>
+    <div class="mt-8" id="column_chart">
+    </div>
+  </div>
+
+  <div class="relative group bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+    <div>
+      <span class="rounded-lg inline-flex p-3 bg-yellow-50 text-yellow-700 ring-4 ring-white">
+        BAR CHART
+      </span>
+    </div>
+    <div class="mt-8" id="bar_chart">
+    </div>
+  </div>
+
+  <div class="sm:rounded-bl-lg relative group bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+    <div>
+      <span class="rounded-lg inline-flex p-3 bg-rose-50 text-rose-700 ring-4 ring-white">
+        MIXED CHART
+      </span>
+    </div>
+    <div class="mt-8" id="mixed_chart">
+    </div>
+  </div>
+
+  <div class="rounded-bl-lg rounded-br-lg sm:rounded-bl-none relative group bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+    <div>
+      <span class="rounded-lg inline-flex p-3 bg-indigo-50 text-indigo-700 ring-4 ring-white">
+        TIMELINE CHART
+      </span>
+    </div>
+    <div class="mt-8" id="timeline_chart">
+    </div>
+  </div>
+
+  <div class="rounded-tl-lg rounded-tr-lg sm:rounded-tr-none relative group bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+    <div>
+      <span class="rounded-lg inline-flex p-3 bg-teal-50 text-teal-700 ring-4 ring-white">
+        CANDLESTICK CHART
+      </span>
+    </div>
+    <div class="mt-8" id="candlestick_chart">
+    </div>
+  </div>
+
+  <div class="sm:rounded-tr-lg relative group bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+    <div>
+      <span class="rounded-lg inline-flex p-3 bg-purple-50 text-purple-700 ring-4 ring-white">
+        BOXPLOT CHART
+      </span>
+    </div>
+    <div class="mt-8" id="boxplot_chart">
+    </div>
+  </div>
+
+  <div class="relative group bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+    <div>
+      <span class="rounded-lg inline-flex p-3 bg-sky-50 text-sky-700 ring-4 ring-white">
+        BUBBLE CHART
+      </span>
+    </div>
+    <div class="mt-8" id="bubble_chart">
+    </div>
+  </div>
+
+  <div class="relative group bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+    <div>
+      <span class="rounded-lg inline-flex p-3 bg-yellow-50 text-yellow-700 ring-4 ring-white">
+        SCATTER CHART
+      </span>
+    </div>
+    <div class="mt-8" id="scatter_chart">
+    </div>
+  </div>
+
+  <div class="sm:rounded-bl-lg relative group bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+    <div>
+      <span class="rounded-lg inline-flex p-3 bg-rose-50 text-rose-700 ring-4 ring-white">
+        HEATMAP CHART
+      </span>
+    </div>
+    <div class="mt-8" id="heatmap_chart">
+    </div>
+  </div>
+
+  <div class="rounded-bl-lg rounded-br-lg sm:rounded-bl-none relative group bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+    <div>
+      <span class="rounded-lg inline-flex p-3 bg-indigo-50 text-indigo-700 ring-4 ring-white">
+        TREEMAP CHART
+      </span>
+    </div>
+    <div class="mt-8" id="treemap_chart">
+    </div>
+  </div>
+
+  <div class="rounded-tl-lg rounded-tr-lg sm:rounded-tr-none relative group bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+    <div>
+      <span class="rounded-lg inline-flex p-3 bg-teal-50 text-teal-700 ring-4 ring-white">
+        PIE CHART
+      </span>
+    </div>
+    <div class="mt-8" id="pie_chart">
+    </div>
+  </div>
+
+  <div class="sm:rounded-tr-lg relative group bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+    <div>
+      <span class="rounded-lg inline-flex p-3 bg-purple-50 text-purple-700 ring-4 ring-white">
+        RADIAL CHART
+      </span>
+    </div>
+    <div class="mt-8" id="radial_chart">
+    </div>
+  </div>
+
+  <div class="relative group bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+    <div>
+      <span class="rounded-lg inline-flex p-3 bg-sky-50 text-sky-700 ring-4 ring-white">
+        RADAR CHART
+      </span>
+    </div>
+    <div class="mt-8" id="radar_chart">
+    </div>
+  </div>
+
+  <div class="relative group bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+    <div>
+      <span class="rounded-lg inline-flex p-3 bg-yellow-50 text-yellow-700 ring-4 ring-white">
+        POLAR CHART
+      </span>
+    </div>
+    <div class="mt-8" id="polar_chart">
+    </div>
+  </div>
+</div>

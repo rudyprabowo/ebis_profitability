@@ -1,0 +1,40 @@
+<tfoot x-show="$store.tbl.data.length>0" class="h-[80px]">
+  <tr>
+    <td colspan="10">
+      <div class="mx-auto container pt-8 flex justify-center sm:justify-end items-center">
+        <a x-show="$store.tbl.opt.current_page>1" @click="$store.tbl.prevPage()"
+          class="text-gray-600 mr-5 border-gray-200 border rounded focus:outline-none hover:bg-blue-600/80 hover:text-white focus:ring-blue-600 focus:shadow-outline-gray"
+          role="link" aria-label="previous page" href="javascript: void(0)">
+          <svg xmlns="http://www.w3.org/2000/svg" class="dark:text-gray-100 icon icon-tabler icon-tabler-chevron-left"
+            width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z"></path>
+            <polyline points="15 6 9 12 15 18"></polyline>
+          </svg>
+        </a>
+        <p class="text-gray-800 dark:text-gray-100 fot-normal text-xs">Page</p>
+        <label for="selectedPage" class="hidden"></label>
+        <input readonly placeholder="0" id="selectedPage" type="text"
+          class="bg-white dark:bg-gray-800 w-10 text-center px-2 mx-2 text-gray-800 dark:text-gray-100 focus:outline-none focus:border focus:border-indigo-700 font-normal flex items-center text-xs border-gray-300 rounded border"
+          x-model="$store.tbl.opt.current_page" />
+        <p class="text-gray-800 dark:text-gray-100 fot-normal text-xs" x-text="'of '+$store.tbl.opt.total_page">
+        </p>
+        <a x-show="$store.tbl.opt.current_page<$store.tbl.opt.total_page" @click="$store.tbl.nextPage()"
+          class="text-gray-600 ml-5 border-gray-200 border rounded focus:outline-none hover:bg-blue-600/80 hover:text-white focus:ring-blue-600 focus:shadow-outline-gray"
+          role="link" aria-label="next page" href="javascript: void(0)">
+          <svg xmlns="http://www.w3.org/2000/svg" class="dark:text-gray-100 icon icon-tabler icon-tabler-chevron-right"
+            width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z"></path>
+            <polyline points="9 6 15 12 9 18"></polyline>
+          </svg>
+        </a>
+        <label for="selectedPage1" class="mx-2">|</label>
+        <input placeholder="0" id="selectedPage1" type="text"
+          class="bg-white dark:bg-gray-800 w-10 px-2 mx-2 text-center text-gray-800 dark:text-gray-100 focus:outline-none focus:border focus:border-indigo-700 font-normal flex items-center text-xs border-gray-300 rounded border"
+          x-model="$store.tbl.opt.perpage" />
+        <p class="-mt-1 text-gray-800 dark:text-gray-100 fot-normal text-xs">per page</p>
+      </div>
+    </td>
+  </tr>
+</tfoot>

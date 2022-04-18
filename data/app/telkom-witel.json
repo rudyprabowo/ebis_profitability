@@ -1,0 +1,317 @@
+[
+    {
+      "wil_id_ho": 23,
+      "witel_ho": "JABAR TENGAH (BANDUNG)",
+      "ex_ucs": "TREG-3"
+    },
+    {
+      "wil_id_ho": "02",
+      "witel_ho": "SUMUT BARAT (MEDAN)",
+      "ex_ucs": "TREG-1"
+    },
+    {
+      "wil_id_ho": "09",
+      "witel_ho": "SUMATERA SELATAN (PALEMBANG)",
+      "ex_ucs": "TREG-1"
+    },
+    {
+      "wil_id_ho": 33,
+      "witel_ho": "DAERAH ISTIMEWA YOGYAKARTA",
+      "ex_ucs": "TREG-4"
+    },
+    {
+      "wil_id_ho": "06",
+      "witel_ho": "JAMBI",
+      "ex_ucs": "TREG-1"
+    },
+    {
+      "wil_id_ho": "",
+      "witel_ho": "",
+      "ex_ucs": ""
+    },
+    {
+      "wil_id_ho": 32,
+      "witel_ho": "JATENG UTARA (SEMARANG)",
+      "ex_ucs": "TREG-4"
+    },
+    {
+      "wil_id_ho": 31,
+      "witel_ho": "JATENG TIMUR UTARA (KUDUS)",
+      "ex_ucs": "TREG-4"
+    },
+    {
+      "wil_id_ho": 13,
+      "witel_ho": "JAKARTA SELATAN",
+      "ex_ucs": "TREG-2"
+    },
+    {
+      "wil_id_ho": 16,
+      "witel_ho": "JAKARTA TIMUR",
+      "ex_ucs": "TREG-2"
+    },
+    {
+      "wil_id_ho": 12,
+      "witel_ho": "JAKARTA BARAT",
+      "ex_ucs": "TREG-2"
+    },
+    {
+      "wil_id_ho": 11,
+      "witel_ho": "LAMPUNG (BANDAR LAMPUNG)",
+      "ex_ucs": "TREG-1"
+    },
+    {
+      "wil_id_ho": 61,
+      "witel_ho": "PAPUA (JAYAPURA)",
+      "ex_ucs": "TREG-7"
+    },
+    {
+      "wil_id_ho": 30,
+      "witel_ho": "JATENG TIMUR SELATAN (SOLO)",
+      "ex_ucs": "TREG-4"
+    },
+    {
+      "wil_id_ho": 21,
+      "witel_ho": "JABAR UTARA (KARAWANG)",
+      "ex_ucs": "TREG-3"
+    },
+    {
+      "wil_id_ho": 24,
+      "witel_ho": "JABAR TIMSEL (TASIKMALAYA)",
+      "ex_ucs": "TREG-3"
+    },
+    {
+      "wil_id_ho": 27,
+      "witel_ho": "JATENG BARAT UTARA (PKLG)",
+      "ex_ucs": "TREG-4"
+    },
+    {
+      "wil_id_ho": 59,
+      "witel_ho": "MALUKU (AMBON)",
+      "ex_ucs": "TREG-7"
+    },
+    {
+      "wil_id_ho": 39,
+      "witel_ho": "SURABAYA UTARA",
+      "ex_ucs": "TREG-5"
+    },
+    {
+      "wil_id_ho": 47,
+      "witel_ho": "KALTIM UTARA (TARAKAN)",
+      "ex_ucs": "TREG-6"
+    },
+    {
+      "wil_id_ho": 22,
+      "witel_ho": "JABAR SELATAN (SUKABUMI)",
+      "ex_ucs": "TREG-3"
+    },
+    {
+      "wil_id_ho": "",
+      "witel_ho": "",
+      "ex_ucs": "TREG-3"
+    },
+    {
+      "wil_id_ho": 51,
+      "witel_ho": "SULSEL BARAT (PARE-PARE)",
+      "ex_ucs": "TREG-7"
+    },
+    {
+      "wil_id_ho": "05",
+      "witel_ho": "RIAU DARATAN (PEKANBARU)",
+      "ex_ucs": "TREG-1"
+    },
+    {
+      "wil_id_ho": "07",
+      "witel_ho": "RIAU KEPULAUAN (BATAM)",
+      "ex_ucs": "TREG-1"
+    },
+    {
+      "wil_id_ho": 50,
+      "witel_ho": "SULTENG (PALU)",
+      "ex_ucs": "TREG-7"
+    },
+    {
+      "wil_id_ho": 56,
+      "witel_ho": "NTB (MATARAM)",
+      "ex_ucs": "TREG-5"
+    },
+    {
+      "wil_id_ho": 52,
+      "witel_ho": "SULSEL (MAKASAR)",
+      "ex_ucs": "TREG-7"
+    },
+    {
+      "wil_id_ho": 18,
+      "witel_ho": "BANTEN TIMUR (TANGERANG)",
+      "ex_ucs": "TREG-2"
+    },
+    {
+      "wil_id_ho": 55,
+      "witel_ho": "BALI UTARA (SINGARAJA)",
+      "ex_ucs": "TREG-5"
+    },
+    {
+      "wil_id_ho": 46,
+      "witel_ho": "KALTIMTENG (SAMARINDA)",
+      "ex_ucs": "TREG-6"
+    },
+    {
+      "wil_id_ho": 40,
+      "witel_ho": "JATIMSEL TIMUR (PASURUAN)",
+      "ex_ucs": "TREG-5"
+    },
+    {
+      "wil_id_ho": 34,
+      "witel_ho": "JATIM BARAT (MADIUN)",
+      "ex_ucs": "TREG-5"
+    },
+    {
+      "wil_id_ho": 28,
+      "witel_ho": "JATENG SELATAN (MAGELANG)",
+      "ex_ucs": "TREG-4"
+    },
+    {
+      "wil_id_ho": 36,
+      "witel_ho": "JATIM SELATAN (MALANG)",
+      "ex_ucs": "TREG-5"
+    },
+    {
+      "wil_id_ho": 45,
+      "witel_ho": "KALTIMSEL (BALIKPAPAN)",
+      "ex_ucs": "TREG-6"
+    },
+    {
+      "wil_id_ho": 35,
+      "witel_ho": "JATIM TENGAH (KEDIRI)",
+      "ex_ucs": "TREG-5"
+    },
+    {
+      "wil_id_ho": 37,
+      "witel_ho": "JATIM TENGAH TIMUR (SIDOARJO)",
+      "ex_ucs": "TREG-5"
+    },
+    {
+      "wil_id_ho": 14,
+      "witel_ho": "JAKARTA PUSAT",
+      "ex_ucs": "TREG-2"
+    },
+    {
+      "wil_id_ho": 42,
+      "witel_ho": "KALBAR (PONTIANAK)",
+      "ex_ucs": "TREG-6"
+    },
+    {
+      "wil_id_ho": 99,
+      "witel_ho": "SULUT MALUKU UTARA",
+      "ex_ucs": "TREG-7"
+    },
+    {
+      "wil_id_ho": "08",
+      "witel_ho": "BENGKULU",
+      "ex_ucs": "TREG-1"
+    },
+    {
+      "wil_id_ho": 41,
+      "witel_ho": "JATIM TIMUR (JEMBER)",
+      "ex_ucs": "TREG-5"
+    },
+    {
+      "wil_id_ho": 10,
+      "witel_ho": "BANGKA BELITUNG (P.PINANG)",
+      "ex_ucs": "TREG-1"
+    },
+    {
+      "wil_id_ho": 25,
+      "witel_ho": "JABAR TIMUR (CIREBON)",
+      "ex_ucs": "TREG-3"
+    },
+    {
+      "wil_id_ho": 57,
+      "witel_ho": "NTT (KUPANG)",
+      "ex_ucs": "TREG-5"
+    },
+    {
+      "wil_id_ho": 54,
+      "witel_ho": "BALI SELATAN (DENPASAR)",
+      "ex_ucs": "TREG-5"
+    },
+    {
+      "wil_id_ho": 60,
+      "witel_ho": "PAPUA BARAT (SORONG)",
+      "ex_ucs": "TREG-7"
+    },
+    {
+      "wil_id_ho": 53,
+      "witel_ho": "SULTRA (KENDARI)",
+      "ex_ucs": "TREG-7"
+    },
+    {
+      "wil_id_ho": 15,
+      "witel_ho": "JAKARTA UTARA",
+      "ex_ucs": "TREG-2"
+    },
+    {
+      "wil_id_ho": 43,
+      "witel_ho": "KALTENG (PALANGKARAYA)",
+      "ex_ucs": "TREG-6"
+    },
+    {
+      "wil_id_ho": 17,
+      "witel_ho": "BANTEN BARAT (SERANG)",
+      "ex_ucs": "TREG-2"
+    },
+    {
+      "wil_id_ho": 26,
+      "witel_ho": "JATENG BARAT SELATAN (PURWOKERTO)",
+      "ex_ucs": "TREG-4"
+    },
+    {
+      "wil_id_ho": 63,
+      "witel_ho": "MADURA",
+      "ex_ucs": "TREG-5"
+    },
+    {
+      "wil_id_ho": 38,
+      "witel_ho": "SURABAYA SELATAN",
+      "ex_ucs": "TREG-5"
+    },
+    {
+      "wil_id_ho": 20,
+      "witel_ho": "JABAR BARAT UTARA (BEKASI)",
+      "ex_ucs": "TREG-2"
+    },
+    {
+      "wil_id_ho": 44,
+      "witel_ho": "KALSEL (BANJARMASIN)",
+      "ex_ucs": "TREG-6"
+    },
+    {
+      "wil_id_ho": "04",
+      "witel_ho": "SUMATERA BARAT (PADANG)",
+      "ex_ucs": "TREG-1"
+    },
+    {
+      "wil_id_ho": "01",
+      "witel_ho": "NAD (ACEH)",
+      "ex_ucs": "TREG-1"
+    },
+    {
+      "wil_id_ho": 19,
+      "witel_ho": "JABAR BARAT (BOGOR)",
+      "ex_ucs": "TREG-2"
+    },
+    {
+      "wil_id_ho": 49,
+      "witel_ho": "GORONTALO",
+      "ex_ucs": "TREG-7"
+    },
+    {
+      "wil_id_ho": "03",
+      "witel_ho": "SUMUT TIMUR (PEMATANG SIANTAR)",
+      "ex_ucs": "TREG-1"
+    },
+    {
+      "wil_id_ho": 62,
+      "witel_ho": "BANDUNG BARAT",
+      "ex_ucs": "TREG-3"
+    }
+  ]

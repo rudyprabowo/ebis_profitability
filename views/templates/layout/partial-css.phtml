@@ -1,0 +1,115 @@
+<?php
+$me = $this;
+$css = ["global_.css","global_.min.css","default_.css","default_.min.css"];
+// !s($_layout, $_module, $_controller, $_action);die();
+$dtime = "?d=" . time();
+if (env('APPLICATION_ENV', "development")==="production") {
+    $dtime = "";
+}
+foreach ($css as $fname) {
+    // zdebug(css_path());
+    // die();
+    if (is_file(APP_PATH . 'public' . DS . css_path() . $fname)) {
+        echo '<link rel="stylesheet" href="'.$me->basePath(css_url().$fname.$dtime).'">';
+    }
+
+    // INFO load layout default style
+    if (is_file(APP_PATH . 'public' . DS . css_path() . $_layout . DS . $fname)) {
+        echo '<link rel="stylesheet" href="'.$me->basePath(css_url() . $_layout . "/".$fname.$dtime).'">';
+    }
+    // if (is_file(APP_PATH . 'public' . DS . 'sass' . DS . $_layout . DS . $fname)) {
+    //     echo '<link rel="stylesheet" href="'.$me->basePath("dist/sass/" . $_layout . "/".$fname.$dtime).'">';
+    // }
+    // if (is_file(APP_PATH . 'public' . DS . 'pcss' . DS . $_layout . DS . $fname)) {
+    //     echo '<link rel="stylesheet" href="'.$me->basePath("dist/pcss/" . $_layout . "/".$fname.$dtime).'">';
+    // }
+    // INFO load module default style
+    if (is_file(APP_PATH . 'public' . DS . css_path() . $_layout . DS . $_module . DS . $fname)) {
+        echo '<link rel="stylesheet" href="'.$me->basePath(css_url() . $_layout . "/" . $_module . "/".$fname.$dtime).'">';
+    }
+    if (is_file(APP_PATH . 'public' . DS . css_path() . $_module . DS . $fname)) {
+        echo '<link rel="stylesheet" href="'.$me->basePath(css_url() . $_module . "/".$fname.$dtime).'">';
+    }
+    // if (is_file(APP_PATH . 'public' . DS . 'sass' . DS . $_layout . DS . $_module . DS . $fname)) {
+    //     echo '<link rel="stylesheet" href="'.$me->basePath("dist/sass/" . $_layout . "/" . $_module . "/".$fname.$dtime).'">';
+    // }
+    // if (is_file(APP_PATH . 'public' . DS . 'sass' . DS . $_module . DS . $fname)) {
+    //     echo '<link rel="stylesheet" href="'.$me->basePath("dist/sass/" . "/" . $_module . "/".$fname.$dtime).'">';
+    // }
+    // if (is_file(APP_PATH . 'public' . DS . 'pcss' . DS . $_layout . DS . $_module . DS . $fname)) {
+    //     echo '<link rel="stylesheet" href="'.$me->basePath("dist/pcss/" . $_layout . "/" . $_module . "/".$fname.$dtime).'">';
+    // }
+    // if (is_file(APP_PATH . 'public' . DS . 'pcss' . DS . $_module . DS . $fname)) {
+    //     echo '<link rel="stylesheet" href="'.$me->basePath("dist/pcss/" . "/" . $_module . "/".$fname.$dtime).'">';
+    // }
+    // INFO load controller default style
+    if (is_file(APP_PATH . 'public' . DS . css_path() . $_layout . DS . $_module . DS . $_controller . DS . $fname)) {
+        echo '<link rel="stylesheet" href="'.$me->basePath(css_url() . $_layout . "/" . $_module . "/" . $_controller . "/".$fname.$dtime).'">';
+    }
+    if (is_file(APP_PATH . 'public' . DS . css_path() . $_module . DS . $_controller . DS . $fname)) {
+        echo '<link rel="stylesheet" href="'.$me->basePath(css_url() . $_module . "/" . $_controller . "/".$fname.$dtime).'">';
+    }
+    // if (is_file(APP_PATH . 'public' . DS . 'sass' . DS . $_layout . DS . $_module . DS . $_controller . DS . $fname)) {
+    //     echo '<link rel="stylesheet" href="'.$me->basePath("dist/sass/" . $_layout . "/" . $_module . "/" . $_controller . "/".$fname.$dtime).'">';
+    // }
+    // if (is_file(APP_PATH . 'public' . DS . 'sass' . DS . $_module . DS . $_controller . DS . $fname)) {
+    //     echo '<link rel="stylesheet" href="'.$me->basePath("dist/sass/" . "/" . $_module . "/" . $_controller . "/".$fname.$dtime).'">';
+    // }
+    // if (is_file(APP_PATH . 'public' . DS . 'pcss' . DS . $_layout . DS . $_module . DS . $_controller . DS . $fname)) {
+    //     echo '<link rel="stylesheet" href="'.$me->basePath("dist/pcss/" . $_layout . "/" . $_module . "/" . $_controller . "/".$fname.$dtime).'">';
+    // }
+    // if (is_file(APP_PATH . 'public' . DS . 'pcss' . DS . $_module . DS . $_controller . DS . $fname)) {
+    //     echo '<link rel="stylesheet" href="'.$me->basePath("dist/pcss/" . "/" . $_module . "/" . $_controller . "/".$fname.$dtime).'">';
+    // }
+}
+
+// INFO load action default style
+// !s(APP_PATH . 'public' . DS . css_path() . $_layout . DS . $_module . DS . $_controller . DS . $_action);
+// !s(is_dir(APP_PATH . 'public' . DS . css_path() . $_layout . DS . $_module . DS . $_controller . DS . $_action));
+if (is_dir(APP_PATH . 'public' . DS . css_path() . $_layout . DS . $_module . DS . $_controller . DS . $_action)) {
+    foreach (glob(APP_PATH . 'public' . DS . css_path() . $_layout . DS . $_module . DS . $_controller . DS . $_action . DS . "*.css") as $filename) {
+        // zdebug($filename);
+        $tmp = explode(DS, $filename);
+        $fname = $tmp[count($tmp) - 1];
+        echo '<link rel="stylesheet" href="'.$me->basePath(css_url() . $_layout . "/" . $_module . "/" . $_controller . "/" . $_action . "/".$fname.$dtime).'">';
+    }
+}
+
+// zdebug(APP_PATH . 'public' . DS . css_path() . $_module . DS . $_controller . DS . $_action);
+if (is_dir(APP_PATH . 'public' . DS . css_path() . $_module . DS . $_controller . DS . $_action)) {
+    foreach (glob(APP_PATH . 'public' . DS . css_path() . $_module . DS . $_controller . DS . $_action . DS . "*.css") as $filename) {
+        $tmp = explode(DS, $filename);
+        $fname = $tmp[count($tmp) - 1];
+        echo '<link rel="stylesheet" href="'.$me->basePath(css_url() . $_module . "/" . $_controller . "/" . $_action . "/".$fname.$dtime).'">';
+    }
+}
+// if (is_dir(APP_PATH . 'public' . DS . 'sass' . DS . $_layout . DS . $_module . DS . $_controller . DS . $_action)) {
+//   foreach (glob(APP_PATH . 'public' . DS . 'sass' . DS . $_layout . DS . $_module . DS . $_controller . DS . $_action . DS . "*.css") as $filename) {
+//       $tmp = explode(DS, $filename);
+//       $fname = $tmp[count($tmp) - 1];
+//       echo '<link rel="stylesheet" href="'.$me->basePath("dist/sass/" . $_layout . "/" . $_module . "/" . $_controller . "/" . $_action . "/".$fname.$dtime).'">';
+//   }
+// }
+
+// if (is_dir(APP_PATH . 'public' . DS . 'sass' . DS . $_module . DS . $_controller . DS . $_action)) {
+//   foreach (glob(APP_PATH . 'public' . DS . 'sass' . DS . $_module . DS . $_controller . DS . $_action . DS . "*.css") as $filename) {
+//       $tmp = explode(DS, $filename);
+//       $fname = $tmp[count($tmp) - 1];
+//       echo '<link rel="stylesheet" href="'.$me->basePath("dist/sass/" . $_module . "/" . $_controller . "/" . $_action . "/".$fname.$dtime).'">';
+//   }
+// }
+// if (is_dir(APP_PATH . 'public' . DS . 'pcss' . DS . $_layout . DS . $_module . DS . $_controller . DS . $_action)) {
+//   foreach (glob(APP_PATH . 'public' . DS . 'pcss' . DS . $_layout . DS . $_module . DS . $_controller . DS . $_action . DS . "*.css") as $filename) {
+//       $tmp = explode(DS, $filename);
+//       $fname = $tmp[count($tmp) - 1];
+//       echo '<link rel="stylesheet" href="'.$me->basePath("dist/pcss/" . $_layout . "/" . $_module . "/" . $_controller . "/" . $_action . "/".$fname.$dtime).'">';
+//   }
+// }
+
+// if (is_dir(APP_PATH . 'public' . DS . 'pcss' . DS . $_module . DS . $_controller . DS . $_action)) {
+//   foreach (glob(APP_PATH . 'public' . DS . 'pcss' . DS . $_module . DS . $_controller . DS . $_action . DS . "*.css") as $filename) {
+//       $tmp = explode(DS, $filename);
+//       $fname = $tmp[count($tmp) - 1];
+//       echo '<link rel="stylesheet" href="'.$me->basePath("dist/pcss/" . $_module . "/" . $_controller . "/" . $_action . "/".$fname.$dtime).'">';
+//   }
+// }

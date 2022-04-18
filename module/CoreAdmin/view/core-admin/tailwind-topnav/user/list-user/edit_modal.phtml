@@ -1,0 +1,110 @@
+<div x-bind="event" x-cloak x-show="show" x-data="edit_user" class="z-50 fixed w-full flex justify-center inset-0">
+    <div @click="" class="w-full h-full bg-bluegray-900 bg-opacity-70 z-0 absolute inset-0"></div>
+    <div class="mx-auto container">
+        <div class=" flex items-center justify-center h-full w-full">
+            <div class=" bg-white rounded-md shadow fixed  sm:h-aut">
+                <div class="px-5 py-4">
+                    <div class="xl:w-full border-b border-gray-300 dark:border-gray-700 pb-2">
+                        <div class="flex items-center w-11/12 ">
+                            <div class="container mx-auto">
+                                <div class="mx-auto xl:w-full">
+                                    <h1 role="heading" class="text-lg text-gray-800 dark:text-gray-100 font-bold">Edit User</h1>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 pt-1"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-6 w-full max-h-72 overflow-y-auto scrollbar scrollbar-thumb-bluegray-400 scrollbar-track-bluegray-100 scrollbar-thin">
+                        <div class="md:flex gap-x-2 items-center mt-4 w-full">
+                            <div class="w-3/6">
+                                <label class="text-sm leading-none text-gray-800">Username</label>
+                                <input x-model="data.username" type="text" name="username" tabindex="0" class="w-full p-3 mt-3  border rounded border-gray-200 focus:outline-none focus:border-gray-600 text-sm font-medium leading-none text-gray-800" aria-labelledby="firstName" placeholder="Username" />
+                            </div>
+                            <div class="w-3/6">
+                                <label class="text-sm leading-none text-gray-800">Full name</label>
+                                <input x-model="data.full_name" type="text" name="full_name" tabindex="0" class="w-full p-3 mt-3  border rounded border-gray-200 focus:outline-none focus:border-gray-600 text-sm font-medium leading-none text-gray-800" aria-labelledby="lastName" placeholder="Full Name" />
+                            </div>
+                        </div>
+                        <div class="md:flex gap-x-2 items-center mt-4 w-full">
+                            <div class="w-3/6">
+                                <label class="text-sm leading-none text-gray-800">Email</label>
+                                <input x-model="data.email" type="email" name="email" tabindex="0" class="w-full p-3 mt-3  border rounded border-gray-200 focus:outline-none focus:border-gray-600 text-sm font-medium leading-none text-gray-800" aria-labelledby="firstName" placeholder="E-Mail" />
+                            </div>
+                            <div class="w-3/6">
+                                <label class="text-sm leading-none text-gray-800">Mobile NO</label>
+                                <input x-model="data.mobile_no" type="text" name="mobile_no" tabindex="0" class="w-full p-3 mt-3  border rounded border-gray-200 focus:outline-none focus:border-gray-600 text-sm font-medium leading-none text-gray-800" aria-labelledby="lastName" placeholder="Mobile NO" />
+                            </div>
+                        </div>
+                        <div class="md:flex gap-x-2 items-center mt-4 w-full">
+                            <div class="w-3/6">
+                                <label class="text-sm leading-none text-gray-800">Employee NIK</label>
+                                <input x-model="data.employ_nik" type="text" name="employ_nik" tabindex="0" class="w-full p-3 mt-3  border rounded border-gray-200 focus:outline-none focus:border-gray-600 text-sm font-medium leading-none text-gray-800" aria-labelledby="firstName" placeholder="Employee NIK" />
+                            </div>
+                            <div class="w-3/6">
+                                <label class="text-sm leading-none text-gray-800">SPV NIK</label>
+                                <input x-model="data.spv_nik" type="text" name="spv_nik" tabindex="0" class="w-full p-3 mt-3  border rounded border-gray-200 focus:outline-none focus:border-gray-600 text-sm font-medium leading-none text-gray-800" aria-labelledby="lastName" placeholder="SPV NIK" />
+                            </div>
+                        </div>
+                        <div class="md:flex gap-x-2 items-center mt-4 w-full">
+                            <div class="w-3/6">
+                                <label class="text-sm leading-none text-gray-800">Redirect Route</label>
+                                <!-- <input x-model="data.redirect_route" type="number" name="redirect_route" tabindex="0" class="w-full p-3 mt-3  border rounded border-gray-200 focus:outline-none focus:border-gray-600 text-sm font-medium leading-none text-gray-800" aria-labelledby="firstName" placeholder="Redirect Route" /> -->
+                                <select x-model="data.redirect_route" name="redirect_route" class="w-full p-3 mt-3  border rounded border-gray-200 focus:outline-none focus:border-gray-600 text-sm font-medium leading-none text-gray-800">
+                                    <option>--</option>
+                                    <template x-for="opt in route_opt">
+                                        <option :selected="data.redirect_route === opt.id" :value="opt.id" x-text="opt.name"></option>
+                                    </template>
+                                </select>
+                            </div>
+                            <div class="w-3/6">
+                                <label class="text-sm leading-none text-gray-800">Redirect Param</label>
+                                <input x-model="data.redirect_param" type="text" name="redirect_param" tabindex="0" class="w-full p-3 mt-3  border rounded border-gray-200 focus:outline-none focus:border-gray-600 text-sm font-medium leading-none text-gray-800" aria-labelledby="lastName" placeholder="Redirect Param" />
+                            </div>
+                        </div>
+                        <div class="md:flex gap-x-2 items-center mt-4 w-full">
+                            <div class="w-3/6">
+                                <label class="text-sm leading-none text-gray-800">Redirect URL</label>
+                                <input x-model="data.redirect_url" type="text" name="redirect_url" tabindex="0" class="w-full p-3 mt-3  border rounded border-gray-200 focus:outline-none focus:border-gray-600 text-sm font-medium leading-none text-gray-800" aria-labelledby="lastName" placeholder="Redirect URL" />
+                            </div>
+                            <div class="w-3/6">
+                                <label class="text-sm leading-none text-gray-800">Redirect Query</label>
+                                <input x-model="data.redirect_query" type="text" name="redirect_query" tabindex="0" class="w-full p-3 mt-3  border rounded border-gray-200 focus:outline-none focus:border-gray-600 text-sm font-medium leading-none text-gray-800" aria-labelledby="lastName" placeholder="Redirect URL" />
+                            </div>
+                        </div>
+                        <div class="md:flex gap-x-2 items-center mt-4 w-full">
+                            <div class="w-3/6">
+                                <label class="text-sm leading-none text-gray-800">Telegram ID</label>
+                                <input x-model="data.telegram_id" type="text" name="telegram_id" tabindex="0" class="w-full p-3 mt-3  border rounded border-gray-200 focus:outline-none focus:border-gray-600 text-sm font-medium leading-none text-gray-800" aria-labelledby="firstName" placeholder="Telegram ID" />
+                            </div>
+                            <div class="w-3/6">
+                                <label class="text-sm leading-none text-gray-800">LDAP</label>
+                                <button @click="changeStatusLdap()" :class="{'bg-red-700':parseInt(data.is_ldap)!==1,'bg-green-700':parseInt(data.is_ldap)===1}" class="w-full p-3 mt-3  border rounded border-green-800 focus:outline-none focus:border-green-600 text-sm font-medium leading-none text-white">
+                                    <!-- Active -->
+                                    <span :class="{'text-red-100':parseInt(data.is_ldap)!==1,'text-green-100':parseInt(data.is_ldap)===1}" class="text-xs" x-text="((parseInt(data.is_ldap)===1)?'Active':'Not Active')"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- <div class="md:flex gap-x-2 items-center mt-4 w-full">
+                            <div class="w-3/6">
+                                <label class="text-sm leading-none text-gray-800">Status</label>
+                                <button @click="changeStatus()" :class="{'bg-green-700 border-green-800 focus:border-green-600':parseInt(data.status)===1, 'bg-red-700 border-red-800 focus:border-red-600':parseInt(data.status)===0}" class="w-full p-3 mt-3  border rounded  focus:outline-none  text-sm font-medium leading-none text-white">
+                                    <span class="text-white" x-text="((parseInt(data.status)===1)?'Active':'Not Active')"></span>
+                                </button>
+                            </div>
+                            <div class="w-3/6">
+                                <label class="text-sm leading-none text-gray-800">LDAP</label>
+                                <button @click="changeLdap()" :class="{'bg-green-700 border-green-800 focus:border-green-600':parseInt(data.status)===1, 'bg-red-700 border-red-800 focus:border-red-600':parseInt(data.status)===0}" class="w-full p-3 mt-3  border rounded  focus:outline-none  text-sm font-medium leading-none text-white">
+                                    <span class="text-white" x-text="((parseInt(data.status)===1)?'Active':'Not Active')"></span>
+                                </button>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="flex items-center justify-end mt-10 gap-x-2">
+                        <button @click="hideModal()" role="button" aria-label="closebutton" class="focus:ring-2 focus:ring-offset-2 focus:bg-gray-600 focus:ring-gray-500 focus:outline-none px-3 py-1 bg-gray-500 hover:bg-gray-400 shadow rounded text-sm text-white">Cancel</button>
+                        <button @click="submit()" aria-label="add user" role="button" class="focus:ring-2 focus:ring-offset-2 focus:ring-green-800 focus:outline-none px-3 py-1 bg-green-700 hover:bg-opacity-80 shadow rounded text-sm text-white">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

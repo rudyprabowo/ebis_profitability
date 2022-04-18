@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+[x-cloak] { display: none !important; }
+
+.toggle-checkbox:checked {
+  @apply right-0 border-green-400;
+}
+.toggle-checkbox:checked + .toggle-label {
+  @apply bg-green-400;
+}
+
+.ts-wrapper .ts-control{
+  @apply whitespace-nowrap;
+}
+
+.ts-dropdown-content .option{
+  @apply whitespace-nowrap;
+}
+
+.ts-dropdown-content {
+  max-height: 85px;
+}
+
+td.cond-col .ts-wrapper .ts-control{
+  min-width: 10em;
+}
+
+.ts-wrapper .ts-control {
+  min-height: 3em;
+}

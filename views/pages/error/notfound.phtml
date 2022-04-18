@@ -1,0 +1,239 @@
+<?php
+$me = $this;
+// zdebug(debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT,2));die('qqq');
+// debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+// zdebug($me->vars());//die();
+use Zend\Mvc\Application;
+// Debug::dump($me->identity());die();
+$me->headLink()->appendStylesheet('https://fonts.googleapis.com/css?family=Inconsolata');
+$me->headStyle()->captureStart();
+?>
+html {
+  min-height: 100%;
+}
+
+body {
+  box-sizing: border-box;
+  height: 100%;
+  background-color: #000000;
+  background-image: radial-gradient(#11581E, #041607);
+  font-family: 'Inconsolata', Helvetica, sans-serif;
+  font-size: 1.2rem;
+  color: rgba(128, 255, 128, 0.8);
+  text-shadow:
+      0 0 1ex rgba(51, 255, 51, 1),
+      0 0 2px rgba(255, 255, 255, 0.8);
+}
+
+.overlay {
+  pointer-events: none;
+  position: absolute;
+  width: 99%;
+  height: 98%;
+  background:
+      repeating-linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 0,
+      rgba(0, 0, 0, 0.3) 50%,
+      rgba(0, 0, 0, 0) 100%);
+  background-size: auto 4px;
+  z-index: 99;
+}
+
+.overlay::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+      0deg,
+      transparent 0%,
+      rgba(32, 128, 32, 0.2) 2%,
+      rgba(32, 128, 32, 0.8) 3%,
+      rgba(32, 128, 32, 0.2) 3%,
+      transparent 100%);
+  background-repeat: no-repeat;
+  animation: scan 7.5s linear 0s infinite;
+}
+
+@keyframes scan {
+  0%        { background-position: 0 -100vh; }
+  35%, 100% { background-position: 0 100vh; }
+}
+
+.terminal {
+  box-sizing: inherit;
+  position: absolute;
+  width: 99%;
+  max-width: 100%;
+  padding: 2.5rem;
+}
+
+.output {
+  color: rgba(128, 255, 128, 0.8);
+  text-shadow:
+      0 0 1px rgba(51, 255, 51, 0.4),
+      0 0 2px rgba(255, 255, 255, 0.8);
+}
+
+.output.stacktrace,ul.trace li{
+  font-size: 1rem;
+}
+
+.output::before {
+  content: "> ";
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+a::before {
+  content: "[";
+}
+
+a::after {
+  content: "]";
+}
+
+.errorcode {
+  color: white;
+}
+<?php
+$me->headStyle()->captureEnd();
+$identity = null;
+// try{
+// $identity = $me->identity();
+// }catch(Zend\View\Exception\RuntimeException $e){}
+?>
+
+<div class="overlay"></div>
+<div class="terminal">
+  <h1>Error <span class="errorcode">404</span></h1>
+  <?php if(env("DEBUG") || ($identity!=null && isset($identity['roles'][1]))) : ?>
+    <h2><span class="errorcode"><?= $me->message ?></span></h2>
+  <?php endif ?>
+  <p class="output">The page you are looking for might have been removed, had its name changed or is temporarily unavailable</p>
+  <?php
+  if(env("DEBUG") || ($identity!=null && isset($identity['roles'][1]))){
+  ?>
+    <h2><span class="errorcode">REASON.</span></h2>
+    <?php
+    if (! empty($me->reason)){
+      switch ($me->reason) {
+        case Application::ERROR_CONTROLLER_CANNOT_DISPATCH:
+            $reasonMessage = 'The requested controller was unable to dispatch the request.';
+            break;
+        case Application::ERROR_MIDDLEWARE_CANNOT_DISPATCH:
+            $reasonMessage = 'The requested middleware was unable to dispatch the request.';
+            break;
+        case Application::ERROR_CONTROLLER_NOT_FOUND:
+            $reasonMessage = 'The requested controller could not be mapped to an existing controller class.';
+            break;
+        case Application::ERROR_CONTROLLER_INVALID:
+            $reasonMessage = 'The requested controller was not dispatchable.';
+            break;
+        case Application::ERROR_ROUTER_NO_MATCH:
+            $reasonMessage = 'The requested URL could not be matched by routing.';
+            break;
+        default:
+            $reasonMessage = 'We cannot determine at this time why a 404 was generated.';
+            break;
+      }
+    ?>
+      <p class="output"><?= $reasonMessage ?></p>
+    <?php
+    }
+    ?>
+
+    <?php if (! empty($me->controller)) : ?>
+      <h2><span class="errorcode">CONTROLLER.</span></h2>
+      <p class="output">
+        <?= $me->escapeHtml($me->controller) ?>
+        <?php
+        if (! empty($me->controller_class) && $me->controller_class != $me->controller) {
+            printf('(resolves to %s)', $me->escapeHtml($me->controller_class));
+        }
+        ?>
+      </p>
+    <?php endif ?>
+
+    <?php if (! empty($me->display_exceptions)) : ?>
+      <?php if (isset($me->exception)
+          && ($me->exception instanceof \Exception || $me->exception instanceof \Error)) : ?>
+        <h2><span class="errorcode">Additional information : </span><?= get_class($me->exception) ?></h2>
+        <p class="output">
+          File : <?= $me->exception->getFile() ?>:<?= $me->exception->getLine() ?>
+        </p>
+        <p class="output">
+          Message : <?= $me->escapeHtml($me->exception->getMessage()) ?>
+          </p>
+        <p class="output stacktrace">
+          Stack trace : <br>
+          <?php // $me->escapeHtml($me->exception->getTraceAsString()) ?>
+        </p>
+        <ul class="trace">
+        <?php
+          $trace = $me->exception->getTrace();
+          // var_dump($trace[1]);
+          foreach($trace as $k=>$v){
+            echo '<li>['.($k+1).']<br>';
+            if(isset($v['file'])){
+              echo $v['file'].' (line '.$v['line'].')<br>';
+            }
+            $tmp = [];
+            foreach($v['args'] as $v2){
+              if($v2===null){
+                $tmp[] = "NULL";
+              }elseif(is_object($v2)){
+                $tmp[] = get_class($v2);
+              }else{
+                $tmp[] = gettype($v2);
+              }
+            }
+            if(isset($v['class'])){
+              echo $v['class'].$v['type'].$v['function'].'('.implode(", ",$tmp).')</li>';
+            }
+          }
+        ?>
+        </ul>
+
+        <?php if ($ex = $me->exception->getPrevious()) : ?>
+          <h2><span class="errorcode">Previous exceptions.</span></h2>
+          <?php $icount = 0 ?>
+          <?php while ($ex) : ?>
+            <h2><span class="errorcode"><?= get_class($ex) ?></span></h2>
+            <p class="output">
+              File : <?= $ex->getFile() ?>:<?= $ex->getLine() ?>
+            </p>
+            <p class="output">
+              Message : <?= $me->escapeHtml($ex->getMessage()) ?>
+            </p>
+            <p class="output stacktrace">
+              Stack trace : <?= $me->escapeHtml($ex->getTraceAsString()) ?>
+            </p>
+            <?php
+              $ex = $ex->getPrevious();
+              if (++$icount >= 50) {
+                  echo '<h2><span class="errorcode">There may be more exceptions, but we do not have enough memory to process it.</span></h2>';
+                  break;
+              }
+            ?>
+          <?php endwhile ?>
+        <?php endif ?>
+      <?php else : ?>
+        <h2><span class="errorcode">No Exception available.</span></h2>
+      <?php endif ?>
+    <?php endif ?>
+  <?php
+  }
+  ?>
+  <p class="output"><a href="<?= $me->identity()['default_redirect'] ?? $me->url('app'); ?>">HOME</a></p>
+</div>

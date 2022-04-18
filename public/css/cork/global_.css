@@ -1,0 +1,50 @@
+.user-cover-image{
+  background: none !important;
+}
+
+.layout-px-spacing {
+  padding: 0 10px 0 10px !important;
+}
+
+.layout-top-spacing {
+  margin-top: 10px;
+}
+
+.sidemenu-icon {
+  font-size: 20px;
+  vertical-align: middle;
+  margin-right: 10px;
+  color: #3852d0;
+}
+
+#sidebar ul.menu-categories ul.submenu > li a.lvl1 {
+  padding-left:25px;
+}
+
+#sidebar ul.menu-categories li.menu ul.submenu > li a.lvl1:before {
+  left: 15px;
+}
+
+#sidebar ul.menu-categories ul.submenu > li a.lvl2 {
+  padding-left:35px;
+}
+
+#sidebar ul.menu-categories li.menu ul.submenu > li a.lvl2:before {
+  left: 25px;
+}
+
+#sidebar ul.menu-categories ul.submenu > li a.lvl3 {
+  padding-left:45px;
+}
+
+#sidebar ul.menu-categories li.menu ul.submenu > li a.lvl3:before {
+  left: 35px;
+}
+
+#sidebar ul.menu-categories ul.submenu > li a.lvl4 {
+  padding-left:55px;
+}
+
+#sidebar ul.menu-categories li.menu ul.submenu > li a.lvl4:before {
+  left: 45px;
+}

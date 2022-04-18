@@ -1,0 +1,451 @@
+<?php
+$me = $this;
+$headLink = $me->headLink();
+$headLink->appendStylesheet($me->basePath("js-lib/toastify-js/toastify.min.css"));
+// $headLink->appendStylesheet($me->basePath("js-lib/choices-js/base.min.css"));
+$headLink->appendStylesheet($me->basePath("js-lib/choices-js/choices.min.css"));
+$headLink->appendStylesheet($me->basePath("css-lib/animate/animate.min.css"));
+$headLink->appendStylesheet($me->basePath("css-lib/spinner/spinner.css"));
+
+$headScript = $me->headScript();
+$headScript->appendFile($me->basePath("js-lib/toastify-js/toastify-js.js"));
+$headScript->appendFile($me->basePath("js-lib/lodash/lodash.min.js"));
+$headScript->appendFile($me->basePath("js-lib/choices-js/choices.min.js"));
+$headScript->appendFile($me->basePath("js-lib/validate/validate.min.js"));
+$headScript->captureStart();
+?>
+var _form_type = "<?= $me->form_type;?>";
+var _uid = <?= $me->uid;?>;
+var modify_role_url = "<?= $me->url('coreadmin/xhr/call-model',['app'=>'CoreAdmin','model'=>'RoleModel','func'=>'getAllActiveRole']);?>";
+var company_url = "<?= $me->url('coreadmin/xhr/call-model',['app'=>'CoreAdmin','model'=>'UbisModel','func'=>'getAllActiveCompany']);?>";
+var division_url = "<?= $me->url('coreadmin/xhr/call-model',['app'=>'CoreAdmin','model'=>'UbisModel','func'=>'getAllActiveDivision']);?>";
+var spv_url = "<?= $me->url('coreadmin/xhr/call-model',['app'=>'CoreAdmin','model'=>'UserModel','func'=>'findUserByUsernameNIKFullname']);?>";
+var add_url = "<?= $me->url('coreadmin/xhr/call-model',['app'=>'CoreAdmin','model'=>'UserModel','func'=>'addUser']);?>";
+var edit_url = "<?= $me->url('coreadmin/xhr/call-model',['app'=>'CoreAdmin','model'=>'UserModel','func'=>'editUser']);?>";
+<?php
+$headScript->captureEnd();
+?>
+<form class="space-y-8 divide-y divide-gray-200 md:p-5">
+  <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+    <div>
+      <div>
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+          Account
+        </h3>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">
+          This information is used to access application.
+        </p>
+      </div>
+
+      <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
+
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="username" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            Account Type
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <div class="max-w-lg flex rounded-md shadow-sm">
+              <template x-if="$store.main.form_type==='view'">
+                <span class="">
+                  <template x-if="$store.account_form.is_telkom">
+                      <span class="text-sm font-bold text-red-600">Internal</span>
+                  </template>
+                  <template x-if="!$store.account_form.is_telkom">
+                      <span class="text-sm font-bold text-blue-600">External</span>
+                  </template>
+                  <template x-if="$store.account_form.is_telkom">
+                      <span class="text-sm text-red-600">(TELKOM)</span>
+                  </template>
+                  <template x-if="!$store.account_form.is_telkom">
+                      <span class="text-sm text-blue-600">(NON TELKOM)</span>
+                  </template>
+                </span>
+              </template>
+              <template x-if="$store.main.form_type!='view'">
+              <div class="flex items-center">
+                <span class="mr-3">
+                  <span :class="{'text-gray-900':$store.account_form.is_telkom,'text-blue-600':!$store.account_form.is_telkom}" class="text-sm font-bold">External </span>
+                  <span :class="{'text-gray-500':$store.account_form.is_telkom,'text-blue-600':!$store.account_form.is_telkom}" class="text-sm">(NON TELKOM)</span>
+                </span>
+                <button x-model="$store.account_form.is_telkom" @click="$store.account_form.is_telkom=!$store.account_form.is_telkom" :class="{'bg-red-600 focus:ring-red-500':$store.account_form.is_telkom, 'bg-blue-600 focus:ring-blue-500':!$store.account_form.is_telkom}" type="button" class="relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2" role="switch" aria-checked="false" aria-labelledby="annual-billing-label">
+                  <span class="sr-only">Use setting</span>
+                  <span aria-hidden="true"  :class="{'translate-x-5':$store.account_form.is_telkom, 'translate-x-0':!$store.account_form.is_telkom}" class="pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200"></span>
+                </button>
+                <span class="ml-3">
+                  <span :class="{'text-gray-900':!$store.account_form.is_telkom,'text-red-600':$store.account_form.is_telkom}" class="text-sm font-bold">Internal </span>
+                  <span :class="{'text-gray-500':!$store.account_form.is_telkom,'text-red-600':$store.account_form.is_telkom}" class="text-sm">(TELKOM)</span>
+                </span>
+              </div>
+              </template>
+            </div>
+          </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="username" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            Username
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <div class="max-w-lg flex rounded-md shadow-sm">
+              <template x-if="$store.main.form_type==='view'">
+                <div x-html="$store.account_form.username"></div>
+              </template>
+              <template x-if="$store.main.form_type!='view'">
+              <input @blur="$store.account_form._focus.username = false" @click="$store.account_form._focus.username = true" x-bind:readonly="!$store.account_form._focus.username" x-model="$store.account_form.username" type="text" name="username" id="username" x-bind:class="{ 'border-red-600': $store.account_form._msg.username!==null, 'border-gray-300': $store.account_form._msg.username===null }" class="form-input flex-1 block w-full focus:ring-mygreen focus:border-mygreen min-w-0 rounded-none rounded-r-md sm:text-sm" autocomplete="off">
+              </template>
+            </div>
+            <template x-if="$store.main.form_type!='view' && $store.account_form._msg.username!==''">
+            <p class="mt-2 text-sm text-red-600" x-html="$store.account_form._msg.username"></p>
+            </template>
+          </div>
+        </div>
+
+        <template x-if="$store.main.form_type==='create'">
+          <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+            <label for="password" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+              Password
+            </label>
+            <div class="mt-1 sm:mt-0 sm:col-span-2">
+              <div class="max-w-lg flex rounded-md shadow-sm">
+                <template x-if="$store.account_form.is_telkom">
+                  <div class="bg-red-600 text-white px-2 py-1 rounded font-bold text-sm">Use LDAP Password</div>
+                </template>
+                <template x-if="!$store.account_form.is_telkom">
+                <input @blur="$store.account_form._focus.password = false" @click="$store.account_form._focus.password = true" x-bind:readonly="!$store.account_form._focus.password" x-model="$store.account_form.password" type="password" name="password" id="password" x-bind:class="{ 'border-red-600': $store.account_form._msg.password!==null, 'border-gray-300': $store.account_form._msg.password===null }" class="form-input flex-1 block w-full focus:ring-mygreen focus:border-mygreen min-w-0 rounded-none rounded-r-md sm:text-sm" autocomplete="off">
+                </template>
+              </div>
+              <template x-if="$store.account_form._msg.password!==''">
+              <p class="mt-2 text-sm text-red-600" x-html="$store.account_form._msg.password"></p>
+              </template>
+            </div>
+          </div>
+        </template>
+
+        <template x-if="$store.main.form_type==='edit' && $store.account_form.uid!==null && !$store.account_form.is_telkom">
+          <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+            <label for="old_password" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+              Old Password
+            </label>
+            <div class="mt-1 sm:mt-0 sm:col-span-2">
+              <div class="max-w-lg flex rounded-md shadow-sm">
+                <input x-model="$store.account_form.old_password" type="password" name="old_password" id="old_password" x-bind:class="{ 'border-red-600': $store.account_form._msg.old_password!==null, 'border-gray-300': $store.account_form._msg.old_password===null }" class="form-input flex-1 block w-full focus:ring-mygreen focus:border-mygreen min-w-0 rounded-none rounded-r-md sm:text-sm" autocomplete="off">
+              </div>
+              <template x-if="$store.account_form._msg.old_password!==''">
+              <p class="mt-2 text-sm text-red-600" x-html="$store.account_form._msg.old_password"></p>
+              </template>
+            </div>
+          </div>
+        </template>
+        <template x-if="$store.main.form_type==='edit' && $store.account_form.uid!==null && !$store.account_form.is_telkom">
+          <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+            <label for="new_password" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+              New Password
+            </label>
+            <div class="mt-1 sm:mt-0 sm:col-span-2">
+              <div class="max-w-lg flex rounded-md shadow-sm">
+                <input x-model="$store.account_form.new_password" type="password" name="new_password" id="new_password" x-bind:class="{ 'border-red-600': $store.account_form._msg.new_password!==null, 'border-gray-300': $store.account_form._msg.new_password===null }" class="form-input flex-1 block w-full focus:ring-mygreen focus:border-mygreen min-w-0 rounded-none rounded-r-md sm:text-sm" autocomplete="off">
+              </div>
+              <template x-if="$store.account_form._msg.new_password!==''">
+              <p class="mt-2 text-sm text-red-600" x-html="$store.account_form._msg.new_password"></p>
+              </template>
+            </div>
+          </div>
+        </template>
+        <template x-if="!$store.account_form.is_telkom">
+          <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+            <label for="retype_password" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+              Retype Password
+            </label>
+            <div class="mt-1 sm:mt-0 sm:col-span-2">
+              <div class="max-w-lg flex rounded-md shadow-sm">
+                <input x-model="$store.account_form.retype_password" type="password" name="retype_password" id="retype_password" x-bind:class="{ 'border-red-600': $store.account_form._msg.retype_password!==null, 'border-gray-300': $store.account_form._msg.retype_password===null }" class=" form-input flex-1 block w-full focus:ring-mygreen focus:border-mygreen min-w-0 rounded-none rounded-r-md sm:text-sm" autocomplete="off">
+              </div>
+              <template x-if="$store.account_form._msg.retype_password!==''">
+              <p class="mt-2 text-sm text-red-600" x-html="$store.account_form._msg.retype_password"></p>
+              </template>
+            </div>
+          </div>
+        </template>
+
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="modify_role" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            Modify Role
+            <button
+              class="text-mygreen px-2 py-1 rounded-sm align-middle hover:bg-mygreen hover:bg-opacity-20 focus:outline-none" @click="loadModifyRole(false)" x-on:click.prevent><em class="ri-refresh-line align-middle text-sm"></em></button>
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <div class="max-w-lg flex rounded-md shadow-sm relative">
+              <template x-if="$store.main.form_type==='view'">
+                <div x-html="$store.account_form.modify_role"></div>
+              </template>
+              <template x-if="$store.main.form_type!='view'">
+                <select placeholder="Modify Role" x-model="$store.account_form.modify_role" x-ref="modify_role" name="modify_role" class="form-select modify_role hidden focus:ring-mygreen focus:border-mygreen w-full shadow-sm sm:text-sm border-gray-300 rounded-md" multiple>
+                </select>
+              </template>
+              <template x-if="$store.main.form_type!='view'">
+                <div x-show="$store.account_form._loader.modify_role" class="w-full h-full max-h-11 absolute text-center mx-auto">
+                  <div class="loadingio-spinner-bars-1 mt-[-5px]">
+                    <div class="ldio-1">
+                      <div class="border-2"></div><div class="border-2"></div><div class="border-2"></div><div class="border-2"></div>
+                    </div>
+                    <div class="title text-mygreen load-text">load role</div>
+                  </div>
+                </div>
+              </template>
+            </div>
+            <template x-if="$store.account_form._msg.modify_role!==''">
+            <p class="mt-2 text-sm text-red-600" x-html="$store.account_form._msg.modify_role"></p>
+            </template>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
+      <div>
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+          Profile
+        </h3>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">
+          This information will be displayed publicly so be careful what you share.
+        </p>
+      </div>
+
+      <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
+
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="fullname" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            Fullname
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <div class="max-w-lg flex rounded-md shadow-sm">
+              <template x-if="$store.main.form_type==='view'">
+                <div x-html="$store.profile_form.fullname"></div>
+              </template>
+              <template x-if="$store.main.form_type!='view'">
+              <input x-model="$store.profile_form.fullname" type="text" name="fullname" id="fullname"  x-bind:class="{ 'border-red-600': $store.profile_form._msg.fullname!==null, 'border-gray-300': $store.profile_form._msg.fullname===null }" class="form-input flex-1 block w-full focus:ring-mygreen focus:border-mygreen min-w-0 rounded-none rounded-r-md sm:text-sm" autocomplete="off">
+              </template>
+            </div>
+            <template x-if="$store.profile_form._msg.fullname!==''">
+            <p class="mt-2 text-sm text-red-600" x-html="$store.profile_form._msg.fullname"></p>
+            </template>
+          </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="email" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            Email
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <div class="max-w-lg flex rounded-md shadow-sm">
+              <template x-if="$store.main.form_type==='view'">
+                <div x-html="$store.profile_form.email"></div>
+              </template>
+              <template x-if="$store.main.form_type!='view'">
+              <input x-model="$store.profile_form.email" type="email" name="email" id="email" x-bind:class="{ 'border-red-600': $store.profile_form._msg.email!==null, 'border-gray-300': $store.profile_form._msg.email===null }" class="form-input flex-1 block w-full focus:ring-mygreen focus:border-mygreen min-w-0 rounded-none rounded-r-md sm:text-sm" autocomplete="off">
+              </template>
+            </div>
+            <template x-if="$store.profile_form._msg.email!==''">
+            <p class="mt-2 text-sm text-red-600" x-html="$store.profile_form._msg.email"></p>
+            </template>
+          </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="mobile_phone" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            Mobile Phone
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <div class="max-w-lg flex rounded-md shadow-sm">
+              <template x-if="$store.main.form_type==='view'">
+                <div x-html="$store.profile_form.mobile_phone"></div>
+              </template>
+              <template x-if="$store.main.form_type!='view'">
+              <input x-model="$store.profile_form.mobile_phone" type="text" name="mobile_phone" id="mobile_phone" x-bind:class="{ 'border-red-600': $store.profile_form._msg.mobile_phone!==null, 'border-gray-300': $store.profile_form._msg.mobile_phone===null }" class="form-input flex-1 block w-full focus:ring-mygreen focus:border-mygreen min-w-0 rounded-none rounded-r-md sm:text-sm" autocomplete="off">
+              </template>
+            </div>
+            <template x-if="$store.profile_form._msg.mobile_phone!==''">
+            <p class="mt-2 text-sm text-red-600" x-html="$store.profile_form._msg.mobile_phone"></p>
+            </template>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
+      <div>
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+          Work Information
+        </h3>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">
+          This information will be displayed publicly so be careful what you share.
+        </p>
+      </div>
+
+      <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
+
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="company" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            Company
+            <button x-show="$store.main.form_type!='view' && !$store.account_form.is_telkom"
+              class="text-mygreen px-2 py-1 rounded-sm align-middle hover:bg-mygreen hover:bg-opacity-20 focus:outline-none" @click="loadCompany(false)" x-on:click.prevent><em class="ri-refresh-line align-middle text-sm"></em></button>
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <div class="max-w-lg flex rounded-md shadow-sm relative">
+              <template x-if="$store.main.form_type==='view'">
+                <div x-html="$store.work_form.company"></div>
+              </template>
+              <template x-if="$store.main.form_type!='view' && $store.account_form.is_telkom">
+                <div class="bg-red-600 text-white px-2 py-1 rounded font-bold text-sm">PT Telekomunikasi Indonesia (TELKOM)</div>
+              </template>
+              <template x-if="$store.main.form_type!='view' && !$store.account_form.is_telkom">
+                <select x-model="$store.work_form.company" x-ref="company" name="company" class="form-select company hidden focus:ring-mygreen focus:border-mygreen w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                </select>
+              </template>
+              <template x-if="$store.main.form_type!='view' && !$store.account_form.is_telkom">
+                <div x-show="$store.work_form._loader.company" class="w-full h-full max-h-11 absolute text-center mx-auto">
+                  <div class="loadingio-spinner-bars-1 mt-[-5px]">
+                    <div class="ldio-1">
+                      <div class="border-2"></div><div class="border-2"></div><div class="border-2"></div><div class="border-2"></div>
+                    </div>
+                    <div class="title text-mygreen load-text">load company</div>
+                  </div>
+                </div>
+              </template>
+            </div>
+            <template x-if="$store.work_form._msg.company!==''">
+            <p class="mt-2 text-sm text-red-600" x-html="$store.work_form._msg.company"></p>
+            </template>
+          </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="nik" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            Employee Number (NIK)
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <div class="max-w-lg flex rounded-md shadow-sm">
+              <template x-if="$store.main.form_type==='view'">
+                <div x-html="$store.work_form.nik"></div>
+              </template>
+              <template x-if="$store.main.form_type!='view' && $store.account_form.is_telkom && $store.account_form.username!=''">
+                <div class="bg-red-600 text-white px-2 py-1 rounded font-bold text-sm" x-html="$store.account_form.username"></div>
+              </template>
+              <template x-if="$store.main.form_type!='view' && !$store.account_form.is_telkom">
+              <input x-model="$store.work_form.nik" type="text" name="nik" id="nik" x-bind:class="{ 'border-red-600': $store.work_form._msg.nik!==null, 'border-gray-300': $store.work_form._msg.nik===null }" class="form-input flex-1 block w-full focus:ring-mygreen focus:border-mygreen min-w-0 rounded-none rounded-r-md sm:text-sm" autocomplete="off">
+              </template>
+            </div>
+            <template x-if="$store.work_form._msg.nik!==''">
+            <p class="mt-2 text-sm text-red-600" x-html="$store.work_form._msg.nik"></p>
+            </template>
+          </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="division" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            Work Division
+            <button
+              class="text-mygreen px-2 py-1 rounded-sm align-middle hover:bg-mygreen hover:bg-opacity-20 focus:outline-none" @click="loadDivision(false)" x-on:click.prevent><em class="ri-refresh-line align-middle text-sm"></em></button>
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <div class="max-w-lg flex rounded-md shadow-sm relative">
+              <template x-if="$store.main.form_type==='view'">
+                <div x-html="$store.work_form.division"></div>
+              </template>
+              <template x-if="$store.main.form_type!='view'">
+                <select x-model="$store.work_form.division" x-ref="division" name="division" class="form-select division hidden focus:ring-mygreen focus:border-mygreen w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                </select>
+              </template>
+              <template x-if="$store.main.form_type!='view'">
+                <div x-show="$store.work_form._loader.division" class="w-full h-full max-h-11 absolute text-center mx-auto">
+                  <div class="loadingio-spinner-bars-1 mt-[-5px]">
+                    <div class="ldio-1">
+                      <div class="border-2"></div><div class="border-2"></div><div class="border-2"></div><div class="border-2"></div>
+                    </div>
+                    <div class="title text-mygreen load-text">load division</div>
+                  </div>
+                </div>
+              </template>
+            </div>
+            <template x-if="$store.work_form._msg.division!==''">
+            <p class="mt-2 text-sm text-red-600" x-html="$store.work_form._msg.division"></p>
+            </template>
+          </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="unit" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            Work Unit
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <div class="max-w-lg flex rounded-md shadow-sm">
+              <template x-if="$store.main.form_type==='view'">
+                <div x-html="$store.work_form.unit"></div>
+              </template>
+              <template x-if="$store.main.form_type!='view'">
+              <input x-model="$store.work_form.unit" type="text" name="unit" id="unit" x-bind:class="{ 'border-red-600': $store.work_form._msg.unit!==null, 'border-gray-300': $store.work_form._msg.unit===null }" class="form-input flex-1 block w-full focus:ring-mygreen focus:border-mygreen min-w-0 rounded-none rounded-r-md sm:text-sm" autocomplete="off">
+              </template>
+            </div>
+            <template x-if="$store.work_form._msg.unit!==''">
+            <p class="mt-2 text-sm text-red-600" x-html="$store.work_form._msg.unit"></p>
+            </template>
+          </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="location" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            Work Location
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <div class="max-w-lg flex rounded-md shadow-sm">
+              <template x-if="$store.main.form_type==='view'">
+                <div x-html="$store.work_form.location"></div>
+              </template>
+              <template x-if="$store.main.form_type!='view'">
+              <input x-model="$store.work_form.location" type="text" name="location" id="location" x-bind:class="{ 'border-red-600': $store.work_form._msg.location!==null, 'border-gray-300': $store.work_form._msg.location===null }" class="form-input flex-1 block w-full focus:ring-mygreen focus:border-mygreen min-w-0 rounded-none rounded-r-md sm:text-sm" autocomplete="off">
+              </template>
+            </div>
+            <template x-if="$store.work_form._msg.location!==''">
+            <p class="mt-2 text-sm text-red-600" x-html="$store.work_form._msg.location"></p>
+            </template>
+          </div>
+        </div>
+
+        <template x-if="!$store.account_form.is_telkom">
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="spv" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            Supervisor Number (NIK)
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <div class="max-w-lg flex rounded-md shadow-sm">
+              <template x-if="$store.main.form_type==='view'">
+                <div x-html="$store.work_form.spv"></div>
+              </template>
+              <template x-if="$store.main.form_type!='view' && !$store.account_form.is_telkom">
+                <!-- <input x-model="$store.work_form.spv_nik" type="text" name="spv_nik" x-ref="spv_nik" class="form-input spv_nik flex-1 hidden w-full focus:ring-mygreen focus:border-mygreen min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300 ring-o outline-none border-0" autocomplete="off"> -->
+                <select x-model="$store.work_form.spv_nik" x-ref="spv_nik" name="spv_nik" class="form-select spv_nik hidden focus:ring-mygreen focus:border-mygreen w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                </select>
+              </template>
+            </div>
+            <template x-if="$store.work_form._msg.spv_nik!==''">
+            <p class="mt-2 text-sm text-red-600" x-html="$store.work_form._msg.spv_nik"></p>
+            </template>
+          </div>
+        </div>
+        </template>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="pt-5 pb-5 px-3">
+    <div class="flex justify-end">
+      <button type="button" class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" x-on:click.prevent @click="window.location.replace('<?= $me->url('core-admin/manage-user/list-user'); ?>')">
+        Cancel
+      </button>
+      <button type="button" @click="Form.submit()" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+        Save
+      </button>
+    </div>
+  </div>
+</form>

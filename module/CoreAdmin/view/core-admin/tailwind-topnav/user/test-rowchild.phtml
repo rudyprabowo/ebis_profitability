@@ -1,0 +1,36 @@
+<?php
+$me       = $this;
+$headLink = $me->headLink();
+$headLink->appendStylesheet($me->basePath("js-lib/datatable/data-table-rowchild/jquery.dataTables.min.css"));
+$headScript = $me->headScript();
+$headScript->appendFile($me->basePath("js-lib/datatable/data-table-rowchild/jquery-3.5.1.js"));
+$headScript->appendFile($me->basePath("js-lib/datatable/data-table-rowchild/jquery.dataTables.min.js"));
+$headScript->captureStart();
+?>
+<!-- DEFINE VAR JS -->
+<?php
+$headScript->captureEnd();
+?>
+
+<div>
+    <table id="example" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Office</th>
+                    <th>Salary</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Office</th>
+                    <th>Salary</th>
+                </tr>
+            </tfoot>
+    </table>
+</div>

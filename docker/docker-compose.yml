@@ -1,0 +1,28 @@
+version: "3.9"
+
+networks:
+    ebisprofit-network:
+        external: true
+
+services:
+  ebisprofit-postgres:
+    # image: ebisprofit-postgres-image
+    # image: postgres:14.2-alpine
+    image: postgres:14.2
+    container_name: ebisprofit-postgres
+    # build:
+    #   context: ./
+    #   dockerfile: "./images/postgres/Dockerfile"
+    # restart: always
+    ports:
+      - 5433:5432
+    environment:
+      # - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=ebis_profitability
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - "./docker/images/postgres/data:/var/lib/postgresql/data"
+      # - "./docker/postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
+    networks:
+      - ebisprofit-network

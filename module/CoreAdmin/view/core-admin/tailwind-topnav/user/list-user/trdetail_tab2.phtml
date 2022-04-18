@@ -1,0 +1,438 @@
+<div class="bg-white flex dark:bg-gray-800 px-8 py-6">
+  <div class="w-1/3">
+    <div class="px-2">
+      <div class="text-center items-center">
+        <p
+          class="focus:outline-none text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800">
+          Business Unit</p>
+        <button
+          class="bg-blue-700 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-700 hover:bg-blue-600 rounded text-white px-2 h-6 items-center  align-middle text-xs"><i
+            class="ri-add-line font-bold align-middle"></em></button>
+      </div>
+    </div>
+
+    <div x-init="if(row.bu===undefined)row.bu = []" class="bg-white px-4 md:px-10 pb-5 overflow-y-auto max-h-[400px]">
+      <div class="mt-3">
+        <div class="flex flex-col items-center">
+
+          <div class="px-3 py-2 bg-green-100 rounded-full">
+            <p class="focus:outline-none text-xs leading-none text-gray-600">New Business Unit</p>
+          </div>
+          <div class="h-6 border-l border-dashed border-gray-200">
+          </div>
+        </div>
+        <div class="bg-green-100 rounded py-2 px-3">
+          <div class="flex items-center justify-center flex-col gap-y-4">
+            <div class="w-full">
+              <label id="listbox-label" class="block text-sm font-medium text-gray-700">
+                Company
+              </label>
+              <div class="mt-1 relative" x-data="{dd_op:false,foc_idx:null,sel_idx:null,comp_name:'Select Company',comp_code:null,comp_id:null}">
+                <button type="button" @click="dd_op=!dd_op"
+                  class="relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                  aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label" >
+                  <span class="w-full inline-flex truncate">
+                    <span class="truncate" x-text="comp_name" :class="{'text-gray-500':comp_id===null}">
+                    </span>
+                    <span class="ml-2 truncate text-gray-500" x-text="comp_code">
+                    </span>
+                  </span>
+                  <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                    <!-- Heroicon name: solid/selector -->
+                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                      fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd"
+                        d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                        clip-rule="evenodd" />
+                    </svg>
+                  </span>
+                </button>
+                <ul x-show="dd_op" x-transition:leave="transition ease-in duration-100"
+                  x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                  class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
+                  @click.away="dd_op = false">
+                  <li class="text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9" @click="sel_idx = 0;comp_name='Company A';comp_code='COMPA';comp_id=0;dd_op=false"
+                    @mouseenter="foc_idx = 0" @mouseleave="foc_idx = null"
+                    :class="{ 'text-white bg-green-600': foc_idx === 0, 'text-gray-900': !(foc_idx === 0) }">
+                    <div class="flex">
+                      <!-- Selected: "font-semibold", Not Selected: "font-normal" -->
+                      <span class="font-normal truncate"
+                        :class="{ 'font-semibold': sel_idx === 0, 'font-normal': !(sel_idx === 0) }">
+                        Company A
+                      </span>
+                      <!-- Highlighted: "text-green-200", Not Highlighted: "text-gray-500" -->
+                      <span class="text-gray-500 ml-2 truncate"
+                        :class="{ 'text-green-200': foc_idx === 0, 'text-gray-500': !(foc_idx === 0) }">
+                        COMPA
+                      </span>
+                    </div>
+                    <span class="text-green-600 absolute inset-y-0 right-0 flex items-center pr-4"
+                      :class="{ 'text-white': foc_idx === 0, 'text-green-600': !(foc_idx === 0) }"
+                      x-show="sel_idx === 0">
+                      <!-- Heroicon name: solid/check -->
+                      <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clip-rule="evenodd" />
+                      </svg>
+                    </span>
+                  </li>
+                  <li class="text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9" @click="sel_idx = 1;comp_name='Company B';comp_code='COMPB';comp_id=1;dd_op=false"
+                    @mouseenter="foc_idx = 1" @mouseleave="foc_idx = null"
+                    :class="{ 'text-white bg-green-600': foc_idx === 1, 'text-gray-900': !(foc_idx === 1) }">
+                    <div class="flex">
+                      <!-- Selected: "font-semibold", Not Selected: "font-normal" -->
+                      <span class="font-normal truncate"
+                        :class="{ 'font-semibold': sel_idx === 1, 'font-normal': !(sel_idx === 1) }">
+                        Company B
+                      </span>
+                      <!-- Highlighted: "text-green-200", Not Highlighted: "text-gray-500" -->
+                      <span class="text-gray-500 ml-2 truncate"
+                        :class="{ 'text-green-200': foc_idx === 1, 'text-gray-500': !(foc_idx === 1) }">
+                        COMPB
+                      </span>
+                    </div>
+                    <span class="text-green-600 absolute inset-y-0 right-0 flex items-center pr-4"
+                      :class="{ 'text-white': foc_idx === 1, 'text-green-600': !(foc_idx === 1) }"
+                      x-show="sel_idx === 1">
+                      <!-- Heroicon name: solid/check -->
+                      <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clip-rule="evenodd" />
+                      </svg>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="w-full">
+              <label id="listbox-label" class="block text-sm font-medium text-gray-700">
+                Division
+              </label>
+              <div class="mt-1 relative" x-data="{dd_op:false,foc_idx:null,sel_idx:null,div_name:'Select Division',div_code:null,div_id:null}">
+                <button type="button" @click="dd_op=!dd_op"
+                  class="relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                  aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label" >
+                  <span class="w-full inline-flex truncate">
+                    <span class="truncate" x-text="div_name" :class="{'text-gray-500':div_id===null}">
+                    </span>
+                    <span class="ml-2 truncate text-gray-500" x-text="div_code">
+                    </span>
+                  </span>
+                  <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                    <!-- Heroicon name: solid/selector -->
+                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                      fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd"
+                        d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                        clip-rule="evenodd" />
+                    </svg>
+                  </span>
+                </button>
+                <ul x-show="dd_op" x-transition:leave="transition ease-in duration-100"
+                  x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                  class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
+                  @click.away="dd_op = false">
+                  <li class="text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9" @click="sel_idx = 0;div_name='Division A';div_code='DIVA';div_id=0;dd_op=false"
+                    @mouseenter="foc_idx = 0" @mouseleave="foc_idx = null"
+                    :class="{ 'text-white bg-green-600': foc_idx === 0, 'text-gray-900': !(foc_idx === 0) }">
+                    <div class="flex">
+                      <!-- Selected: "font-semibold", Not Selected: "font-normal" -->
+                      <span class="font-normal truncate"
+                        :class="{ 'font-semibold': sel_idx === 0, 'font-normal': !(sel_idx === 0) }">
+                        Division A
+                      </span>
+                      <!-- Highlighted: "text-green-200", Not Highlighted: "text-gray-500" -->
+                      <span class="text-gray-500 ml-2 truncate"
+                        :class="{ 'text-green-200': foc_idx === 0, 'text-gray-500': !(foc_idx === 0) }">
+                        DIVA
+                      </span>
+                    </div>
+                    <span class="text-green-600 absolute inset-y-0 right-0 flex items-center pr-4"
+                      :class="{ 'text-white': foc_idx === 0, 'text-green-600': !(foc_idx === 0) }"
+                      x-show="sel_idx === 0">
+                      <!-- Heroicon name: solid/check -->
+                      <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clip-rule="evenodd" />
+                      </svg>
+                    </span>
+                  </li>
+                  <li class="text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9" @click="sel_idx = 1;div_name='Division B';div_code='DIVB';div_id=1;dd_op=false"
+                    @mouseenter="foc_idx = 1" @mouseleave="foc_idx = null"
+                    :class="{ 'text-white bg-green-600': foc_idx === 1, 'text-gray-900': !(foc_idx === 1) }">
+                    <div class="flex">
+                      <!-- Selected: "font-semibold", Not Selected: "font-normal" -->
+                      <span class="font-normal truncate"
+                        :class="{ 'font-semibold': sel_idx === 1, 'font-normal': !(sel_idx === 1) }">
+                        Division B
+                      </span>
+                      <!-- Highlighted: "text-green-200", Not Highlighted: "text-gray-500" -->
+                      <span class="text-gray-500 ml-2 truncate"
+                        :class="{ 'text-green-200': foc_idx === 1, 'text-gray-500': !(foc_idx === 1) }">
+                        DIVB
+                      </span>
+                    </div>
+                    <span class="text-green-600 absolute inset-y-0 right-0 flex items-center pr-4"
+                      :class="{ 'text-white': foc_idx === 1, 'text-green-600': !(foc_idx === 1) }"
+                      x-show="sel_idx === 1">
+                      <!-- Heroicon name: solid/check -->
+                      <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clip-rule="evenodd" />
+                      </svg>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="w-full">
+              <label id="listbox-label" class="block text-sm font-medium text-gray-700">
+                Unit
+              </label>
+              <div class="mt-1 relative" x-data="{dd_op:false,foc_idx:null,sel_idx:null,unit_name:'Select Unit',unit_code:null,unit_id:null}">
+                <button type="button" @click="dd_op=!dd_op"
+                  class="relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                  aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label" >
+                  <span class="w-full inline-flex truncate">
+                    <span class="truncate" x-text="unit_name" :class="{'text-gray-500':unit_id===null}">
+                    </span>
+                    <span class="ml-2 truncate text-gray-500" x-text="unit_code">
+                    </span>
+                  </span>
+                  <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                    <!-- Heroicon name: solid/selector -->
+                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                      fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd"
+                        d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                        clip-rule="evenodd" />
+                    </svg>
+                  </span>
+                </button>
+                <ul x-show="dd_op" x-transition:leave="transition ease-in duration-100"
+                  x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                  class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
+                  @click.away="dd_op = false">
+                  <li class="text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9" @click="sel_idx = 0;unit_name='Unit A';unit_code='UNITA';unit_id=0;dd_op=false"
+                    @mouseenter="foc_idx = 0" @mouseleave="foc_idx = null"
+                    :class="{ 'text-white bg-green-600': foc_idx === 0, 'text-gray-900': !(foc_idx === 0) }">
+                    <div class="flex">
+                      <!-- Selected: "font-semibold", Not Selected: "font-normal" -->
+                      <span class="font-normal truncate"
+                        :class="{ 'font-semibold': sel_idx === 0, 'font-normal': !(sel_idx === 0) }">
+                        Unit A
+                      </span>
+                      <!-- Highlighted: "text-green-200", Not Highlighted: "text-gray-500" -->
+                      <span class="text-gray-500 ml-2 truncate"
+                        :class="{ 'text-green-200': foc_idx === 0, 'text-gray-500': !(foc_idx === 0) }">
+                        UNITA
+                      </span>
+                    </div>
+                    <span class="text-green-600 absolute inset-y-0 right-0 flex items-center pr-4"
+                      :class="{ 'text-white': foc_idx === 0, 'text-green-600': !(foc_idx === 0) }"
+                      x-show="sel_idx === 0">
+                      <!-- Heroicon name: solid/check -->
+                      <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clip-rule="evenodd" />
+                      </svg>
+                    </span>
+                  </li>
+                  <li class="text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9" @click="sel_idx = 1;unit_name='Unit B';unit_code='UNITB';unit_id=1;dd_op=false"
+                    @mouseenter="foc_idx = 1" @mouseleave="foc_idx = null"
+                    :class="{ 'text-white bg-green-600': foc_idx === 1, 'text-gray-900': !(foc_idx === 1) }">
+                    <div class="flex">
+                      <!-- Selected: "font-semibold", Not Selected: "font-normal" -->
+                      <span class="font-normal truncate"
+                        :class="{ 'font-semibold': sel_idx === 1, 'font-normal': !(sel_idx === 1) }">
+                        Unit B
+                      </span>
+                      <!-- Highlighted: "text-green-200", Not Highlighted: "text-gray-500" -->
+                      <span class="text-gray-500 ml-2 truncate"
+                        :class="{ 'text-green-200': foc_idx === 1, 'text-gray-500': !(foc_idx === 1) }">
+                        UNITB
+                      </span>
+                    </div>
+                    <span class="text-green-600 absolute inset-y-0 right-0 flex items-center pr-4"
+                      :class="{ 'text-white': foc_idx === 1, 'text-green-600': !(foc_idx === 1) }"
+                      x-show="sel_idx === 1">
+                      <!-- Heroicon name: solid/check -->
+                      <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clip-rule="evenodd" />
+                      </svg>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <template x-for="bu in row.bu">
+        <div>
+          <div class="flex flex-col items-center">
+            <div class="h-6 border-l border-dashed border-gray-200">
+            </div>
+            <div class="px-3 py-2 bg-gray-100 rounded-full">
+              <p class="focus:outline-none text-xs leading-none text-gray-600" x-text="bu.edate"></p>
+            </div>
+            <div class="h-6 border-l border-dashed border-gray-200">
+            </div>
+          </div>
+          <div class="bg-gray-100 rounded py-1 px-3">
+            <div x-data="{dropdown_open:false}" class="flex items-center justify-between">
+              <p class="focus:outline-none text-base font-medium leading-none text-gray-800"
+                x-text="buData[bu.id].label"></p>
+              <div class="relative">
+                <div @click.away="dropdown_open = false" x-show="dropdown_open"
+                  class="dropdown-content mt-5 absolute left-[-40px] shadow-md z-10 w-[100px]">
+                  <ul class="bg-white shadow rounded py-1">
+                    <li
+                      class="cursor-pointer text-gray-600 leading-3 tracking-normal p-2 hover:bg-green-700 hover:text-white font-normal">
+                      Change</li>
+                    <li
+                      class="cursor-pointer text-gray-600 leading-3 tracking-normal p-2 hover:bg-green-700 hover:text-white font-normal">
+                      Delete</li>
+                  </ul>
+                </div>
+                <button class="focus:outline-none" aria-label="dropdown" role="button">
+                  <svg @click="dropdown_open = !dropdown_open" class=" dropbtn" xmlns="http://www.w3.org/2000/svg"
+                    width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M5 10C3.9 10 3 10.9 3 12C3 13.1 3.9 14 5 14C6.1 14 7 13.1 7 12C7 10.9 6.1 10 5 10ZM19 10C17.9 10 17 10.9 17 12C17 13.1 17.9 14 19 14C20.1 14 21 13.1 21 12C21 10.9 20.1 10 19 10ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z"
+                      fill="#52525B"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <p class="focus:outline-none text-sm leading-5 text-gray-600 sm:w-11/12" x-text="buData[bu.id].lvl"></p>
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
+  <div class="w-1/3">
+    <div class="px-2">
+      <div class="text-center items-center">
+        <p
+          class="focus:outline-none text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800">
+          Position</p>
+        <button
+          class="bg-blue-700 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-700 hover:bg-blue-600 rounded text-white px-2 h-6 items-center  align-middle text-xs"><i
+            class="ri-add-line font-bold align-middle"></em></button>
+      </div>
+    </div>
+
+    <div x-init="if(row.pos===undefined)row.pos = []" class="bg-white px-4 md:px-10 pb-5 overflow-y-auto max-h-[400px]">
+      <template x-for="pos in row.pos">
+        <div>
+          <div class="flex flex-col items-center">
+            <div class="h-6 border-l border-dashed border-gray-200">
+            </div>
+            <div class="px-3 py-2 bg-gray-100 rounded-full">
+              <p class="focus:outline-none text-xs leading-none text-gray-600" x-text="pos.edate"></p>
+            </div>
+            <div class="h-6 border-l border-dashed border-gray-200">
+            </div>
+          </div>
+          <div class="bg-gray-100 rounded py-1 px-3">
+            <div x-data="{dropdown_open:false}" class="flex items-center justify-between">
+              <p class="focus:outline-none text-base font-medium leading-none text-gray-800"
+                x-text="posData[pos.id].label"></p>
+              <div class="relative">
+                <div @click.away="dropdown_open = false" x-show="dropdown_open"
+                  class="dropdown-content mt-5 absolute left-[-40px] shadow-md z-10 w-[100px]">
+                  <ul class="bg-white shadow rounded py-1">
+                    <li
+                      class="cursor-pointer text-gray-600 leading-3 tracking-normal p-2 hover:bg-indigo-700 hover:text-white font-normal">
+                      Change</li>
+                    <li
+                      class="cursor-pointer text-gray-600 leading-3 tracking-normal p-2 hover:bg-indigo-700 hover:text-white font-normal">
+                      Delete</li>
+                  </ul>
+                </div>
+                <button class="focus:outline-none" aria-label="dropdown" role="button">
+                  <svg @click="dropdown_open = !dropdown_open" class=" dropbtn" xmlns="http://www.w3.org/2000/svg"
+                    width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M5 10C3.9 10 3 10.9 3 12C3 13.1 3.9 14 5 14C6.1 14 7 13.1 7 12C7 10.9 6.1 10 5 10ZM19 10C17.9 10 17 10.9 17 12C17 13.1 17.9 14 19 14C20.1 14 21 13.1 21 12C21 10.9 20.1 10 19 10ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z"
+                      fill="#52525B"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <p class="focus:outline-none text-sm leading-5 text-gray-600 sm:w-11/12" x-text="posData[pos.id].code"></p>
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
+  <div class="w-1/3">
+    <div class="px-2">
+      <div class="text-center items-center">
+        <p
+          class="focus:outline-none text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800">
+          Location</p>
+        <button
+          class="bg-blue-700 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-700 hover:bg-blue-600 rounded text-white px-2 h-6 items-center  align-middle text-xs"><i
+            class="ri-add-line font-bold align-middle"></em></button>
+      </div>
+    </div>
+
+    <div x-init="if(row.loc===undefined)row.loc = []" class="bg-white px-4 md:px-10 pb-5 overflow-y-auto max-h-[400px]">
+      <template x-for="loc in row.loc">
+        <div>
+          <div class="flex flex-col items-center">
+            <div class="h-6 border-l border-dashed border-gray-200">
+            </div>
+            <div class="px-3 py-2 bg-gray-100 rounded-full">
+              <p class="focus:outline-none text-xs leading-none text-gray-600" x-text="loc.edate"></p>
+            </div>
+            <div class="h-6 border-l border-dashed border-gray-200">
+            </div>
+          </div>
+          <div class="bg-gray-100 rounded py-1 px-3">
+            <div x-data="{dropdown_open:false}" class="flex items-center justify-between">
+              <p class="focus:outline-none text-base font-medium leading-none text-gray-800" x-text="loc.name"></p>
+              <div class="relative">
+                <div @click.away="dropdown_open = false" x-show="dropdown_open"
+                  class="dropdown-content mt-5 absolute left-[-40px] shadow-md z-10 w-[100px]">
+                  <ul class="bg-white shadow rounded py-1">
+                    <li
+                      class="cursor-pointer text-gray-600 leading-3 tracking-normal p-2 hover:bg-indigo-700 hover:text-white font-normal">
+                      Change</li>
+                    <li
+                      class="cursor-pointer text-gray-600 leading-3 tracking-normal p-2 hover:bg-indigo-700 hover:text-white font-normal">
+                      Delete</li>
+                  </ul>
+                </div>
+                <button class="focus:outline-none" aria-label="dropdown" role="button">
+                  <svg @click="dropdown_open = !dropdown_open" class=" dropbtn" xmlns="http://www.w3.org/2000/svg"
+                    width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M5 10C3.9 10 3 10.9 3 12C3 13.1 3.9 14 5 14C6.1 14 7 13.1 7 12C7 10.9 6.1 10 5 10ZM19 10C17.9 10 17 10.9 17 12C17 13.1 17.9 14 19 14C20.1 14 21 13.1 21 12C21 10.9 20.1 10 19 10ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z"
+                      fill="#52525B"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <p class="focus:outline-none text-sm leading-5 text-gray-600 sm:w-11/12" x-text="loc.code"></p>
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
+</div>

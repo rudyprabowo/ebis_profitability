@@ -1,0 +1,8 @@
+#bin/bash
+export PATH=$PATH
+while :
+do
+  php /var/www/html/php-lamira-frames/public/index.php scheduler-1min
+  sleep 60
+done
+exit

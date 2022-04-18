@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.side-menu{
+    @apply flex-1 space-y-1;
+}
+
+.side-menu.child{
+    @apply pl-1;
+}
+
+.link-child{
+    @apply pl-4 text-gray-600 hover:text-gray-900 hover:bg-ebis-c hover:bg-opacity-30 flex items-center pr-2 py-2 text-sm;
+}
+
+.parent-child{
+    @apply text-gray-600 hover:text-gray-900 border-transparent hover:bg-ebis-c hover:bg-opacity-30 flex items-center pl-1 pr-2 py-2 text-sm;
+}
+
+.top-parent{
+    @apply text-gray-600 hover:text-gray-900 border-transparent hover:bg-ebis-c hover:bg-opacity-30 flex items-center  text-sm;
+}
+
+.top-link{
+    @apply text-gray-600 hover:bg-ebis-c hover:bg-opacity-30 hover:text-gray-900 flex items-center pl-2 pr-2 py-2 text-sm;
+}
+
+:is(.link-child,.parent-child,.top-parent,.top-link).active{
+    @apply bg-ebis-c border-ebis-d text-ebis-d bg-opacity-20 font-medium;
+}
+
+.echarts-tooltip .echart-title-time{
+    @apply text-xs !important;
+}
+
+.echarts-tooltip .echart-value-time{
+    @apply font-bold !important;
+}
+
+.dataTable-table{
+    @apply text-xs w-full;
+}
+
+.dataTable-table thead tr th{
+    @apply whitespace-nowrap;
+}
+
+table.head-ebis-o thead{
+    @apply bg-ebis-o text-ebis-k;
+}
+
+table.head-center thead tr th{
+    @apply text-center;
+}

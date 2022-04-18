@@ -1,0 +1,53 @@
+<?php
+$ini_reader = new \Laminas\Config\Reader\Ini();
+$conf = $ini_reader->fromFile(conf_path() . env('APPLICATION_ENV') . ".conf");
+$app_conf = $conf['app-config'];
+/** @var \Laminas\View\Helper\HeadStyle $headStyle */
+$headStyle = $this->headLink();
+//datatable
+$headStyle->appendStylesheet("https://fonts.googleapis.com/css?family=Montserrat:400,500,700,900&display=swap");
+?>
+<?php $this->headStyle()->captureStart() ?>
+body {
+  /* The image used */
+  background-image: url("/img/welcome/bg-1.png");
+
+  width: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+<?php $this->headStyle()->captureEnd() ?>
+<main class="min-h-screen font-montserrat relative">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-3">
+    <div class="col-start-2 col-end-2 w-full pr-3">
+      <img class="w-32 float-right" src="/img/welcome/image7.gif" />
+    </div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-2 p-3">
+    <div class=""></div>
+    <div class="md:col-span-3 text-center md:text-left">
+      <h1 class="font-bold text-[2.3rem] md:text-[2.7rem] leading-[2.7rem] md:leading-[3.5rem] text-ebis-g tracking-wide">IT Tools<br>Profitability Analytics<br>EBIS</h1>
+      <a href="/auth/login" class="bg-ebis-d hover:bg-ebis-c text-lg font-medium text-white p-2 rounded-md m-auto block text-center w-1/2 md:w-full mt-5">Get Started</a>
+    </div>
+    <div class=""></div>
+    <div class="md:col-span-6 w-full">
+      <img class="w-3/5 md:w-3/4 m-auto" src="/img/welcome/img-1.png" />
+    </div>
+    <div class=""></div>
+  </div>
+  <div class="fixed bottom-0 flex flex-wrap w-full bg-white space-x-reverse justify-center items-center space-y-5 space-x-5 px-3 pb-5">
+    <div class="w-0"></div>
+    <?php
+      foreach (glob(APP_PATH . 'public' . DS . 'img' . DS . 'welcome' . DS . "comp-*") as $filename) {
+        $tmp = explode(DS, $filename);
+        $fname = $tmp[count($tmp) - 1];
+    ?>
+      <img class="h-4" src="/img/welcome/<?= $fname; ?>" />
+    <?php
+      }
+    ?>
+  </div>
+</main>

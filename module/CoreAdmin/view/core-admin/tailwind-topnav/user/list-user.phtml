@@ -1,0 +1,378 @@
+<?php
+$me = $this;
+$headLink = $this->headLink();
+$headLink->appendStylesheet($me->basePath("js-lib/tom-select/tom-select.default.min.css"));
+
+$headScript = $me->headScript();
+$headScript->appendFile($me->basePath("js-lib/lodash/lodash.js"));
+$headScript->appendFile($me->basePath("js-lib/tom-select/tom-select.complete.js"));
+$headScript->captureStart();
+?>
+var list_route = <?= json_encode($me->route); ?> ;
+<?php
+$headScript->captureEnd();
+?>
+<style></style>
+
+<div class="mx-auto bg-white dark:bg-gray-800 shadow rounded" x-data="list_user" x-bind="event">
+    <div class="flex w-full pl-3 sm:pl-6 pr-3 py-5 items-center justify-between bg-indigo-50 rounded-t">
+        <h3 class="text-gray-800 font-bold text-base sm:text-xl"></h3>
+        <button @click="$dispatch('show-addmodal')" class="ml-0 sm:ml-6 bg-indigo-700 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 hover:bg-indigo-600 rounded text-white px-5 h-8 flex items-center text-sm">Create New</button>
+    </div>
+    <div class="flex flex-col md:flex-row p-3 justify-between items-start md:items-stretch w-full">
+        <div class="w-full md:w-1/3 flex flex-col md:flex-row items-start md:items-center">
+            <div class="flex items-center">
+                <button class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 p-2 border-gray-200 text-gray-600 dark:text-gray-400 border rounded focus:outline-none focus:border-gray-800 focus:shadow-outline-gray" aria-label="Delete table" role="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon cursor-pointer icon-tabler icon-tabler-trash" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" />
+                        <line x1="4" y1="7" x2="20" y2="7" />
+                        <line x1="10" y1="11" x2="10" y2="17" />
+                        <line x1="14" y1="11" x2="14" y2="17" />
+                        <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                        <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                    </svg>
+                </button>
+                <button class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-gray-600 p-2 ml-2 border-gray-200 dark:text-gray-400 border rounded focus:outline-none focus:border-gray-800 focus:shadow-outline-gray" aria-label="upload Table" role="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-upload" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" />
+                        <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+                        <polyline points="7 9 12 4 17 9" />
+                        <line x1="12" y1="4" x2="12" y2="16" />
+                    </svg>
+                </button>
+                <button @click="$dispatch('sorting-sortingmodal')"  class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-gray-600 p-2 ml-2 border-gray-200 dark:text-gray-400 border rounded focus:outline-none focus:border-gray-800 focus:shadow-outline-gray" aria-label="upload Table" role="button">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                </svg>
+                </button>
+            </div>
+        </div>
+        <div class="w-full md:w-2/3 flex flex-col md:flex-row items-start md:items-center justify-end">
+            <div class="flex flex-col w-full sm:w-1/2 md:ml-4 mt-3 md:mt-0">
+                <div class="relative w-full">
+                    <div @click= "$dispatch('show-filtermodal')" aria-hidden="true" class="absolute cursor-pointer text-gray-600 dark:text-gray-400 flex items-center pr-3 right-0 border-l h-full">
+                        <span class="ml-2 mr-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-filter" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z"></path>
+                                <path d="M5.5 5h13a1 1 0 0 1 0.5 1.5L14 12L14 19L10 16L10 12L5 6.5a1 1 0 0 1 0.5 -1.5"></path>
+                            </svg>
+                        </span>
+                        <span class="text-sm leading-tight tracking-normal">Filter</span>
+                    </div>
+                    <div class="absolute text-gray-600 dark:text-gray-400 flex items-center pl-3 h-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z"></path>
+                            <circle cx="10" cy="10" r="7"></circle>
+                            <line x1="21" y1="21" x2="15" y2="15"></line>
+                        </svg>
+                    </div>
+                    <label for="search" class="hidden text-gray-800 text-sm font-bold leading-tight tracking-normal mb-2"></label>
+                    <input  id="search" class="w-full text-gray-600 bg-transparent dark:bg-gray-800 dark:text-gray-400 focus:outline-none focus:border focus:border-indigo-700 font-normal pl-8 pr-24 h-10 flex items-center text-sm border-gray-300 dark:border-gray-200 rounded border" placeholder="Search by project name or owner" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="w-full overflow-x-scroll xl:overflow-x-hidden">
+        <table class="min-w-full bg-white dark:bg-gray-800 rounded border border-gray-300" id="main-table">
+            <thead>
+                <tr class="w-full bg-gray-100 dark:bg-gray-700 border-b border-gray-300">
+                    <th role="columnheader" class="pl-3 w-20 py-3">
+                        <div class="flex items-center">
+                            <input placeholder="check box" type="checkbox" class="cursor-pointer relative w-5 h-5 border rounded border-gray-400 bg-white" onclick="checkAll(this)" />
+                            <div class="opacity-0 cursor-defaut ml-4 text-gray-800 dark:text-gray-100">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-up" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" />
+                                    <polyline points="6 15 12 9 18 15" />
+                                </svg>
+                            </div>
+                        </div>
+                    </th>
+                    <th role="columnheader" class="border-gray-300 px-4 whitespace-no-wrap w-32">
+                        <div class="flex items-center justify-center relative chuss-div">
+                            <p class="text-gray-800 dark:text-gray-100 font-normal text-center text-xs tracking-normal leading-4">User ID</p>
+                        </div>
+                    </th>
+                    <th role="columnheader" class="border-l border-gray-300 px-4 whitespace-no-wrap w-32">
+                        <div class="flex items-center justify-center relative chuss-div">
+                            <p class="text-gray-800 dark:text-gray-100 font-normal text-center text-xs tracking-normal leading-4">User Name</p>
+                        </div>
+                    </th>
+                    <th role="columnheader" class="border-l border-gray-300 px-4 whitespace-no-wrap w-32">
+                        <div class="flex items-center justify-center relative chuss-div">
+                            <p class="text-gray-800 dark:text-gray-100 font-normal text-center text-xs tracking-normal leading-4">Full Name</p>
+                        </div>
+                    </th>
+                    <th role="columnheader" class="border-l border-gray-300 px-4 whitespace-no-wrap w-32">
+                        <div class="flex items-center justify-center relative chuss-div">
+                            <p class="text-gray-800 dark:text-gray-100 font-normal text-center text-xs tracking-normal leading-4">Email</p>
+                        </div>
+                    </th>
+                    <th role="columnheader" class="border-l border-gray-300 px-4 whitespace-no-wrap w-32">
+                        <div class="flex items-center justify-center relative chuss-div">
+                            <p class="text-gray-800 dark:text-gray-100 font-normal text-center text-xs tracking-normal leading-4">Status</p>
+                        </div>
+                    </th>
+                    <th role="columnheader"
+                        class="border-l border-gray-300 px-4 whitespace-nowrap w-32">
+                        <p class="text-gray-800 dark:text-gray-100 font-normal text-center text-xs tracking-normal leading-4">Actions
+                        </p>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template x-for="(user,idx) in data">
+                    <tr class="border-b border-gray-300">
+                        <td class="pl-3 w-24 py-3">
+                            <div class="flex items-center">
+                                <input placeholder="check box" type="checkbox" class="cursor-pointer relative w-5 h-5 border rounded border-gray-400 bg-white" onclick="tableInteract(this)" />
+                                <button onclick="accordionHandler(this)" class="focus:outline-none focus:ring-2 focus:ring-gray-400 cursor-pointer text-gray-800 dark:text-gray-100 ml-2 lg:ml-4 mr-2 sm:mr-0 border border-transparent rounded focus:outline-none" aria-label="Toggle Details" role="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z"></path>
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                        <td class="whitespace-no-wrap px-4 w-32 text-center">
+                            <p class="text-gray-800 dark:text-gray-100 font-normal text-center text-xs tracking-normal leading-4" x-text="user.id"></p>
+                        </td>
+                        <td class="pl-4 whitespace-no-wrap px-4 w-32 text-center">
+                            <p class="text-gray-800 dark:text-gray-100 font-normal text-center text-xs tracking-normal leading-4" x-text="user.username"></p>
+                        </td>
+                        <td class="pl-4 whitespace-no-wrap px-4 w-32 text-center">
+                            <p class="text-gray-800 dark:text-gray-100 font-normal text-center text-xs tracking-normal leading-4" x-text="user.full_name"></p>
+                        </td>
+                        <td class="pl-4 whitespace-no-wrap px-4 w-32 text-center">
+                            <p class="text-gray-800 dark:text-gray-100 font-normal text-center text-xs tracking-normal leading-4" x-text="user.email"></p>
+                        </td>
+                        <td class="pl-4 whitespace-no-wrap px-4 w-32 text-center">
+                            <div @click="changeUserStatus(idx)" :class="{'bg-red-100':parseInt(user.status)!==1,'bg-green-100':parseInt(user.status)===1}" class="h-6 rounded-md flex items-center justify-center hover:cursor-pointer font-normal hover:font-bold">
+                                <span :class="{'text-red-700':parseInt(user.status)!==1,'text-green-700':parseInt(user.status)===1}" class="text-xs" x-text="((parseInt(user.status)===1)?'Active':'Not Active')"></span>
+                            </div>
+                        </td>
+                        <td class="pl-4 whitespace-no-wrap px-4 w-32 text-center">
+                            <div class="flex gap-x-2 flex-wrap flex-nowrap justify-center">
+                                <button
+                                class="focus:outline-none focus:ring-2 focus:ring-red-400 hover:bg-red-100 border-red-800 p-1 cursor-pointer text-red-800 dark:text-red-100 border border-transparent rounded focus:outline-none"
+                                role="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" @click="$dispatch('show-deletemodal',idx)" class="icon icon-tabler icon-tabler-trash" width="16"
+                                    height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <line x1="4" y1="7" x2="20" y2="7"></line>
+                                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+                                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+                                </svg>
+                                </button>
+                                <button
+                                @click= "$dispatch('show-editmodal',idx)"
+                                class="focus:outline-none focus:ring-2 focus:ring-indigo-400 hover:bg-indigo-100 border-indigo-800 p-1 cursor-pointer text-indigo-800 dark:text-indigo-100 border border-transparent rounded focus:outline-none"
+                                role="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="16"
+                                    height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3"></path>
+                                    <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3"></path>
+                                    <line x1="16" y1="5" x2="19" y2="8"></line>
+                                </svg>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </template>
+                <template x-if="false">
+                    <tr class="detail-row">
+                        <td colspan="9">
+                            <div class="flex items-stretch w-full border-b border-gray-300 dark:border-gray-200">
+                                <ul>
+                                    <li class="cursor-pointer text-sm leading-3 tracking-normal flex items-center justify-center">
+                                        <a class="p-3 border text-gray-800 dark:text-gray-100 border-transparent hover:text-indigo-700 focus:bg-indigo-700 focus:text-white" href="javascript: void(0)">
+                                            <svg aria-label="Option 1" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-grid" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z"></path>
+                                                <rect x="4" y="4" width="6" height="6" rx="1"></rect>
+                                                <rect x="14" y="4" width="6" height="6" rx="1"></rect>
+                                                <rect x="4" y="14" width="6" height="6" rx="1"></rect>
+                                                <rect x="14" y="14" width="6" height="6" rx="1"></rect>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li autofocus class="cursor-pointer flex items-center justify-center">
+                                        <a class="p-3 border text-gray-800 dark:text-gray-100 border-transparent focus:bg-indigo-700 focus:text-white" href="javascript:void(0)">
+                                            <svg aria-label="Option 2" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-puzzle" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z"></path>
+                                                <path d="M4 7h3a1 1 0 0 0 1 -1v-1a2 2 0 0 1 4 0v1a1 1 0 0 0 1 1h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h1a2 2 0 0 1 0 4h-1a1 1 0 0 0 -1 1v3a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-1a2 2 0 0 0 -4 0v1a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h1a2 2 0 0 0 0 -4h-1a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1"></path>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li class="cursor-pointer text-sm leading-3 tracking-normal flex items-center justify-center">
+                                        <a class="p-3 border text-gray-800 dark:text-gray-100 border-transparent hover:text-indigo-700 focus:bg-indigo-700 focus:text-white" href="javascript:void(0)">
+                                            <svg aria-label="Option 3" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-compass" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z"></path>
+                                                <polyline points="8 16 10 10 16 8 14 14 8 16"></polyline>
+                                                <circle cx="12" cy="12" r="9"></circle>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li class="cursor-pointer text-sm leading-3 tracking-normal flex items-center justify-center">
+                                        <a class="p-3 border text-gray-800 dark:text-gray-100 border-transparent hover:text-indigo-700 focus:bg-indigo-700 focus:text-white" href="javascript:void(0)">
+                                            <svg aria-label="Option 4" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-code" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z"></path>
+                                                <polyline points="7 8 3 12 7 16"></polyline>
+                                                <polyline points="17 8 21 12 17 16"></polyline>
+                                                <line x1="14" y1="4" x2="10" y2="20"></line>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="w-full bg-white border-l border-gray-300 dark:bg-gray-800">
+                                    <h4 class="pl-10 w-full text-sm text-gray-800 dark:text-gray-100 py-3 bg-gray-100 dark:bg-gray-700">Software Development Project</h4>
+                                    <div class="bg-white dark:bg-gray-800 px-8 py-6">
+                                        <div class="flex items-start">
+                                            <div class="w-1/3">
+                                                <p class="text-gray-600 dark:text-gray-400 font-normal text-xs">Owner</p>
+                                                <h5 class="text-gray-800 dark:text-gray-100 font-normal text-xs">Jason Smith</h5>
+                                            </div>
+                                            <div class="w-1/3">
+                                                <p class="text-gray-600 dark:text-gray-400 font-normal text-xs">Type</p>
+                                                <h5 class="text-gray-800 dark:text-gray-100 font-normal text-xs">Development</h5>
+                                            </div>
+                                            <div class="w-1/3">
+                                                <p class="text-gray-600 dark:text-gray-400 font-normal text-xs">Time Spent</p>
+                                                <h5 class="text-gray-800 dark:text-gray-100 font-normal text-xs">1440 Hours, 45 Mins</h5>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start mt-6">
+                                            <div class="w-1/3">
+                                                <p class="text-gray-600 dark:text-gray-400 font-normal text-xs">Project</p>
+                                                <h5 class="text-gray-800 dark:text-gray-100 font-normal text-xs">Create new features for the app</h5>
+                                            </div>
+                                            <div class="w-1/3">
+                                                <p class="text-gray-600 dark:text-gray-400 font-normal text-xs">Priority</p>
+                                                <h5 class="text-gray-800 dark:text-gray-100 font-normal text-xs">High</h5>
+                                            </div>
+                                            <div class="w-1/3">
+                                                <p class="text-gray-600 dark:text-gray-400 font-normal text-xs">Incharge officer(s)</p>
+                                                <h5 class="text-indigo-700 font-normal text-xs">Saul Berenson & Nicholas Brody</h5>
+                                            </div>
+                                        </div>
+                                        <hr class="my-6 border-t border-gray-300 w-full" />
+                                        <h5 class="text-gray-600 dark:text-gray-400 text-xs mb-2 font-bold">Message</h5>
+                                        <p class="text-gray-800 dark:text-gray-100 font-normal text-xs w-3/5 leading-6">But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful</p>
+                                        <h5 class="text-indigo-700 text-xs mb-2 mt-12 font-bold">Recommended Action</h5>
+                                        <p class="text-gray-800 dark:text-gray-100 font-normal text-xs w-3/5 leading-6">But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="mx-auto container pt-8 flex justify-center sm:justify-end items-center">
+    <a class="text-gray-600 mr-5 border-gray-200 border rounded focus:outline-none focus:border-gray-800 focus:shadow-outline-gray" role="link" aria-label="previous page" href="javascript: void(0)">
+        <svg xmlns="http://www.w3.org/2000/svg" class="dark:text-gray-100 icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z"></path>
+            <polyline points="15 6 9 12 15 18"></polyline>
+        </svg>
+    </a>
+    <p class="text-gray-800 dark:text-gray-100 fot-normal text-xs">Page</p>
+    <label for="selectedPage" class="hidden"></label>
+    <input placeholder="0" type="text" class="text-center bg-white dark:bg-gray-800 w-10 px-2 mx-2 text-gray-800 dark:text-gray-100 focus:outline-none focus:border focus:border-indigo-700 font-normal flex items-center text-xs border-gray-300 rounded border" />
+    <a class="text-gray-600 mx-5 border-gray-200 border rounded focus:outline-none focus:border-gray-800 focus:shadow-outline-gray" role="link" aria-label="next page" href="javascript: void(0)">
+        <svg xmlns="http://www.w3.org/2000/svg" class="dark:text-gray-100 icon icon-tabler icon-tabler-chevron-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z"></path>
+            <polyline points="9 6 15 12 9 18"></polyline>
+        </svg>
+    </a>
+    <input placeholder="0" type="text" class="text-center bg-white dark:bg-gray-800 w-10 px-2 mx-2 text-gray-800 dark:text-gray-100 focus:outline-none focus:border focus:border-indigo-700 font-normal flex items-center text-xs border-gray-300 rounded border" />
+    <p class="-mt-1 text-gray-800 dark:text-gray-100 fot-normal text-xs">per page</p>
+</div>
+
+<!-- MODAL CREATE NEW USER -->
+<?php
+  /*  <div class="z-50 fixed w-full flex justify-center inset-0" x-data="add_user" x-show="true">
+        <div  class="w-full h-full bg-gray-900 z-0 absolute inset-0"></div>
+        <div class="mx-auto container">
+            <div class="flex items-center justify-center h-full w-full">
+                <div class="bg-white rounded-md shadow fixed overflow-y-auto sm:h-auto w-10/12 md:w-8/12 lg:w-1/2 2xl:w-2/5">
+                    <div class="bg-gray-100 rounded-tl-md rounded-tr-md px-4 md:px-8 md:py-4 py-7 flex items-center justify-between">
+                        <p class="text-base font-semibold">Create New User</p>
+                        <button @click="modalAddUser" role="button" aria-label="close label" class="focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 focus:outline-none">
+                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 7L7 21" stroke="#A1A1AA" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M7 7L21 21" stroke="#A1A1AA" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="px-4 md:px-10 pt-6 md:pt-12 md:pb-4 pb-7">
+                        <!-- <div class="flex items-center justify-center">
+                            <div tabindex="0" aria-label="img" role="img" class="focus:outline-none w-40 h-40 p-16 bg-gray-100 rounded-md flex items-center justify-center">
+                                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22.5 12H22.515" stroke="#94A3B8" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M25.5 6H10.5C8.01472 6 6 8.01472 6 10.5V25.5C6 27.9853 8.01472 30 10.5 30H25.5C27.9853 30 30 27.9853 30 25.5V10.5C30 8.01472 27.9853 6 25.5 6Z" stroke="#94A3B8" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M6 22.4999L12 16.4999C12.6841 15.8417 13.4601 15.4951 14.25 15.4951C15.0399 15.4951 15.8159 15.8417 16.5 16.4999L24 23.9999" stroke="#94A3B8" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M21 20.9999L22.5 19.4999C23.1841 18.8417 23.9601 18.4951 24.75 18.4951C25.5399 18.4951 26.3159 18.8417 27 19.4999L30 22.4999" stroke="#94A3B8" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </div>
+                        </div> -->
+                        <form class="mt-11">
+                            <div class="flex items-center space-x-9 mt-4">
+                                <input placeholder="Username" class="focus:ring-2 focus:ring-gray-400 w-1/2 focus:outline-none placeholder-gray-500 py-3 px-3 text-sm leading-none text-gray-800 bg-white border rounded border-gray-200" />
+
+                                <input placeholder="Full Name" class="focus:ring-2 focus:ring-gray-400 w-1/2 focus:outline-none placeholder-gray-500 py-3 px-3 text-sm leading-none text-gray-800 bg-white border rounded border-gray-200" />
+                                <!-- <input placeholder="Age" type="number" min="0" class="focus:ring-2 focus:ring-gray-400 w-1/2 focus:outline-none placeholder-gray-500 py-3 px-3 text-sm leading-none text-gray-800 bg-white border rounded border-gray-200" /> -->
+                            </div>
+                            <div class="flex items-center space-x-9 mt-8">
+                                <input type="password"placeholder="Password" class="focus:ring-2 focus:ring-gray-400 w-1/2 focus:outline-none placeholder-gray-500 py-3 px-3 text-sm leading-none text-gray-800 bg-white border rounded border-gray-200" />
+
+                                <input type="password"placeholder="Repeat Password" class="focus:ring-2 focus:ring-gray-400 w-1/2 focus:outline-none placeholder-gray-500 py-3 px-3 text-sm leading-none text-gray-800 bg-white border rounded border-gray-200" />
+
+                            </div>
+                            <div class="flex items-center space-x-9 mt-8">
+                                <input placeholder="Email" type="email" class="focus:ring-2 focus:ring-gray-400 w-1/2 focus:outline-none placeholder-gray-500 py-3 px-3 text-sm leading-none text-gray-800 bg-white border rounded border-gray-200" />
+
+                                <!-- <input value="1" aria-label="toggle 2" type="checkbox" name="toggle" id="toggle2" class="ring-2 ring-red-700 checked:ring-green-700 focus:outline-none checkbox2 w-6 h-6 rounded-full bg-white absolute shadow-sm appearance-none cursor-pointer border border-transparent top-0 bottom-0 m-auto" /> -->
+
+                            </div>
+                            <div class="flex items-center space-x-9 mt-8">
+                                <input placeholder="Pass Reset Token" class="focus:ring-2 focus:ring-gray-400 w-1/2 focus:outline-none placeholder-gray-500 py-3 px-3 text-sm leading-none text-gray-800 bg-white border rounded border-gray-200" />
+
+                                <input placeholder="Redirect Route" class="focus:ring-2 focus:ring-gray-400 w-1/2 focus:outline-none placeholder-gray-500 py-3 px-3 text-sm leading-none text-gray-800 bg-white border rounded border-gray-200" />
+                            </div>
+                            <div class="flex items-center space-x-9 mt-8">
+                                <input placeholder="Pass Reset Token" class="focus:ring-2 focus:ring-gray-400 w-1/2 focus:outline-none placeholder-gray-500 py-3 px-3 text-sm leading-none text-gray-800 bg-white border rounded border-gray-200" />
+
+                                <input placeholder="Redirect Route" class="focus:ring-2 focus:ring-gray-400 w-1/2 focus:outline-none placeholder-gray-500 py-3 px-3 text-sm leading-none text-gray-800 bg-white border rounded border-gray-200" />
+                            </div>
+                            <div class="flex items-center space-x-9 mt-8">
+                                <input placeholder="Pass Reset Token" class="focus:ring-2 focus:ring-gray-400 w-1/2 focus:outline-none placeholder-gray-500 py-3 px-3 text-sm leading-none text-gray-800 bg-white border rounded border-gray-200" />
+
+                                <input placeholder="Redirect Route" class="focus:ring-2 focus:ring-gray-400 w-1/2 focus:outline-none placeholder-gray-500 py-3 px-3 text-sm leading-none text-gray-800 bg-white border rounded border-gray-200" />
+                            </div>
+                            <div class="flex items-center space-x-9 mt-8">
+                                <input placeholder="Pass Reset Token" class="focus:ring-2 focus:ring-gray-400 w-1/2 focus:outline-none placeholder-gray-500 py-3 px-3 text-sm leading-none text-gray-800 bg-white border rounded border-gray-200" />
+
+                                <input placeholder="Redirect Route" class="focus:ring-2 focus:ring-gray-400 w-1/2 focus:outline-none placeholder-gray-500 py-3 px-3 text-sm leading-none text-gray-800 bg-white border rounded border-gray-200" />
+                            </div>
+
+                        </form>
+                        <div class="flex items-center justify-between mt-9">
+                            <button @click="modalAddUser" role="button" aria-label="close button" class="focus:ring-2 focus:ring-offset-2 focus:bg-gray-600 focus:ring-gray-600 focus:outline-none px-6 py-3 bg-gray-600 hover:bg-gray-500 shadow rounded text-sm text-white">Cancel</button>
+                            <button aria-label="add user" role="button" class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-800 focus:outline-none px-6 py-3 bg-indigo-700 hover:bg-opacity-80 shadow rounded text-sm text-white">Add User</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?=$me->partial('list-user/add_modal.phtml', []);?>
+<?=$me->partial('list-user/edit_modal.phtml', []);?>
+<?=$me->partial('list-user/filter_modal.phtml', []);?>
+<?=$me->partial('list-user/delete_modal.phtml', []);?>

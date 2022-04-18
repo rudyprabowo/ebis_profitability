@@ -1,0 +1,8 @@
+<template x-teleport="#mainmodal">
+    <div x-cloak x-show="show_preview" 
+        @show-previewcustomer.window="show_preview=true;$nextTick(() => { $dispatch('show-mainmodal', true) })"
+        class="bg-white p-2 rounded-md m-auto h-[98vh] w-[98vw] relative">
+        <button @click="show_preview=false;$nextTick(() => { $dispatch('show-mainmodal', false) })" class="px-2 py-1 rounded-sm bg-red-600 hover:bg-red-500 absolute top-3 text-white font-medium right-3 z-50">close</button>
+        <div id="preview-content" class="w-full h-full max-h-full max-w-full overflow-hidden"></div>
+    </div>
+</template>

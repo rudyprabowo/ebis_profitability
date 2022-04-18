@@ -1,0 +1,8 @@
+td.dt-control {
+    background: url('/img/details_open1.png') no-repeat center center;
+    cursor: pointer;
+}
+
+tr.shown td.dt-control {
+    background: url('/img/details_close1.png') no-repeat center center;
+}

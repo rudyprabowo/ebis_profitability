@@ -1,0 +1,191 @@
+<?php
+$me = $this;
+$ini_reader = new \Laminas\Config\Reader\Ini();
+$conf = $ini_reader->fromFile(conf_path() . env('APPLICATION_ENV') . ".conf");
+$app_conf = $conf['app-config'];
+$identity = $me->identity();
+// d($identity);
+/** @var Core\Helper\Layout\TailwindTopNav $layoutHelper */
+$layoutHelper = $me->TailwindTopNavLayout();
+$layoutHelper->generateMenu($identity, $me->_module);
+/** @var Core\Helper\View\Routing $routingHelper */
+$routingHelper = $me->Routing();
+// zdebug($_module);die();
+$logoutRoute = strtolower($_module)."/auth/logout";
+if (!$routingHelper->hasRoute($logoutRoute)) {
+    $logoutRoute = 'app/auth/logout';
+    if (!$routingHelper->hasRoute($logoutRoute)) {
+        $logoutRoute = 'coreadmin/auth/logout';
+    }
+}
+?>
+<div x-show="sidebarOpen" class="lg:hidden"
+  x-description="Off-canvas menu for mobile, show/hide based on off-canvas menu state." style="display: none;">
+  <div class="fixed inset-0 flex z-40">
+    <div @click="sidebarOpen = false" x-show="sidebarOpen"
+      x-description="Off-canvas menu overlay, show/hide based on off-canvas menu state."
+      x-transition:enter="transition-opacity ease-linear duration-300" x-transition:enter-start="opacity-0"
+      x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity ease-linear duration-300"
+      x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0"
+      style="display: none;">
+      <div class="absolute inset-0 bg-gray-600 opacity-75"></div>
+    </div>
+    <div x-show="sidebarOpen" x-ref="sidebar" tabindex="0"
+      x-description="Off-canvas menu, show/hide based on off-canvas menu state."
+      x-transition:enter="transition ease-in-out duration-300 transform" x-transition:enter-start="-translate-x-full"
+      x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in-out duration-300 transform"
+      x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full"
+      class="relative flex-1 flex flex-col max-w-xs w-full bg-white focus:outline-none" style="display: none;">
+      <div class="absolute top-0 right-0 -mr-12 pt-2">
+        <button type="button" x-show="sidebarOpen" @click="sidebarOpen = false"
+          class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+          style="display: none;">
+          <span class="sr-only">Close sidebar</span>
+          <svg class="h-6 w-6 text-white" x-description="Heroicon name: x" xmlns="http://www.w3.org/2000/svg"
+            fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
+        <div class="flex-shrink-0 flex items-center px-4">
+          <img class="inline-block h-8 w-auto align-middle" src="<?=$me->basePath("img/open_source.png");?>"
+            alt="<?= $app_conf['app_name']; ?>">
+          <span class="text-mygreen font-extrabold inline-block text-2  xl align-middle"><?= $app_conf['app_name']; ?></span>
+        </div>
+        <nav x-cloak aria-label="Sidebar" class="mt-5">
+          <div class="px-2 space-y-1">
+            <!-- Current: "bg-gray-100 text-gray-900", Default: "text-gray-600 hover:bg-gray-50 hover:text-gray-900" -->
+            <a x-show="false" href="#"
+              class="bg-white text-gray-600 hover:text-gray-900 hover:bg-gray-50 group flex items-center px-2 py-1 text-base font-medium rounded-md align-middle" id="sidemenu-0">
+              <!-- Current: "text-gray-500", Default: "text-gray-400 group-hover:text-gray-500" -->
+              <em class="ri-home-2-line text-gray-500 mr-1 align-middle text-xl"></em>
+              Home
+            </a>
+            <?= $layoutHelper->generateSideBar($me); ?>
+
+            <div x-show="false" x-data="{ sidemenu_isExpanded_1: false, menu_id: 1 }" class="space-y-1" x-bind:id="'sidemenu-'+menu_id">
+              <button
+                class="group w-full flex items-center pl-2 pr-1 py-2 text-base font-medium rounded-md bg-white text-gray-600 hover:text-gray-900 hover:bg-gray-50 focus:outline-none"
+                @click.prevent="sidemenu_isExpanded_1 = !sidemenu_isExpanded_1" x-bind:aria-expanded="sidemenu_isExpanded_1">
+                <i class="ri-list-check mr-1 text-lg text-gray-400 group-hover:text-gray-500"></i>
+                Menu 1
+                <svg :class="{ 'text-gray-400 rotate-90': sidemenu_isExpanded_1, 'text-gray-300': !sidemenu_isExpanded_1 }"
+                  x-state:on="Expanded" x-state:off="Collapsed"
+                  class="ml-auto h-5 w-5 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150 text-gray-300"
+                  viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="M6 6L14 10L6 14V6Z" fill="currentColor"></path>
+                </svg>
+              </button>
+              <div x-show="sidemenu_isExpanded_1" x-description="Expandable link section, show/hide based on state." class="space-y-1" style="display: none;">
+                <a href="#"
+                  class="group w-full flex items-center pl-7 pr-2 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 bg-gray-50 hover:bg-gray-100">
+                  <i class="ri-external-link-line mr-1 text-lg text-gray-400 group-hover:text-gray-500"></i>
+                  Menu 1-1
+                </a>
+                <div x-data="{ sidemenu_isExpanded_1_2: false }" class="space-y-1 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+                  <button
+                    class="group w-full flex items-center pl-7 pr-1 py-2 text-sm font-medium rounded-md bg-white text-gray-600 hover:text-gray-900 hover:bg-gray-50 focus:outline-none  "
+                    @click.prevent="sidemenu_isExpanded_1_2 = !sidemenu_isExpanded_1_2" x-bind:aria-expanded="sidemenu_isExpanded_1_2">
+                    <i class="ri-list-check mr-1 text-lg text-gray-400 group-hover:text-gray-500"></i>
+                    Menu 1-2
+                    <svg :class="{ 'text-gray-400 rotate-90': sidemenu_isExpanded_1_2, 'text-gray-300': !sidemenu_isExpanded_1_2 }"
+                      x-state:on="Expanded" x-state:off="Collapsed"
+                      class="ml-auto h-5 w-5 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150 text-gray-300"
+                      viewBox="0 0 20 20" aria-hidden="true">
+                      <path d="M6 6L14 10L6 14V6Z" fill="currentColor"></path>
+                    </svg>
+                  </button>
+                  <div x-show="sidemenu_isExpanded_1_2" x-description="Expandable link section, show/hide based on state." class="space-y-1" style="display: none;">
+                    <a href="#"
+                      class="group w-full flex items-center pl-11 pr-2 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 bg-gray-100 hover:bg-gray-200"
+                      role="menuitem">
+                      <i class="ri-external-link-line mr-1 text-lg text-gray-400 group-hover:text-gray-500"></i>
+                      Menu 1-2-1
+                    </a>
+                    <div x-data="{ sidemenu_isExpanded_1_2_2: false }" class="space-y-1 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+                        <button
+                          class="group w-full flex items-center pl-11 pr-1 py-2 text-sm font-medium rounded-md bg-white text-gray-600 hover:text-gray-900 hover:bg-gray-50 focus:outline-none  "
+                          @click.prevent="sidemenu_isExpanded_1_2_2 = !sidemenu_isExpanded_1_2_2" x-bind:aria-expanded="sidemenu_isExpanded_1_2_2">
+                          <i class="ri-list-check mr-1 text-lg text-gray-400 group-hover:text-gray-500"></i>
+                          Menu 1-2-2
+                          <svg :class="{ 'text-gray-400 rotate-90': sidemenu_isExpanded_1_2_2, 'text-gray-300': !sidemenu_isExpanded_1_2_2 }"
+                            x-state:on="Expanded" x-state:off="Collapsed"
+                            class="ml-auto h-5 w-5 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150 text-gray-300"
+                            viewBox="0 0 20 20" aria-hidden="true">
+                            <path d="M6 6L14 10L6 14V6Z" fill="currentColor"></path>
+                          </svg>
+                        </button>
+                        <div x-show="sidemenu_isExpanded_1_2_2" x-description="Expandable link section, show/hide based on state." class="space-y-1" style="display: none;">
+                          <a href="#"
+                            class="group w-full flex items-center pl-16 pr-2 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 bg-gray-100 hover:bg-gray-200"
+                            role="menuitem">
+                            <i class="ri-external-link-line mr-1 text-lg text-gray-400 group-hover:text-gray-500"></i>
+                            Menu 1-2-2-1
+                          </a>
+                          <a href="#"
+                            class="group w-full flex items-center pl-16 pr-2 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 bg-gray-100 hover:bg-gray-200"
+                            role="menuitem">
+                            <i class="ri-external-link-line mr-1 text-lg text-gray-400 group-hover:text-gray-500"></i>
+                            Menu 1-2-2-2
+                          </a>
+
+                        </div>
+                    </div>
+                    <a href="#"
+                      class="group w-full flex items-center pl-11 pr-2 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 bg-gray-100 hover:bg-gray-200"
+                      role="menuitem">
+                      <i class="ri-external-link-line mr-1 text-lg text-gray-400 group-hover:text-gray-500"></i>
+                      Menu 1-2-3
+                    </a>
+
+                  </div>
+                </div>
+
+                <a href="#"
+                  class="group w-full flex items-center pl-7 pr-2 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 bg-gray-50 hover:bg-gray-100">
+                  <i class="ri-external-link-line mr-1 text-lg text-gray-400 group-hover:text-gray-500"></i>
+                  Menu 1-3
+                </a>
+
+                <a href="#"
+                  class="group w-full flex items-center pl-7 pr-2 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 bg-gray-50 hover:bg-gray-100">
+                  <i class="ri-external-link-line mr-1 text-lg text-gray-400 group-hover:text-gray-500"></i>
+                  Menu 1-4
+                </a>
+
+              </div>
+            </div>
+
+          </div>
+        </nav>
+      </div>
+      <div class="flex-shrink-0 flex border-t border-gray-200 p-4">
+        <a href="#" class="flex-shrink-0 group block">
+          <div class="flex items-center">
+            <div>
+              <img class="inline-block h-10 w-10 rounded-full"
+                src="<?=$me->basePath("img/open_source.png");?>"
+                alt="">
+            </div>
+            <div class="ml-3">
+              <p class="text-base font-medium text-gray-700 group-hover:text-gray-900">
+                <?= $identity['full_name']??"Guest"; ?>
+              </p>
+              <p class="text-sm font-medium text-gray-500 group-hover:text-gray-700">
+                <?= $identity['mainrole']['name']??$identity['username']??"Guest"; ?>
+              </p>
+            </div>
+          </div>
+        </a>
+
+        <a href="<?= $this->url($logoutRoute); ?>" class="flex-grow text-right group block hover:text-red-500">
+          <em class="align-middle font-bold ri-logout-box-line text-3xl align-middle"></em>
+        </a>
+      </div>
+    </div>
+    <div class="flex-shrink-0 w-14" aria-hidden="true">
+      <!-- Force sidebar to shrink to fit close icon -->
+    </div>
+  </div>
+</div>

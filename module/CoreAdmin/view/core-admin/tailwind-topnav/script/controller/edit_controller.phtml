@@ -1,0 +1,78 @@
+<div x-bind="event_edit" x-cloak x-show="show" x-data="edit_controller" class="z-50 fixed w-full flex justify-center inset-0">
+    <div @click="" class="w-full h-full bg-bluegray-900 bg-opacity-70 z-0 absolute inset-0"></div>
+    <div class="mx-auto container">
+        <div class=" flex items-center justify-center h-full w-full">
+            <div class="w-8/12 bg-white rounded-md shadow fixed  sm:h-aut">
+                <div class="px-5 py-4">
+                    <div class="xl:w-full border-b border-gray-300 dark:border-gray-700 pb-2">
+                        <div class="flex items-center w-11/12 ">
+                            <div class="container mx-auto">
+                                <div class="mx-auto xl:w-full">
+                                    <h1 role="heading" class="text-lg text-gray-800 dark:text-gray-100 font-bold">Edit
+                                        Controller ccccc</h1>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 pt-1"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <!-- END -->
+                    <div
+                        class="px-6 w-full max-h-72 overflow-y-auto scrollbar scrollbar-thumb-bluegray-400 scrollbar-track-bluegray-100 scrollbar-thin">
+                        <div class="md:flex gap-x-2 items-center mt-4 w-full">
+                            <div class="w-3/6">
+                                <!-- <label class="text-sm leading-none text-gray-800">Username</label>
+                                <input type="text" x-model="data.username" name="username" tabindex="0" class="w-full p-3 mt-3  border rounded border-gray-200 focus:outline-none focus:border-gray-600 text-sm font-medium leading-none text-gray-800"  aria-labelledby="firstName" placeholder="Username" /> -->
+                                <label for="username" class=" block text-sm font-medium text-gray-700">
+                                    Action Name
+                                </label>
+                                <div class="mt-1 relative rounded-md shadow-sm">
+                                    <input x-bind="bind.name.input" x-model="data.name" type="text" name="username"
+                                        class="w-full p-3 mt-3  border rounded border-gray-200 focus:outline-none focus:border-gray-600 text-sm font-medium leading-none text-gray-800"
+                                        placeholder="Action Name">
+                                    <div
+                                        class="absolute inset-y-0 right-0 pr-3 pt-3 flex items-center pointer-events-none">
+
+                                    </div>
+                                </div>
+                                <!-- <p x-show="name_msg!==''" class=" absolute mt-1 text-xs text-red-600" x-html="name_msg"></p> -->
+                            </div>
+                            <div class="w-3/6">
+                                <label class="text-sm leading-none text-gray-800">Module</label>
+                                <select x-model="data.module" name="redirect_route"
+                                    class="w-full p-3 mt-3  border rounded border-gray-200 focus:outline-none focus:border-gray-600 text-sm font-medium leading-none text-gray-800">
+                                    <option>--</option>
+                                    <template x-for="opt in module_opt">
+                                        <option :selected="data.module === opt.id" :value="opt.id" x-text="opt.name"></option>
+                                    </template>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="md:flex gap-x-2 items-center mt-4 w-full">
+                            <!-- <div class="w-3/6">
+                                <label class="text-sm leading-none text-gray-800">Status</label>
+                                <button @click="changeStatus()"
+                                    :class="{'bg-green-700 border-green-800 focus:border-green-600':parseInt(data.status)===1, 'bg-red-700 border-red-800 focus:border-red-600':parseInt(data.status)===0}"
+                                    class="w-full p-3 mt-3  border rounded  focus:outline-none  text-sm font-medium leading-none text-white">
+                                    <span class="text-white"
+                                        x-text="((parseInt(data.status)===1)?'Active':'Not Active')"></span>
+                                </button>
+                            </div> -->
+                            <div class="w-3/6">
+                                <label class="text-sm leading-none text-gray-800">Factory</label>
+                                <input type="text" x-model="data.factory" name="factory" tabindex="0"
+                                    class="w-full p-3 mt-3  border rounded border-gray-200 focus:outline-none focus:border-gray-600 text-sm font-medium leading-none text-gray-800"
+                                    aria-labelledby="lastName" placeholder="Factory" />
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-end mt-10 gap-x-2">
+                            <button role="button" aria-label="closebutton" @click="hideModal()"
+                                class="focus:ring-2 focus:ring-offset-2 focus:bg-gray-600 focus:ring-gray-500 focus:outline-none px-3 py-1 bg-gray-500 hover:bg-gray-400 shadow rounded text-sm text-white">Cancel</button>
+                            <button @click="submit()" aria-label="add user" role="button"
+                                class="focus:ring-2 focus:ring-offset-2 focus:ring-green-800 focus:outline-none px-3 py-1 bg-green-700 hover:bg-opacity-80 shadow rounded text-sm text-white">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

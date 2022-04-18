@@ -1,0 +1,4 @@
+.ball-grid-pulse>div{
+  --tw-bg-opacity: 1;
+  background-color: rgba(76, 175, 80, var(--tw-bg-opacity));
+}

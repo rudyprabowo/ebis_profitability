@@ -1,0 +1,61 @@
+<thead x-cloak>
+  <tr class="w-full bg-gray-100 dark:bg-gray-700 border-b border-gray-300">
+    <th role="columnheader" class="pl-3 w-24 py-3">
+      <div class="flex items-center">
+        <input @click="$dispatch('chkbox', $el.checked)" placeholder="check box" type="checkbox"
+          class="cursor-pointer relative w-5 h-5 border rounded border-gray-400 bg-white" />
+        <div class="opacity-0 cursor-defaut ml-4 text-gray-800 dark:text-gray-100">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-up" width="16" height="16"
+            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" />
+            <polyline points="6 15 12 9 18 15" />
+          </svg>
+        </div>
+      </div>
+    </th>
+    <template x-for="(column, idx) in $store.tbl.column">
+      <th x-data="{dropdown_open : false}" @click.outside="dropdown_open = false" role="columnheader"
+        :class="{'border-l border-gray-300 pl-4':idx!==0}"
+        class="whitespace-nowrap w-[9rem] min-w-[9rem] first-dropdown cursor-pointer">
+        <div class="flex items-center justify-between relative chuss-div">
+          <p @click="dropdown_open = !dropdown_open"
+            class="text-gray-800 dark:text-gray-100 font-normal text-left text-xs tracking-normal leading-4"
+            x-text="column.label"></p>
+          <button x-show="column.filter!==null"
+            @click="dropdown_open = !dropdown_open;" role="button"
+            aria-label="option"
+            class="cursor-pointer  mr-3 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400 rounded">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down" width="16"
+              height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" />
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+          <ul x-show="dropdown_open && column.filter!==null"
+            class="bg-white shadow rounded py-1 w-[9rem] absolute top-0 right-0 mt-8 dropdown-content">
+            <li class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-1 px-3 font-normal">
+              <select
+                class="form-select hover:border-mygreen focus:border-mygreen focus:ring-mygreen block w-full mt-1 text-xs p-1">
+                <option value="off">Off</option>
+                <option value="suffix">Suffix</option>
+                <option value="prefix">Prefix</option>
+                <option value="like">Like</option>
+              </select>
+            </li>
+            <li class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-1 px-3 font-normal">
+              <input type="text"
+                class="border-0 hover:border-mygreen focus:border-mygreen focus:ring-0 border-b-2 text-center form-input mt-1 block w-full text-xs p-1"
+                placeholder="filter">
+            </li>
+          </ul>
+        </div>
+      </th>
+    </template>
+    <th role="columnheader" class="border-l border-gray-300 pl-4 pr-12  w-[9rem] min-w-[9rem] whitespace-nowrap">
+      <p class="text-gray-800 dark:text-gray-100 font-normal text-left text-xs tracking-normal leading-4">
+        Actions</p>
+    </th>
+  </tr>
+</thead>

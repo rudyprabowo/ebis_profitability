@@ -1,0 +1,127 @@
+RewriteEngine On
+
+#php_flag allow_url_fopen off
+#TraceEnable off
+
+#RewriteCond %{HTTPS} !=on
+#RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+#RewriteCond %{HTTP_HOST} !^www\.
+#RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L,E=HTTPS:1]
+#Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS
+
+#Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS
+#Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+#Header set Strict-Transport-Security "max-age=0; includeSubDomains; preload"
+
+Header set X-Frame-Options "sameorigin"
+Header set X-XSS-Protection "1"
+Header set X-Content-Type-Options "nosniff"
+Header set Content-Security-Policy "script-src cdn.jsdelivr.net unpkg.com 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com https://unpkg.com; connect-src 'self'; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; child-src 'self'; img-src 'self' *.unsplash.com tailwindui.com *.openstreetmap.org data:; media-src 'self'; object-src 'self'; frame-ancestors 'self';"
+
+Options +FollowSymLinks +MultiViews -Indexes
+
+#on httpd.conf
+#RewriteCond %{REQUEST_METHOD} ^(OPTION|CONNECT|DEBUG|DELETE|MOVE|PUT|TRACE|TRACK)
+#RewriteRule .* - [F]
+
+RewriteCond %{REQUEST_METHOD} ^(OPTION|CONNECT|DEBUG|MOVE|TRACE|TRACK) [NC]
+RewriteRule .* - [F,L]
+
+# The following rule tells Apache that if the requested filename
+# exists, simply serve it.
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+#RewriteRule ^.*$ - [L]
+RewriteRule ^.*$ - [NC,L]
+
+# The following rewrites all other queries to index.php. The
+# condition ensures that if you are using Apache aliases to do
+# mass virtual hosting or installed the project in a subdirectory,
+# the base path will be prepended to allow proper resolution of
+# the index.php file; it will work in non-aliased environments
+# as well, providing a safe, one-size fits all solution.
+RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$
+RewriteRule ^(.*) - [E=BASE:%1]
+#RewriteRule ^(.*)$ %{ENV:BASE}/app-src.php [L]
+RewriteRule ^(.*)$ %{ENV:BASE}/index.php [NC,L]
+
+<Limit POST GET PUT DELETE PATCH>
+    Require all granted
+</Limit>
+
+<LimitExcept POST GET PUT DELETE PATCH>
+Order allow,deny
+Deny from all
+</LimitExcept>
+
+<FilesMatch "\.(ini|psd|log|sh|lock|jshintrc|DS_Store|gitignore|htaccess|browserslistrc|stylelintignore|editorconfig|eslintignore|eslintrc|npmignore|gitattributes|babelrc)$">
+Order allow,deny
+Deny from all
+</FilesMatch>
+
+<Files  "license.txt">
+Order allow,deny
+Deny from all
+</Files>
+
+<Files  "readme.txt">
+Order allow,deny
+Deny from all
+</Files>
+
+<Files  "myhide_*">
+Order allow,deny
+Deny from all
+</Files>
+
+<Files  "my_command.txt">
+Order allow,deny
+Deny from all
+</Files>
+
+<Files  "bower.json">
+Order allow,deny
+Deny from all
+</Files>
+
+<Files  "stencil.config.ts">
+Order allow,deny
+Deny from all
+</Files>
+
+<Files  "composer.json">
+Order allow,deny
+Deny from all
+</Files>
+
+<Files  "package.json">
+Order allow,deny
+Deny from all
+</Files>
+
+<Files  "Gemfile">
+Order allow,deny
+Deny from all
+</Files>
+
+<Files  "README.md">
+Order allow,deny
+Deny from all
+</Files>
+
+<Files  "LICENSE">
+Order allow,deny
+Deny from all
+</Files>
+
+<Files  "LICENSE-MIT">
+Order allow,deny
+Deny from all
+</Files>
+
+<Files  "LICENSE-WTFPL">
+Order allow,deny
+Deny from all
+</Files>

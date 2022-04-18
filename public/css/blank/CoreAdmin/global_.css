@@ -1,0 +1,184 @@
+.meter {
+    box-sizing: content-box;
+    height: 20px;
+    position: relative;
+    margin: 0;
+    background: rgba(59, 130, 246, .2);
+    border-radius: 25px
+}
+
+.meter>span {
+    display: block;
+    height: 100%;
+    background-color: #2bc253;
+    background-image: linear-gradient(center bottom, #2bc253 37%, #54f054 69%);
+    box-shadow: inset 0 2px 9px hsla(0, 0%, 100%, .3), inset 0 -2px 6px rgba(0, 0, 0, .4);
+    position: relative
+}
+
+.animate>span>span,
+.meter>span,
+.meter>span:after {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    overflow: hidden
+}
+
+.animate>span>span,
+.meter>span:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-image: linear-gradient(-45deg, hsla(0, 0%, 100%, .2) 25%, transparent 0, transparent 50%, hsla(0, 0%, 100%, .2) 0, hsla(0, 0%, 100%, .2) 75%, transparent 0, transparent);
+    z-index: 1;
+    background-size: 50px 50px;
+    -webkit-animation: move 2s linear infinite;
+    animation: move 2s linear infinite
+}
+
+.animate>span:after {
+    display: none
+}
+
+@-webkit-keyframes move {
+    0% {
+        background-position: 0 0
+    }
+
+    to {
+        background-position: 50px 50px
+    }
+}
+
+@keyframes move {
+    0% {
+        background-position: 0 0
+    }
+
+    to {
+        background-position: 50px 50px
+    }
+}
+
+.orange>span {
+    border-radius: 25px;
+    background-image: linear-gradient(#f1a165, #f36d0a)
+}
+
+.red>span {
+    border-radius: 25px;
+    background-image: linear-gradient(#f0a3a3, #f42323)
+}
+
+.blue>span {
+    border-radius: 25px;
+    background-image: linear-gradient(#b0a3f0, #1e293b)
+}
+
+.nostripes>span:after,
+.nostripes>span>span {
+    background-image: none
+}
+
+@-webkit-keyframes ldio-1 {
+    0% {
+        opacity: 1
+    }
+
+    50% {
+        opacity: .5
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes ldio-1 {
+    0% {
+        opacity: 1
+    }
+
+    50% {
+        opacity: .5
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+.ldio-1 div {
+    position: absolute;
+    width: 10px;
+    height: 40px;
+    top: 0;
+    -webkit-animation: ldio-1 1s cubic-bezier(.5, 0, .5, 1) infinite;
+    animation: ldio-1 1s cubic-bezier(.5, 0, .5, 1) infinite
+}
+
+.ldio-1 div:first-child {
+    transform: translate(15px);
+    background: #fff;
+    -webkit-animation-delay: -.6s;
+    animation-delay: -.6s
+}
+
+.ldio-1 div:nth-child(2) {
+    transform: translate(35px);
+    background: #f5fdff;
+    -webkit-animation-delay: -.4s;
+    animation-delay: -.4s
+}
+
+.ldio-1 div:nth-child(3) {
+    transform: translate(55px);
+    background: #e7f6ff;
+    -webkit-animation-delay: -.2s;
+    animation-delay: -.2s
+}
+
+.ldio-1 div:nth-child(4) {
+    transform: translate(75px);
+    background: #dbecff
+}
+
+.ldio-1 div.load-text,
+.ldio-1 div:nth-child(4) {
+    -webkit-animation-delay: -1s;
+    animation-delay: -1s
+}
+
+.ldio-1 div.load-text {
+    transform: translateY(45px)
+}
+
+.loadingio-spinner-bars-1 {
+    width: 54px;
+    height: 54px;
+    display: inline-block;
+    overflow: hidden;
+    background: 0 0;
+    position: absolute;
+    top: 50%;
+    transform: translate(-27px, -27px)
+}
+
+.ldio-1 {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform: translateZ(0) scale(.54);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform-origin: 0 0
+}
+
+.ldio-1 div {
+    box-sizing: content-box
+}

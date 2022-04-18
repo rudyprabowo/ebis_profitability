@@ -1,0 +1,83 @@
+<tr
+  x-cloak
+  x-init="$nextTick(() => { expand = false; });"
+  :class="{'dark:bg-blue-700 bg-blue-100':row.checked}" class="border-b border-gray-300">
+  <td class="pl-3 w-24 py-3">
+    <div class="flex items-center">
+      <input @chkbox.window="if($event.detail!=$el.checked)$el.click()" @click="$store.tbl.checked(idx,$el.checked)"
+        placeholder="check box" type="checkbox"
+        class="cursor-pointer relative w-5 h-5 border rounded border-gray-400 bg-white" />
+      <button @click="expand = !expand;" :class="{'text-white bg-mygreen/60 ring-2':expand}"
+        class="hover:ring-2 hover:text-white hover:bg-mygreen/60 cursor-pointer text-gray-800 dark:text-gray-100 ml-2 lg:ml-4 mr-2 sm:mr-0 border border-transparent rounded focus:outline-none"
+        aria-label="Toggle Details" role="button">
+        <svg x-show="expand" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down"
+          width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z"></path>
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+        <svg x-show="!expand" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-right"
+          width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <polyline points="9 6 15 12 9 18" />
+        </svg>
+      </button>
+    </div>
+  </td>
+  <td class="whitespace-no-wrap">
+    <p class="text-gray-800 dark:text-gray-100 font-normal text-left text-xs tracking-normal leading-4" x-text="row.id">
+    </p>
+  </td>
+  <td class="pl-4 whitespace-no-wrap">
+    <p class="text-gray-800 dark:text-gray-100 font-normal text-left text-xs tracking-normal leading-4"
+      x-text="row.username"></p>
+  </td>
+  <td class="pl-4 whitespace-no-wrap">
+    <div class="bg-blue-100 h-6 w-20 rounded-md flex items-center justify-center">
+      <span class="text-xs text-blue-700 font-normal" x-text="row.full_name"></span>
+    </div>
+  </td>
+  <td class="pl-4 whitespace-no-wrap">
+    <p class="text-gray-800 dark:text-gray-100 font-normal text-left text-xs tracking-normal leading-4"
+      x-text="row.email"></p>
+  </td>
+  <td class="pl-4 whitespace-no-wrap">
+    <p class="text-gray-800 dark:text-gray-100 font-normal text-left text-xs tracking-normal leading-4"
+      x-text="row.created_date"></p>
+  </td>
+  <td class="pl-4 whitespace-no-wrap">
+    <p class="text-gray-800 dark:text-gray-100 font-normal text-left text-xs tracking-normal leading-4"
+      x-text="row.main_role"></p>
+  </td>
+  <td class="pl-4 whitespace-no-wrap">
+    <p class="text-gray-800 dark:text-gray-100 font-normal text-left text-xs tracking-normal leading-4"
+      x-text="row.position"></p>
+  </td>
+  <td class="pl-4 whitespace-no-wrap">
+    <p class="text-gray-800 dark:text-gray-100 font-normal text-left text-xs tracking-normal leading-4"
+      x-text="convertStatus(row.status)"></p>
+  </td>
+  <td class="pl-4 pr-4 whitespace-no-wrap">
+    <div class="relative">
+      <div @click="act_open = !act_open"
+        class="relative z-0 text-gray-600 flex items-center justify-between w-full cursor-pointer text-xs form-select py-2 px-2 xl:px-3 border border-gray-300 rounded bg-transparent"
+        data-menu>
+        <p class="leading-3 tracking-normal font-normal">Edit User</p>
+        <button role="button" aria-label="option"
+          class="cursor-pointer  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 rounded"
+          aria-label="Options button" role="button">
+        </button>
+      </div>
+      <ul @click="act_open = false" @click.outside="act_open = false" x-show="act_open" aria-label="Options"
+        class="z-10 transition duration-300 bg-white shadow rounded mt-2 py-1 absolute">
+        <li
+          class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-3 hover:bg-gray-100 px-3 font-normal">
+          Edit User</li>
+        <li
+          class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-3 hover:bg-gray-100 px-3 font-normal">
+          Delete User</li>
+      </ul>
+    </div>
+  </td>
+</tr>

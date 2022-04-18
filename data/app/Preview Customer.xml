@@ -1,0 +1,281 @@
+<mxGraphModel dx="914" dy="574" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2" value="Customer Preview" style="swimlane;childLayout=stackLayout;resizeParent=1;resizeParentMax=0;startSize=20;horizontal=1;fontColor=#1464BC;fillColor=#CDDDF8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="1480" height="480" as="geometry" />
+        </mxCell>
+        <mxCell id="3" value="Customer" style="swimlane;startSize=20;strokeColor=none;labelBackgroundColor=#1464BC;fillColor=none;fontColor=#FCFCFC;swimlaneFillColor=none;swimlaneLine=1;glass=0;sketch=0;shadow=0;rounded=0;fontSize=20;labelBorderColor=#1464BC;spacingTop=10;" vertex="1" parent="2">
+          <mxGeometry y="20" width="360" height="460" as="geometry">
+            <mxRectangle y="20" width="30" height="460" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4" value="" style="html=1;whiteSpace=wrap;container=1;recursiveResize=0;collapsible=0;fontSize=12;fontColor=#FCFCFC;strokeColor=none;fillColor=none;imageAspect=0;" vertex="1" parent="3">
+          <mxGeometry x="40" y="280" width="280" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="5" value="Nilai KB | % Margin TG (Telkom + Mitra Telkom)" style="text;strokeColor=none;fillColor=none;html=1;fontSize=12;fontStyle=1;verticalAlign=middle;align=left;fontColor=#1464BC;" vertex="1" parent="4">
+          <mxGeometry width="280" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="6" value="" style="shape=table;html=1;whiteSpace=wrap;startSize=0;container=1;collapsible=0;childLayout=tableLayout;strokeColor=#6784FD;" vertex="1" parent="4">
+          <mxGeometry y="20" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="7" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="6">
+          <mxGeometry width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="8" value="Customer A" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontColor=#1464BC;fontStyle=1" vertex="1" parent="7">
+          <mxGeometry width="120" height="40" as="geometry">
+            <mxRectangle width="120" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9" value="999 Project" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=#CDDDF8;top=0;left=0;bottom=0;right=0;overflow=hidden;fontColor=#1464BC;fontStyle=1" vertex="1" parent="7">
+          <mxGeometry x="120" width="60" height="40" as="geometry">
+            <mxRectangle width="60" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="10" value="999.99M | 99.9%" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=#6784FD;top=0;left=0;bottom=0;right=0;overflow=hidden;fontColor=#FCFCFC;" vertex="1" parent="7">
+          <mxGeometry x="180" width="100" height="40" as="geometry">
+            <mxRectangle width="100" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="11" value="Business Line" style="swimlane;startSize=20;strokeColor=none;fillColor=none;fontColor=#FCFCFC;swimlaneFillColor=none;fontSize=20;labelBorderColor=#1464BC;labelBackgroundColor=#1464BC;spacingTop=10;" vertex="1" parent="2">
+          <mxGeometry x="360" y="20" width="360" height="460" as="geometry" />
+        </mxCell>
+        <mxCell id="12" value="" style="html=1;whiteSpace=wrap;container=1;recursiveResize=0;collapsible=0;fontSize=12;fontColor=#FCFCFC;strokeColor=none;fillColor=none;imageAspect=0;" vertex="1" parent="11">
+          <mxGeometry x="40" y="40" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="13" value="&lt;b&gt;Connectivity&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1464BC;strokeColor=#6784FD;fillColor=none;" vertex="1" parent="12">
+          <mxGeometry y="20" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="14" value="999.99 M" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#FCFCFC;strokeColor=#6784FD;fillColor=#6784FD;" vertex="1" parent="12">
+          <mxGeometry x="120" y="40" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="15" value="999 Project" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1464BC;strokeColor=#6784FD;fillColor=#CDDDF8;fontStyle=1" vertex="1" parent="12">
+          <mxGeometry x="120" y="20" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="16" value="Nilai KB | % Margin Telkom" style="text;strokeColor=none;fillColor=none;html=1;fontSize=12;fontStyle=1;verticalAlign=middle;align=left;fontColor=#1464BC;" vertex="1" parent="12">
+          <mxGeometry width="240" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="17" value="" style="html=1;whiteSpace=wrap;container=1;recursiveResize=0;collapsible=0;fontSize=12;fontColor=#FCFCFC;strokeColor=none;fillColor=none;imageAspect=0;" vertex="1" parent="11">
+          <mxGeometry x="100" y="120" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="18" value="999 Project" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1464BC;strokeColor=#6784FD;fillColor=#CDDDF8;fontStyle=1" vertex="1" parent="17">
+          <mxGeometry x="100" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="19" value="&lt;b style=&quot;font-size: 10px;&quot;&gt;Enterprise Conn&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fontColor=#1464BC;strokeColor=#6784FD;fillColor=none;" vertex="1" parent="17">
+          <mxGeometry width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="20" value="999.99 M | 99.99%" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#FCFCFC;strokeColor=#6784FD;fillColor=#6784FD;" vertex="1" parent="17">
+          <mxGeometry y="20" width="220" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="21" value="" style="html=1;whiteSpace=wrap;container=1;recursiveResize=0;collapsible=0;fontSize=12;fontColor=#FCFCFC;strokeColor=none;fillColor=none;imageAspect=0;" vertex="1" parent="11">
+          <mxGeometry x="100" y="180" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="22" value="999 Project" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1464BC;strokeColor=#6784FD;fillColor=#CDDDF8;fontStyle=1" vertex="1" parent="21">
+          <mxGeometry x="100" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="23" value="&lt;b style=&quot;font-size: 10px&quot;&gt;Satelite&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fontColor=#1464BC;strokeColor=#6784FD;fillColor=none;" vertex="1" parent="21">
+          <mxGeometry width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="24" value="999.99 M | 99.99%" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#FCFCFC;strokeColor=#6784FD;fillColor=#6784FD;" vertex="1" parent="21">
+          <mxGeometry y="20" width="220" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fontSize=10;fontColor=#FCFCFC;strokeColor=#1464BC;strokeWidth=2;" edge="1" parent="11" source="13" target="20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fontSize=10;fontColor=#FCFCFC;strokeColor=#1464BC;strokeWidth=2;" edge="1" parent="11" source="13" target="24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="27" value="" style="html=1;whiteSpace=wrap;container=1;recursiveResize=0;collapsible=0;fontSize=12;fontColor=#FCFCFC;strokeColor=none;fillColor=none;imageAspect=0;" vertex="1" parent="11">
+          <mxGeometry x="40" y="260" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="28" value="&lt;b&gt;Device&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1464BC;strokeColor=#6784FD;fillColor=none;" vertex="1" parent="27">
+          <mxGeometry y="20" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="29" value="999.99 M" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#FCFCFC;strokeColor=#6784FD;fillColor=#6784FD;" vertex="1" parent="27">
+          <mxGeometry x="120" y="40" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="30" value="999 Project" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1464BC;strokeColor=#6784FD;fillColor=#CDDDF8;fontStyle=1" vertex="1" parent="27">
+          <mxGeometry x="120" y="20" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="31" value="Nilai KB | % Margin Telkom" style="text;strokeColor=none;fillColor=none;html=1;fontSize=12;fontStyle=1;verticalAlign=middle;align=left;fontColor=#1464BC;" vertex="1" parent="27">
+          <mxGeometry width="240" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="32" value="" style="html=1;whiteSpace=wrap;container=1;recursiveResize=0;collapsible=0;fontSize=12;fontColor=#FCFCFC;strokeColor=none;fillColor=none;imageAspect=0;" vertex="1" parent="11">
+          <mxGeometry x="40" y="365" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="33" value="&lt;b&gt;Digital IT Service&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1464BC;strokeColor=#6784FD;fillColor=none;" vertex="1" parent="32">
+          <mxGeometry y="20" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="34" value="999.99 M" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#FCFCFC;strokeColor=#6784FD;fillColor=#6784FD;" vertex="1" parent="32">
+          <mxGeometry x="120" y="40" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="35" value="999 Project" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1464BC;strokeColor=#6784FD;fillColor=#CDDDF8;fontStyle=1" vertex="1" parent="32">
+          <mxGeometry x="120" y="20" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="36" value="Nilai KB | % Margin Telkom" style="text;strokeColor=none;fillColor=none;html=1;fontSize=12;fontStyle=1;verticalAlign=middle;align=left;fontColor=#1464BC;" vertex="1" parent="32">
+          <mxGeometry width="240" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="37" value="List Mitra" style="swimlane;startSize=20;strokeColor=none;fillColor=none;fontColor=#FCFCFC;swimlaneFillColor=none;fontSize=20;labelBorderColor=#1464BC;labelBackgroundColor=#1464BC;spacingTop=10;" vertex="1" parent="2">
+          <mxGeometry x="720" y="20" width="400" height="460" as="geometry" />
+        </mxCell>
+        <mxCell id="38" value="" style="html=1;whiteSpace=wrap;container=1;recursiveResize=0;collapsible=0;fontSize=12;fontColor=#FCFCFC;strokeColor=none;fillColor=none;imageAspect=0;" vertex="1" parent="37">
+          <mxGeometry x="40" y="50" width="320" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="39" value="999.99 M" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#FCFCFC;strokeColor=#6784FD;fillColor=#6784FD;" vertex="1" parent="38">
+          <mxGeometry y="20" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="40" value="999 Project" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1464BC;strokeColor=#6784FD;fillColor=#CDDDF8;fontStyle=1" vertex="1" parent="38">
+          <mxGeometry x="90" y="20" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="41" value="Nilai KL | % Margin Mitra" style="text;strokeColor=none;fillColor=none;html=1;fontSize=12;fontStyle=1;verticalAlign=middle;align=left;fontColor=#1464BC;" vertex="1" parent="38">
+          <mxGeometry width="320" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="42" value="&lt;b&gt;Telkomsat&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1464BC;strokeColor=#6784FD;fillColor=none;" vertex="1" parent="38">
+          <mxGeometry x="180" y="20" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="43" value="" style="html=1;whiteSpace=wrap;container=1;recursiveResize=0;collapsible=0;fontSize=12;fontColor=#FCFCFC;strokeColor=none;fillColor=none;imageAspect=0;" vertex="1" parent="37">
+          <mxGeometry x="40" y="140" width="320" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="44" value="999.99 M" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#FCFCFC;strokeColor=#6784FD;fillColor=#6784FD;" vertex="1" parent="43">
+          <mxGeometry y="20" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="45" value="999 Project" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1464BC;strokeColor=#6784FD;fillColor=#CDDDF8;fontStyle=1" vertex="1" parent="43">
+          <mxGeometry x="90" y="20" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="46" value="Nilai KL | % Margin Mitra" style="text;strokeColor=none;fillColor=none;html=1;fontSize=12;fontStyle=1;verticalAlign=middle;align=left;fontColor=#1464BC;" vertex="1" parent="43">
+          <mxGeometry width="320" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="47" value="&lt;b&gt;Nutech&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1464BC;strokeColor=#6784FD;fillColor=none;" vertex="1" parent="43">
+          <mxGeometry x="180" y="20" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="48" value="" style="html=1;whiteSpace=wrap;container=1;recursiveResize=0;collapsible=0;fontSize=12;fontColor=#FCFCFC;strokeColor=none;fillColor=none;imageAspect=0;" vertex="1" parent="37">
+          <mxGeometry x="40" y="205" width="320" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="49" value="999.99 M" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#FCFCFC;strokeColor=#6784FD;fillColor=#6784FD;" vertex="1" parent="48">
+          <mxGeometry y="20" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="50" value="999 Project" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1464BC;strokeColor=#6784FD;fillColor=#CDDDF8;fontStyle=1" vertex="1" parent="48">
+          <mxGeometry x="90" y="20" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="51" value="Nilai KL | % Margin Mitra" style="text;strokeColor=none;fillColor=none;html=1;fontSize=12;fontStyle=1;verticalAlign=middle;align=left;fontColor=#1464BC;" vertex="1" parent="48">
+          <mxGeometry width="320" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="52" value="&lt;b&gt;PINS&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1464BC;strokeColor=#6784FD;fillColor=none;" vertex="1" parent="48">
+          <mxGeometry x="180" y="20" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="53" value="" style="html=1;whiteSpace=wrap;container=1;recursiveResize=0;collapsible=0;fontSize=12;fontColor=#FCFCFC;strokeColor=none;fillColor=none;imageAspect=0;" vertex="1" parent="37">
+          <mxGeometry x="40" y="265" width="320" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="54" value="999.99 M" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#FCFCFC;strokeColor=#6784FD;fillColor=#6784FD;" vertex="1" parent="53">
+          <mxGeometry y="20" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="55" value="999 Project" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1464BC;strokeColor=#6784FD;fillColor=#CDDDF8;fontStyle=1" vertex="1" parent="53">
+          <mxGeometry x="90" y="20" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="56" value="Nilai KL | % Margin Mitra" style="text;strokeColor=none;fillColor=none;html=1;fontSize=12;fontStyle=1;verticalAlign=middle;align=left;fontColor=#1464BC;" vertex="1" parent="53">
+          <mxGeometry width="320" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="57" value="&lt;b&gt;Telkomsel&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1464BC;strokeColor=#6784FD;fillColor=none;" vertex="1" parent="53">
+          <mxGeometry x="180" y="20" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="58" value="List Sub Mitra" style="swimlane;startSize=20;strokeColor=none;fillColor=none;fontColor=#FCFCFC;swimlaneFillColor=none;fontSize=20;labelBorderColor=#1464BC;labelBackgroundColor=#1464BC;spacingTop=10;" vertex="1" parent="2">
+          <mxGeometry x="1120" y="20" width="360" height="460" as="geometry" />
+        </mxCell>
+        <mxCell id="59" value="" style="html=1;whiteSpace=wrap;container=1;recursiveResize=0;collapsible=0;fontSize=12;fontColor=#FCFCFC;strokeColor=none;fillColor=none;imageAspect=0;" vertex="1" parent="58">
+          <mxGeometry x="40" y="50" width="280" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="60" value="999.99 M" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#FCFCFC;strokeColor=#6784FD;fillColor=#6784FD;" vertex="1" parent="59">
+          <mxGeometry y="20" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="61" value="Nilai COGS Own Product/Nilai beli dari SubMitra" style="text;strokeColor=none;fillColor=none;html=1;fontSize=12;fontStyle=1;verticalAlign=middle;align=left;fontColor=#1464BC;" vertex="1" parent="59">
+          <mxGeometry width="280" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="62" value="&lt;b&gt;Own Product&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1464BC;strokeColor=#6784FD;fillColor=none;" vertex="1" parent="59">
+          <mxGeometry x="90" y="20" width="190" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="63" value="" style="html=1;whiteSpace=wrap;container=1;recursiveResize=0;collapsible=0;fontSize=12;fontColor=#FCFCFC;strokeColor=none;fillColor=none;imageAspect=0;" vertex="1" parent="58">
+          <mxGeometry x="40" y="140" width="280" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="64" value="999.99 M" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#FCFCFC;strokeColor=#6784FD;fillColor=#6784FD;" vertex="1" parent="63">
+          <mxGeometry y="20" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="65" value="Nilai COGS Own Product/Nilai beli dari SubMitra" style="text;strokeColor=none;fillColor=none;html=1;fontSize=12;fontStyle=1;verticalAlign=middle;align=left;fontColor=#1464BC;" vertex="1" parent="63">
+          <mxGeometry width="280" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="66" value="&lt;b&gt;PT SW&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1464BC;strokeColor=#6784FD;fillColor=none;" vertex="1" parent="63">
+          <mxGeometry x="90" y="20" width="190" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="67" value="" style="html=1;whiteSpace=wrap;container=1;recursiveResize=0;collapsible=0;fontSize=12;fontColor=#FCFCFC;strokeColor=none;fillColor=none;imageAspect=0;" vertex="1" parent="58">
+          <mxGeometry x="40" y="220" width="280" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="68" value="999.99 M" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#FCFCFC;strokeColor=#6784FD;fillColor=#6784FD;" vertex="1" parent="67">
+          <mxGeometry y="20" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="69" value="Nilai COGS Own Product/Nilai beli dari SubMitra" style="text;strokeColor=none;fillColor=none;html=1;fontSize=12;fontStyle=1;verticalAlign=middle;align=left;fontColor=#1464BC;" vertex="1" parent="67">
+          <mxGeometry width="280" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="70" value="&lt;b&gt;PT ECS Indo Jaya&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1464BC;strokeColor=#6784FD;fillColor=none;" vertex="1" parent="67">
+          <mxGeometry x="90" y="20" width="190" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="71" value="" style="html=1;whiteSpace=wrap;container=1;recursiveResize=0;collapsible=0;fontSize=12;fontColor=#FCFCFC;strokeColor=none;fillColor=none;imageAspect=0;" vertex="1" parent="58">
+          <mxGeometry x="40" y="280" width="280" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="72" value="999.99 M" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#FCFCFC;strokeColor=#6784FD;fillColor=#6784FD;" vertex="1" parent="71">
+          <mxGeometry y="20" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="73" value="Nilai COGS Own Product/Nilai beli dari SubMitra" style="text;strokeColor=none;fillColor=none;html=1;fontSize=12;fontStyle=1;verticalAlign=middle;align=left;fontColor=#1464BC;" vertex="1" parent="71">
+          <mxGeometry width="280" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="74" value="&lt;b&gt;PT Tritunggal CIpta Buana&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1464BC;strokeColor=#6784FD;fillColor=none;" vertex="1" parent="71">
+          <mxGeometry x="90" y="20" width="190" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="75" value="" style="html=1;whiteSpace=wrap;container=1;recursiveResize=0;collapsible=0;fontSize=12;fontColor=#FCFCFC;strokeColor=none;fillColor=none;imageAspect=0;" vertex="1" parent="58">
+          <mxGeometry x="40" y="340" width="280" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="76" value="999.99 M" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#FCFCFC;strokeColor=#6784FD;fillColor=#6784FD;" vertex="1" parent="75">
+          <mxGeometry y="20" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="77" value="Nilai COGS Own Product/Nilai beli dari SubMitra" style="text;strokeColor=none;fillColor=none;html=1;fontSize=12;fontStyle=1;verticalAlign=middle;align=left;fontColor=#1464BC;" vertex="1" parent="75">
+          <mxGeometry width="280" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="78" value="&lt;b&gt;Own Product&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1464BC;strokeColor=#6784FD;fillColor=none;" vertex="1" parent="75">
+          <mxGeometry x="90" y="20" width="190" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="79" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fontSize=12;fontColor=#FCFCFC;strokeColor=#1464BC;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="2" source="7" target="13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="80" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=10;fontColor=#FCFCFC;strokeColor=#1464BC;strokeWidth=2;" edge="1" parent="2" source="6" target="28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="81" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=10;fontColor=#FCFCFC;strokeColor=#1464BC;strokeWidth=2;" edge="1" parent="2" source="7" target="33">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="82" style="orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=10;fontColor=#FCFCFC;strokeColor=#1464BC;strokeWidth=2;rounded=0;" edge="1" parent="2" source="21" target="39">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="83" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fontSize=10;fontColor=#FCFCFC;strokeColor=#1464BC;strokeWidth=2;elbow=vertical;" edge="1" parent="2" source="29" target="49">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="84" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=10;fontColor=#FCFCFC;strokeColor=#1464BC;strokeWidth=2;elbow=vertical;" edge="1" parent="2" source="30" target="54">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="85" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=10;fontColor=#FCFCFC;strokeColor=#1464BC;strokeWidth=2;elbow=vertical;" edge="1" parent="2" source="29" target="44">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="86" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;fontSize=10;fontColor=#FCFCFC;strokeColor=#1464BC;strokeWidth=2;elbow=vertical;" edge="1" parent="2" source="42" target="60">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="87" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;fontSize=10;fontColor=#FCFCFC;strokeColor=#1464BC;strokeWidth=2;elbow=vertical;" edge="1" parent="2" source="47" target="64">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="88" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=10;fontColor=#FCFCFC;strokeColor=#1464BC;strokeWidth=2;elbow=vertical;" edge="1" parent="2" source="52" target="68">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="89" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=10;fontColor=#FCFCFC;strokeColor=#1464BC;strokeWidth=2;elbow=vertical;" edge="1" parent="2" source="52" target="72">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="90" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=10;fontColor=#FCFCFC;strokeColor=#1464BC;strokeWidth=2;elbow=vertical;" edge="1" parent="2" source="52" target="76">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>

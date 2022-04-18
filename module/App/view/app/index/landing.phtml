@@ -1,0 +1,98 @@
+<?php
+$me = $this;
+?>
+<div class="min-h-screen bg-bluegray-900">
+  <div class="relative overflow-hidden">
+    <header class="relative" x-data="{open:false}">
+      <div class="bg-bluegray-900 pt-6">
+        <nav class="relative max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6" aria-label="Global">
+          <div class="flex items-center flex-1">
+            <div class="flex items-center justify-between w-full md:w-auto">
+              <a href="#">
+                <span class="sr-only"><?= $me->app_name; ?></span>
+                <img class="h-8 w-auto sm:h-10 inline-block align-middle" src="<?=$me->basePath("img/open_source.png");?>" alt="">
+                <span class="text-white font-extrabold inline-block text-2  xl align-middle"><?= $me->app_name; ?></span>
+              </a>
+              <div class="-mr-2 flex items-center md:hidden">
+                <button @click="open = true" type="button" class="bg-bluegray-900 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-bluegray-800 focus:outline-none focus:ring-2 focus-ring-inset focus:ring-white" id="main-menu" aria-haspopup="true" x-bind:aria-expanded="open">
+                  <span class="sr-only">Open main menu</span>
+                  <!-- Heroicon name: menu -->
+                  <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="hidden space-x-8 md:flex md:ml-10">
+              <a href="#" class="text-base font-medium text-white hover:text-mygreen">About <strong class="text-mygreen"><?= $me->app_name; ?></a>
+              <a href="<?= $me->url("app/term-condition");?>" class="text-base font-medium text-white hover:text-mygreen">Terms and Conditions</a>
+            </div>
+          </div>
+          <div class="hidden md:flex md:items-center md:space-x-6">
+            <a href="<?= $me->url('app/auth/logout');?>" class="bg-mygreen rounded-md hover:bg-white px-4 py-1 text-base text-white hover:text-mygreen font-extrabold">
+              Log Out
+            </a>
+          </div>
+        </nav>
+      </div>
+      <div x-show="open" x-description="Mobile menu, show/hide based on menu open state." x-transition:enter="duration-150 ease-out" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="duration-100 ease-in" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="absolute top-0 inset-x-0 p-2 transition transform origin-top md:hidden">
+        <div class="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
+          <div class="px-5 pt-4 flex items-center justify-between">
+            <div>
+              <img class="h-8 w-auto inline-block align-middle" src="<?=$me->basePath("img/open_source.png");?>" alt="">
+              <span class="font-extrabold inline-block text-2xl align-middle text-mygreen"><?= $me->app_name; ?></span>
+            </div>
+            <div class="-mr-2">
+              <button @click="open = false" type="button" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-bluegray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600">
+                <span class="sr-only">Close menu</span>
+                <!-- Heroicon name: x -->
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="pt-5 pb-6" role="menu" aria-orientation="vertical" aria-labelledby="main-menu">
+            <div class="px-2 space-y-1" role="none">
+              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-mygreen-hover" role="menuitem">About <strong><?= $me->app_name; ?></strong></a>
+
+              <a href="<?= $me->url("app/term-condition");?>" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-mygreen-hover" role="menuitem">Terms and Conditions</a>
+            </div>
+            <div role="none" class="mt-6 px-5">
+              <p class="text-center text-base font-medium text-gray-500"> <a href="<?= $me->url('app/auth/logout');?>" class="text-gray-900 hover:underline">Logout</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="pt-10 bg-bluegray-900 sm:pt-16 lg:pt-8 lg:pb-14 lg:overflow-hidden">
+        <div class="mx-auto max-w-7xl lg:px-8">
+          <div class="lg:grid lg:grid-cols-2 lg:gap-8">
+            <div class="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-left lg:flex lg:items-center">
+              <div class="lg:py-24">
+
+                <h1 class="mt-4 text-4xl tracking-tight font-extrabold text-white sm:mt-5 sm:text-6xl lg:mt-6 xl:text-6xl">
+                  <span class="block text-mygreen"><?= $me->app_name; ?></span>
+                  <span class="text-lg block font-light">by <?= $me->copy_owner;?></span>
+                </h1>
+                <p class="mt-3 text-base text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
+                Apabila ada <span class="font-extrabold">kendala dalam proses login atau kendala fungsi aplikasi</span> harap menghubungi kami melalui Telegram Group <a href="https://t.me/KawalISM" class="font-extrabold text-lightblue-500">KawalISM</a>.
+                </p>
+              </div>
+            </div>
+            <div class="mt-12 -mb-16 sm:-mb-48 lg:m-0 lg:relative">
+              <div class="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 lg:max-w-none lg:px-0">
+                <!-- Illustration taken from Lucid Illustrations: https://lucid.pixsellz.io/ -->
+                <img class="w-full lg:absolute lg:inset-y-0 lg:left-0 lg:h-full lg:w-auto lg:max-w-none" src="<?=$me->basePath("img/cloud-illustration-green-400.svg");?>" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- More main page content here... -->
+    </main>
+  </div>
+</div>

@@ -1,0 +1,351 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $me
+ */
+$me = $this;
+// !d($me);
+?>
+<!-- blank layout -->
+<?=$me->doctype()?>
+<?php
+$content = $me->content;
+// zdebug($content);die();
+$vars = $me->vars();
+// !d($vars);die();
+$_vars = $vars['_vars_']??[];
+$module = $_vars['module']??"";
+$controller = $_vars['controller']??"";
+$controller = str_replace("Controller", "", $controller);
+$action = $_vars['action']??"";
+$layout = $_vars['layout']??"";
+// !d($layout);die();
+$active_menu = $me->active_menu??"";
+// !d($layout);die();
+unset($vars['content']);
+
+$ini_reader = new \Laminas\Config\Reader\Ini();
+$conf = $ini_reader->fromFile(conf_path() . env('APPLICATION_ENV') . ".conf");
+$app_conf = $conf['app-config'];
+?>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <?=$me->headMeta()?>
+    <?=$me->headTitle()->setAutoEscape(false)?>
+    <?=$me->headLink(['rel' => 'shortcut icon', 'type' => 'image/gif', 'href' => $me->basePath() . '/img/fav.ico']);?>
+    <!-- <script src="/js-lib/alpine-js/spruce.umd.js"></script>
+    <script src="/js-lib/alpine-js/alpine.min.js" defer></script> -->
+  <script src="/js-lib/alpine-js/morph-3.7.1.min.js" defer></script>
+  <script src="/js-lib/alpine-js/intersect-3.7.1.min.js" defer></script>
+  <script src="/js-lib/alpine-js/persist-3.7.1.min.js" defer></script>
+  <script src="/js-lib/alpine-js/trap-3.7.1.min.js" defer></script>
+  <script src="/js-lib/alpine-js/collapse-3.7.1.min.js" defer></script>
+    <script src="/js-lib/alpine-js/alpine-magic-helpers_1.2.2.min.js" defer></script>
+    <script src="/js-lib/alpine-js/toolkit-1.0.0.min.js" defer></script>
+  <script src="/js-lib/alpine-js/alpinejs-3.7.1.min.js" defer></script>
+    <script src="/js-lib/jquery/jquery-3.6.0.js"></script>
+    <script src="/js-lib/jquery/jquery-3.6.0.min.js"></script>
+    <script src="/js-lib/datatables/jquery.dataTables.min.js"></script>
+    <script src="/js-lib/datatables/dataTables.buttons.min.js"></script>
+    <script src="/js-lib/datatables/dataTables.fixedColumns.min.js"></script>
+    <script src="/js-lib/datatables/jszip.min.js"></script>
+    <script src="/js-lib/datatables/vfs_fonts.js"></script>
+    <script src="/js-lib/datatables/buttons.html5.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap"
+        rel="stylesheet"
+      />
+    <link rel="stylesheet" href="<?=$this->basePath("font/inter/inter.css");?>">
+    <link rel="stylesheet" href="<?=$this->basePath("css-lib/remix-icon/remixicon.css");?>">
+    <link rel="stylesheet" href="<?=$this->basePath("css-lib/spinner/spinner.css");?>">
+    <link rel="stylesheet" href="<?=$this->basePath("css-lib/animate/animate.min.min.css");?>">
+    <link rel="stylesheet" href="<?=$this->basePath("css-lib/loading/loading.css");?>">
+    <link rel="stylesheet" href="<?=$this->basePath("css-lib/loading/loading.min.css");?>">
+	<link rel="stylesheet" href="<?=$this->basePath("css-lib/datatables/jquery.dataTables.min.css");?>">
+  <link rel="stylesheet" href="<?=$this->basePath("css-lib/datatables/fixedColumns.dataTables.min.css");?>">
+
+    <?=$me->partial('partial-css.phtml', ['_vars' => $_vars,'_module'=>$module,'_controller'=>$controller,'_action'=>$action,'_layout'=>$layout,'_active_menu'=>$active_menu]);?>
+
+    <?=$me->headStyle()?>
+    <style>
+      [x-cloak] {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div x-data="setup()" x-init="$refs.loading.classList.add('hidden'); setColors(color);" :class="{ 'dark': isDark}">
+      <div class="flex h-screen antialiased text-gray-900 bg-gray-100 dark:bg-dark dark:text-light">
+        <!-- Loading screen -->
+        <div
+          x-ref="loading"
+          class="fixed inset-0 z-50 flex items-center justify-center text-2xl font-semibold text-white bg-primary-darker"
+        >
+          Loading.....
+        </div>
+
+        <?=$me->partial('kwd/sidebar.phtml', ['_vars' => $_vars,'_module'=>$module,'_controller'=>$controller,'_action'=>$action,'_layout'=>$layout,'_active_menu'=>$active_menu]);?>
+
+        <div class="flex flex-col flex-1 min-h-screen overflow-x-hidden overflow-y-auto">
+          <!-- Navbar -->
+          <?=$me->partial('kwd/navbar.phtml', ['_vars' => $_vars,'_module'=>$module,'_controller'=>$controller,'_action'=>$action,'_layout'=>$layout,'_active_menu'=>$active_menu]);?>
+
+          <!-- Main content -->
+          <main class="p-3 pt-20 pb-16">
+            <?= $content; ?>
+          </main>
+
+          <footer
+            class="md:pr-[17rem] w-full fixed z-10 bottom-0 flex-shrink-0 flex items-center justify-center md:justify-between p-4 bg-white border-t dark:bg-darker dark:border-primary-darker"
+            >
+            <div><?= $app_conf['copy_owner'];?> &copy; 2021</div>
+            <div class="hidden md:block">
+            <?= ucwords(strtolower($app_conf['app_name'])); ?>
+            </div>
+          </footer>
+        </div>
+
+        <!-- Panels -->
+        <?=$me->partial('kwd/setting-panel.phtml', ['_vars' => $_vars,'_module'=>$module,'_controller'=>$controller,'_action'=>$action,'_layout'=>$layout,'_active_menu'=>$active_menu]);?>
+        <?=$me->partial('kwd/notif-panel.phtml', ['_vars' => $_vars,'_module'=>$module,'_controller'=>$controller,'_action'=>$action,'_layout'=>$layout,'_active_menu'=>$active_menu]);?>
+        <?=$me->partial('kwd/search-panel.phtml', ['_vars' => $_vars,'_module'=>$module,'_controller'=>$controller,'_action'=>$action,'_layout'=>$layout,'_active_menu'=>$active_menu]);?>
+
+      </div>
+
+      <div x-cloak x-show="$store.confirm_modal.main"
+        class="pt-32 bg-bluegray-800 bg-opacity-70 transition duration-150 ease-in-out z-20 absolute top-0 right-0 bottom-0 left-0"
+        id="modal">
+        <div role="alert" class="container mx-auto w-11/12 md:w-2/3 max-w-lg">
+          <div class="relative py-5 px-3 md:px-10 bg-white shadow-md rounded border border-gray-400">
+            <div
+              :class="{'text-blue-800':$store.confirm_modal.type === 'info','text-red-800':$store.confirm_modal.type === 'remove'}"
+              class="w-full flex items-center mb-4">
+              <button
+                class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 rounded-md cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out"
+                @click="$store.confirm_modal.main = false" aria-label="Close" role="button">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="20" height="20"
+                  viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" />
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+              <template x-if="$store.confirm_modal.type === 'info'">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle" width="40"
+                  height="40" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <circle cx="12" cy="12" r="9" />
+                  <line x1="12" y1="8" x2="12.01" y2="8" />
+                  <polyline points="11 12 12 12 12 16 13 16" />
+                </svg>
+              </template>
+              <template x-if="$store.confirm_modal.type === 'remove'">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="40"
+                  height="40" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" />
+                  <rect x="3" y="4" width="18" height="4" rx="2" />
+                  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+                  <line x1="10" y1="12" x2="14" y2="12" />
+                </svg>
+              </template>
+              <h1
+                :class="{'text-blue-800':$store.confirm_modal.type === 'info','text-red-800':$store.confirm_modal.type === 'remove'}"
+                class="focus:outline-none text-2xl font-bold tracking-normal leading-tight ml-2"
+                x-text="$store.confirm_modal.title"></h1>
+            </div>
+            <p tabindex="0" class="focus:outline-none mb-5 text-lg text-gray-600 font-normal"
+              x-html="$store.confirm_modal.main_content"></p>
+            <p tabindex="0" class="focus:outline-none mb-5 text-md text-gray-600 font-normal"
+              x-html="$store.confirm_modal.second_content"></p>
+            <div class="flex items-center w-full">
+              <button x-text="$store.confirm_modal.btn_text"
+                :class="{'bg-blue-700 hover:bg-blue-600 focus:ring-blue-600':$store.confirm_modal.type === 'info','bg-red-700 hover:bg-red-600 focus:ring-red-600':$store.confirm_modal.type === 'remove'}"
+                class="flex-grow focus:ring-2 focus:ring-offset-2 focus:outline-none transition duration-150 ease-in-out rounded text-white px-8 py-2 text-sm"
+                @click="$store.confirm_modal.submit()">Submit</button>
+              <button
+                :class="{'focus:ring-blue-600':$store.confirm_modal.type === 'info','focus:ring-red-600':$store.confirm_modal.type === 'remove'}"
+                class="flex-grow focus:ring-2 focus:ring-offset-2 focus:outline-none ml-3 bg-gray-100 transition duration-150 text-gray-600 ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-sm"
+                @click="$store.confirm_modal.main = false">Cancel</button>
+            </div>
+            <button
+              class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 rounded-md cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out"
+              @click="$store.confirm_modal.main = false" aria-label="Close" role="button">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="20" height="20"
+                viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" />
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div x-cloak x-show="$store.notif_modal.main"
+        class="pt-32 bg-bluegray-800 bg-opacity-70 transition duration-150 ease-in-out z-20 absolute top-0 right-0 bottom-0 left-0"
+        id="modal">
+        <div role="alert" class="container mx-auto w-11/12 md:w-2/3 max-w-lg">
+          <div class="relative py-5 px-3 md:px-10 bg-white shadow-md rounded border border-gray-400">
+            <div
+              :class="{'text-blue-800':$store.notif_modal.type === 'info','text-red-800':$store.notif_modal.type === 'failed','text-green-800':$store.notif_modal.type === 'success'}"
+              class="w-full flex items-center mb-4">
+              <button
+                class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 rounded-md cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out"
+                @click="$store.notif_modal.main = false" aria-label="Close" role="button">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="20" height="20"
+                  viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" />
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+              <template x-if="$store.notif_modal.type === 'info'">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle" width="40"
+                  height="40" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <circle cx="12" cy="12" r="9" />
+                  <line x1="12" y1="8" x2="12.01" y2="8" />
+                  <polyline points="11 12 12 12 12 16 13 16" />
+                </svg>
+              </template>
+              <template x-if="$store.notif_modal.type === 'failed'">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-x" width="40"
+                  height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M10 10l4 4m0 -4l-4 4" />
+                </svg>
+              </template>
+              <template x-if="$store.notif_modal.type === 'success'">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check" width="40"
+                  height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M9 12l2 2l4 -4" />
+                </svg>
+              </template>
+              <h1
+                :class="{'text-blue-800':$store.notif_modal.type === 'info','text-red-800':$store.notif_modal.type === 'failed','text-green-800':$store.notif_modal.type === 'success'}"
+                class="focus:outline-none text-2xl font-bold tracking-normal leading-tight ml-2"
+                x-text="$store.notif_modal.title"></h1>
+            </div>
+            <p tabindex="0" class="focus:outline-none mb-5 text-lg text-gray-600 font-normal"
+              x-html="$store.notif_modal.main_content"></p>
+            <p tabindex="0" class="focus:outline-none mb-5 text-md text-gray-600 font-normal"
+              x-html="$store.notif_modal.second_content"></p>
+            <div class="flex items-center w-full">
+              <button x-text="$store.notif_modal.btn_text"
+                :class="{'bg-blue-700 hover:bg-blue-600 focus:ring-blue-600':$store.notif_modal.type === 'info','bg-red-700 hover:bg-red-600 focus:ring-red-600':$store.notif_modal.type === 'failed','bg-green-700 hover:bg-green-600 focus:ring-green-600':$store.notif_modal.type === 'success'}"
+                class="flex-grow focus:ring-2 focus:ring-offset-2 focus:outline-none transition duration-150 ease-in-out rounded text-white px-8 py-2 text-sm"
+                @click="$store.notif_modal.submit()">Submit</button>
+            </div>
+            <button
+              class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 rounded-md cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out"
+              @click="$store.notif_modal.main = false" aria-label="Close" role="button">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="20" height="20"
+                viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" />
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div x-cloak x-show="$store.loader.main" class="z-50 fixed w-full flex justify-center inset-0">
+        <div class="w-full h-full bg-bluegray-900 bg-opacity-70 z-20 absolute inset-0"></div>
+        <div class="mx-auto container z-50">
+          <div class="flex flex-col items-center justify-center h-full w-full">
+            <div class="ball-grid-pulse text-center items-center justify-center">
+              <div class="bg-mygreen"></div>
+              <div class="bg-mygreen"></div>
+              <div class="bg-mygreen"></div>
+              <div class="bg-mygreen"></div>
+              <div class="bg-mygreen"></div>
+              <div class="bg-mygreen"></div>
+              <div class="bg-mygreen"></div>
+              <div class="bg-mygreen"></div>
+              <div class="bg-mygreen"></div>
+            </div>
+            <div class="text-white text-lg" x-text="$store.loader.msg"></div>
+          </div>
+        </div>
+      </div>
+
+      <div x-data="right_notif" x-show="Object.keys(notif).length>0" x-cloak x-bind="bind.self"
+        class="z-20 xl:w-5/12 mx-auto sm:mx-0 sm:w-6/12 md:w-6/12 w-10/12 absolute left-0 sm:left-auto right-0 top-0 pt-16">
+
+        <template x-teleport="body" x-for="(list,idx) in notif" :key="idx">
+          <template x-if="typeof list !== 'undefined'">
+          <div role="alert" x-show="list.show" x-bind="bind.notif" x-transition:enter="transition ease-out duration-500"
+            x-transition:enter-start="opacity-0 transform-gpu translate-x-[150%]"
+            x-transition:enter-end="opacity-100 transform-gpu translate-x-0"
+            x-transition:leave="transition ease-in duration-500"
+            x-transition:leave-start="opacity-100 transform-gpu translate-x-0"
+            x-transition:leave-end="opacity-0 transform-gpu translate-x-[150%]"
+            class="bg-white dark:bg-gray-800 shadow-lg rounded flex pr-4 sm:mr-6 mb-6">
+            <div
+              :class="{'text-green-700':list.type==='success','text-red-700':list.type==='failed'}"
+              class="px-5 border-r border-gray-300 dark:border-gray-700 flex items-center justify-center">
+              <template x-if="list.type==='success'">
+                <svg aria-label="success logo" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30"
+                  height="30" fill="currentColor">
+                  <path class="heroicon-ui"
+                    d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-2.3-8.7l1.3 1.29 3.3-3.3a1 1 0 0 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-2-2a1 1 0 0 1 1.4-1.42z">
+                  </path>
+                </svg>
+              </template>
+              <template x-if="list.type==='failed'">
+                <svg aria-label="failed logo" role="img" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" width="30"
+                  height="30" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="heroicon-ui" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </template>
+            </div>
+            <div class="flex flex-grow flex-col justify-center pl-4 py-4">
+              <h1 :class="{'text-green-700':list.type==='success','text-red-700':list.type==='failed'}"
+                class="whitespace-nowrap text-sm font-semibold" x-html="list.title">
+              </h1>
+              <p class="whitespace-nowrap text-xs text-gray-600 dark:text-gray-400 font-normal" x-html="list.msg"></p>
+            </div>
+            <button aria-label="close notification"
+              class="cursor-pointer mr-2 mt-2 text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-500 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-500 rounded"
+              @click="list.show=false">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="20" height="20"
+                viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" />
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          </div>
+          </template>
+        </template>
+      </div>
+
+    </div>
+
+    <script src="<?=$me->basePath("js-lib/lodash/lodash.js");?>"></script>
+    <script src="<?=$me->basePath("js-lib/validate/validate.min.js");?>"></script>
+
+    <!-- END GLOBAL MANDATORY SCRIPTS -->
+    <script src="<?=$me->basePath("js/him/validate.js");?>"></script>
+    <?=$me->headScript();?>
+
+    <?=$me->partial('partial-js.phtml', ['_vars' => $_vars,'_module'=>$module,'_controller'=>$controller,'_action'=>$action,'_layout'=>$layout,'_active_menu'=>$active_menu]);?>
+    <?=$me->inlineScript()?>
+  </body>
+</html>

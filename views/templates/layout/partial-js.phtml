@@ -1,0 +1,47 @@
+<?php
+$me = $this;
+$js = ["global_.js","global_.min.js","default_.js","default_.min.js"];
+// !d($_layout,$_module,$_controller,$_action);die();
+// zdebug(APP_PATH . 'public' . DS . js_path());
+// zdebug($me->basePath(js_url()));die();
+foreach ($js as $fname) {
+    // zdebug($fname);die();
+    if (is_file(APP_PATH . 'public' . DS . js_path() . $fname)) {
+        echo '<script src="'.$me->basePath(js_url() .$fname."?d=" . time()).'"></script>';
+    }
+    // INFO load layout default style
+    if (is_file(APP_PATH . 'public' . DS . js_path() . $_layout . DS . $fname)) {
+        echo '<script src="'.$me->basePath(js_url() . $_layout . "/".$fname."?d=" . time()).'"></script>';
+    }
+    // INFO load module default style
+    if (is_file(APP_PATH . 'public' . DS . js_path() . $_layout . DS . $_module . DS . $fname)) {
+        echo '<script src="'.$me->basePath(js_url() . $_layout . "/" . $_module . "/".$fname."?d=" . time()).'"></script>';
+    }
+    if (is_file(APP_PATH . 'public' . DS . js_path() . $_module . DS . $fname)) {
+        echo '<script src="'.$me->basePath(js_url() . $_module . "/".$fname."?d=" . time()).'"></script>';
+    }
+    // INFO load controller default style
+    if (is_file(APP_PATH . 'public' . DS . js_path() . $_layout . DS . $_module . DS . $_controller . DS . $fname)) {
+        echo '<script src="'.$me->basePath(js_url() . $_layout . "/" . $_module . "/" . $_controller . "/".$fname."?d=" . time()).'"></script>';
+    }
+    if (is_file(APP_PATH . 'public' . DS . js_path() . $_module . DS . $_controller . DS . $fname)) {
+        echo '<script src="'.$me->basePath(js_url() . $_module . "/" . $_controller . "/".$fname."?d=" . time()).'"></script>';
+    }
+}
+
+// INFO load action default style
+if (is_dir(APP_PATH . 'public' . DS . js_path() . $_layout . DS . $_module . DS . $_controller . DS . $_action)) {
+    foreach (glob(APP_PATH . 'public' . DS . js_path() . $_layout . DS . $_module . DS . $_controller . DS . $_action . DS . "*.js") as $filename) {
+        $tmp = explode(DS, $filename);
+        $fname = $tmp[count($tmp) - 1];
+        echo '<script src="'.$me->basePath(js_url() . $_layout . "/" . $_module . "/" . $_controller . "/" . $_action . "/".$fname."?d=" . time()).'"></script>';
+    }
+}
+
+if (is_dir(APP_PATH . 'public' . DS . js_path() . $_module . DS . $_controller . DS . $_action)) {
+    foreach (glob(APP_PATH . 'public' . DS . js_path() . $_module . DS . $_controller . DS . $_action . DS . "*.js") as $filename) {
+        $tmp = explode(DS, $filename);
+        $fname = $tmp[count($tmp) - 1];
+        echo '<script src="'.$me->basePath(js_url() . $_module . "/" . $_controller . "/" . $_action . "/".$fname."?d=" . time()).'"></script>';
+    }
+}

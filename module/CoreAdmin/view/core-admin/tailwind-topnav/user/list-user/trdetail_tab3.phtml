@@ -1,0 +1,135 @@
+<div class="bg-white dark:bg-gray-800 w-full max-w-full px-8 py-6">
+  <div class="flex flex-nowrap space-x-10 overflow-x-auto">
+    <template x-for="layout in layouts">
+      <div x-bind="t3_layout" x-data="{menus:[]}" class="px-2">
+        <div class="text-center items-center border-b-2 border-gray-600 bg-gray-600/10 pt-2">
+          <p class="focus:outline-none text-base leading-normal text-gray-800">
+            Layout</p>
+          <p class="focus:outline-none text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800"
+            x-text="layout.name"></p>
+        </div>
+        <ul x-bind="t3_ul0" class="tree pt-10" x-data="{mnu0:[]}">
+          <template x-for="menu0 in mnu0">
+            <li x-data="{s0:null,a0:{}}" x-bind="t3_ul0_li">
+              <a @click.prevent="s0=(s0===1)?0:1" x-show="menu0.link!==null" :href="menu0.link" :class="{'bg-gray-600':s0===0,'bg-green-600':s0===1}"
+                class="tree_label rounded px-2 text-white" x-text="menu0.label"></a>
+              <button x-show="menu0.link!==null" @click="tooltip_open=!tooltip_open"
+                class="align-middle mx-1 rounded-full h-5 w-5 bg-blue-600 text-white" x-data="{tooltip_open: false}"><i
+                  class="align-middle ri-information-line"></em>
+                <div x-show="tooltip_open" role="tooltip" @click.outside="tooltip_open=!tooltip_open"
+                  class="z-20 transition duration-150 ease-in-out bottom-0 mb-8 absolute shadow-lg p-2 text-gray-600 rounded w-40 bg-gray-100">
+                  <svg class="absolute bottom-0 -mb-2 text-gray-100" width="16px" height="8px" viewBox="0 0 16 8"
+                    version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    fill="currentColor">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                      <g transform="translate(-84.000000, -203.000000)" fill="currentColor">
+                        <g transform="translate(76.000000, 145.000000)">
+                          <polygon class="shadow"
+                            transform="translate(16.000000, 62.000000) rotate(-180.000000) translate(-16.000000, -62.000000) "
+                            points="16 58 24 66 8 66">
+                          </polygon>
+                        </g>
+                      </g>
+                    </g>
+                  </svg>
+                  <div class="text-xs text-left p-0">
+                    <h5 class="font-bold mt-2">ID</h5>
+                    <span x-text="menu0.id"></span>
+                    <h5 class="font-bold">URL</h5>
+                    <span x-text="menu0.link"></span>
+                    <h5 class="font-bold mt-2">ICON</h5>
+                    <span x-text="menu0.icon"></span>
+                  </div>
+                </div>
+              </button>
+
+              <input x-show="menu0.link===null" type="checkbox" />
+              <label x-show="menu0.link===null" :class="{'bg-gray-600':s0===0,'bg-green-600':s0===1,'bg-orange-600':s0===2}"
+                class="tree_label rounded px-2 text-white" @click="$el.previousElementSibling.click()"
+                x-text="menu0.label"></label>
+              <ul x-bind="t3_ul1" x-show="menu0.link===null" x-data="{mnu1:[]}">
+                <template x-for="menu1 in mnu1">
+                  <li x-data="{s1:null,a1:{}}" x-bind="t3_ul1_li">
+                    <a @click.prevent="s1=(s1===1)?0:1" x-show="menu1.link!==null" :href="menu1.link" :class="{'bg-gray-600':s1===0,'bg-green-600':s1===1}"
+                      class="tree_label rounded px-2 text-white" x-text="menu1.label"></a>
+                    <button x-show="menu1.link!==null" @click="tooltip_open=!tooltip_open"
+                      class="align-middle mx-1 rounded-full h-5 w-5 bg-blue-600 text-white"
+                      x-data="{tooltip_open: false}"><em class="align-middle ri-information-line"></em>
+                      <div x-show="tooltip_open" role="tooltip" @click.outside="tooltip_open=!tooltip_open"
+                        class="z-20 transition duration-150 ease-in-out bottom-0 mb-8 absolute shadow-lg p-2 text-gray-600 rounded w-40 bg-gray-100">
+                        <svg class="absolute bottom-0 -mb-2 text-gray-100" width="16px" height="8px" viewBox="0 0 16 8"
+                          version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                          fill="currentColor">
+                          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g transform="translate(-84.000000, -203.000000)" fill="currentColor">
+                              <g transform="translate(76.000000, 145.000000)">
+                                <polygon class="shadow"
+                                  transform="translate(16.000000, 62.000000) rotate(-180.000000) translate(-16.000000, -62.000000) "
+                                  points="16 58 24 66 8 66">
+                                </polygon>
+                              </g>
+                            </g>
+                          </g>
+                        </svg>
+                        <div class="text-xs text-left p-0">
+                          <h5 class="font-bold mt-2">ID</h5>
+                          <span x-text="menu1.id"></span>
+                          <h5 class="font-bold">URL</h5>
+                          <span x-text="menu1.link"></span>
+                          <h5 class="font-bold mt-2">ICON</h5>
+                          <span x-text="menu1.icon"></span>
+                        </div>
+                      </div>
+                    </button>
+
+                    <input x-show="menu1.link===null" type="checkbox" />
+                    <label x-show="menu1.link===null" :class="{'bg-gray-600':s1===0,'bg-green-600':s1===1,'bg-orange-600':s1===2}"
+                      class="tree_label rounded px-2 text-white" @click="$el.previousElementSibling.click()"
+                      x-text="menu1.label"></label>
+                    <ul x-bind="t3_ul2" x-show="menu1.link===null" x-data="{mnu2:[]}">
+                      <template x-for="menu2 in mnu2">
+                        <li x-data="{s2:null,a2:{}}" x-bind="t3_ul2_li">
+                          <a @click.prevent="s2=(s2===1)?0:1" x-show="menu2.link!==null" :href="menu2.link" :class="{'bg-gray-600':s2===0,'bg-green-600':s2===1}"
+                            class="tree_label rounded px-2 text-white" x-text="menu2.label" @click=""></a>
+                          <button x-show="menu2.link!==null" @click="tooltip_open=!tooltip_open"
+                            class="align-middle mx-1 rounded-full h-5 w-5 bg-blue-600 text-white"
+                            x-data="{tooltip_open: false}"><em class="align-middle ri-information-line"></em>
+                            <div x-show="tooltip_open" role="tooltip" @click.outside="tooltip_open=!tooltip_open"
+                              class="z-20 transition duration-150 ease-in-out bottom-0 mb-8 absolute shadow-lg p-2 text-gray-600 rounded w-40 bg-gray-100">
+                              <svg class="absolute bottom-0 -mb-2 text-gray-100" width="16px" height="8px"
+                                viewBox="0 0 16 8" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                  <g transform="translate(-84.000000, -203.000000)" fill="currentColor">
+                                    <g transform="translate(76.000000, 145.000000)">
+                                      <polygon class="shadow"
+                                        transform="translate(16.000000, 62.000000) rotate(-180.000000) translate(-16.000000, -62.000000) "
+                                        points="16 58 24 66 8 66">
+                                      </polygon>
+                                    </g>
+                                  </g>
+                                </g>
+                              </svg>
+                              <div class="text-xs text-left p-0">
+                                <h5 class="font-bold mt-2">ID</h5>
+                                <span x-text="menu2.id"></span>
+                                <h5 class="font-bold">URL</h5>
+                                <span x-text="menu2.link"></span>
+                                <h5 class="font-bold mt-2">ICON</h5>
+                                <span x-text="menu2.icon"></span>
+                              </div>
+                            </div>
+                          </button>
+                        </li>
+                      </template>
+                    </ul>
+                  </li>
+                </template>
+              </ul>
+            </li>
+          </template>
+        </ul>
+      </div>
+    </template>
+  </div>
+</div>

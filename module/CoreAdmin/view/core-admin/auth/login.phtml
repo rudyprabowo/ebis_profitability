@@ -1,0 +1,124 @@
+<?php
+/** @var Laminas\View\Renderer\PhpRenderer $me */
+$me = $this;
+$vars = $me->vars();
+// !d($vars);
+$headLink = $me->headLink();
+$headLink->appendStylesheet($me->basePath("css-lib/animate/animate.min.css"));
+$headLink->appendStylesheet($me->basePath("css-lib/bootstrap5/css/bootstrap.min.css"));
+$headLink->appendStylesheet($me->basePath("css-lib/bootstrap-icons/bootstrap-icons.css"));
+$headLink->appendStylesheet($me->basePath("css-lib/spinner/spinner.css"));
+
+$headScript = $me->headScript();
+$headScript->appendFile($me->basePath("css-lib/bootstrap5/js/bootstrap.bundle.min.js"));
+$headScript->captureStart();
+// !d($me->url("coreadmin/xhr/login",["action"=>"login"]));die();
+$ini_reader = new \Laminas\Config\Reader\Ini();
+$conf = $ini_reader->fromFile(conf_path() . env('APPLICATION_ENV','development') . ".conf");
+$app_conf = $conf['app-config'];
+?>
+var SCRIPT = {
+  auth_url : '<?= $me->url("coreadmin/xhr/login",["action"=>"login"]); ?>',
+  redirect_url : '<?= ($me->redirect!=="")?$me->redirect:$me->url("coreadmin",["action"=>"index"]); ?>'
+};
+<?php
+$headScript->captureEnd();
+?>
+<div class="wrapper">
+  <div class="container">
+    <div id="logo-content" class="animate__animated animate__flipInY animate__slow">
+      <img id="main-logo" src="<?=$me->basePath("img/open_source.png");?>" />
+      <h1 id="show-title" class="main-title" onclick="showForm()"><?= strtoupper($app_conf['app_name']); ?></h1>
+      <p class="mt-5 mb-3 text-muted text-center"><?= $app_conf['copy_owner']; ?> &copy; <?= $app_conf['copy_year']; ?></p>
+    </div>
+    <div id="login-content" class="d-none">
+      <h1 id="hide-title" class="main-title" onclick="hideForm()"><?= strtoupper($app_conf['app_name']); ?></h1>
+      <br>
+      <form class="form-signin needs-validation" novalidate id="login-form">
+        <?=$me->formElement($form->get('redirect_url'));?>
+        <?=$me->formElement($form->get('csrf'))?>
+        <div class="form-label-group">
+          <input type="text" id="inputAccount" name="account" class="form-control" placeholder="Username" required autofocus autocomplete="off">
+          <label for="inputAccount">Username</label>
+          <div class="invalid-feedback alert alert-danger px-2 py-1" role="alert">
+            Please input valid username.
+          </div>
+        </div>
+
+        <div class="form-label-group">
+          <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required autocomplete="off">
+          <label for="inputPassword">Password</label>
+          <div class="invalid-feedback alert alert-danger px-2 py-1" role="alert">
+            Please input password.
+          </div>
+        </div>
+
+        <div class="checkbox mb-3">
+          <label>
+            <input type="checkbox" name="remember" value="1" id="inputRemember" > Remember me
+          </label>
+        </div>
+        <div class="d-grid gap-2">
+        <button class="btn btn-lg btn-success btn-block" type="submit">Sign in</button>
+        <p class="mt-5 mb-3 text-muted text-center"><?= $app_conf['copy_owner']; ?> &copy; <?= $app_conf['copy_year']; ?></p>
+        </div>
+      </form>
+    </div>
+  </div>
+  <ul class="bg-bubbles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+</div>
+<div class="modal" id="loader-modal" tabindex="-1" aria-labelledby="loader-modal-label" aria-hidden="true"
+  data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-transparent border-0">
+      <div class="modal-body text-center m-auto">
+        <div>
+          <div class="loader">
+            <div class="ball-grid-pulse">
+              <div class="bg-success"></div>
+              <div class="bg-success"></div>
+              <div class="bg-success"></div>
+              <div class="bg-success"></div>
+              <div class="bg-success"></div>
+              <div class="bg-success"></div>
+              <div class="bg-success"></div>
+              <div class="bg-success"></div>
+              <div class="bg-success"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer text-center m-auto border-0">
+        <h4 class="text-white" id="loader-msg">processing ...</h4>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="info-modal" tabindex="-1" aria-labelledby="overlay-modal-label" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body text-center m-auto p-0">
+        <em class="bi-check-circle fw-bold text-success" id="info-icon"></em>
+        <h4 class="fw-bold text-success px-2" id="info-msg"></h4>
+      </div>
+      <div class="modal-footer text-center">
+        <button class="btn btn-success btn-lg w-100 d-block" type="button" id="info-btn"
+          data-bs-dismiss="modal">TUTUP</button>
+      </div>
+    </div>
+  </div>
+</div>

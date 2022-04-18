@@ -1,0 +1,202 @@
+<div x-cloak x-data="filter" x-bind="event" x-show="show" class="z-50 fixed w-full flex justify-center inset-0">
+    <div @click="cancelFilter()" class="w-full h-full bg-bluegray-900 bg-opacity-70 z-0 absolute inset-0"></div>
+    <div class="mx-auto container">
+        <div class="flex items-center justify-center h-full w-full">
+            <div class="bg-white rounded-md shadow fixed overflow-y-auto sm:h-auto w-3/4">
+                <div class="px-5 py-4">
+                    <div class="w-full grid grid-cols-6 mb-5">
+                        <div class="col-span-1 font-bold">
+                            FIELD
+                        </div>
+                        <div class="col-span-2 font-bold pl-3">
+                            CONDITION
+                        </div>
+                        <div class="col-span-3 whitespace-nowrap font-bold pl-3">
+                            VALUE (comma separated)
+                        </div>
+                    </div>
+                    <template x-for="(fld,idx) in field">
+                        <div class="w-full grid grid-cols-6 my-3">
+                            <div class="col-span-1 pt-2" x-text="fld.label"></div>
+                            <div class="col-span-2 pl-3">
+                                <select class="tom-select-search" :id="'filtercond-'+idx" x-model="fld.cond">
+                                    <option value="none" class="whitespace-nowrap">None</option>
+                                    <option value="equal" class="whitespace-nowrap">Equal</option>
+                                    <option value="notequal" class="whitespace-nowrap">Not Equal</option>
+                                    <option value="like" class="whitespace-nowrap">Like</option>
+                                    <option value="notlike" class="whitespace-nowrap">Not Like</option>
+                                    <option value="prefix" class="whitespace-nowrap">Prefix</option>
+                                    <option value="notprefix" class="whitespace-nowrap">Not Prefix</option>
+                                    <option value="suffix" class="whitespace-nowrap">Suffix</option>
+                                    <option value="notsuffix" class="whitespace-nowrap">Not Suffix</option>
+                                </select>
+                            </div>
+                            <div class="col-span-3 pl-3">
+                                <template x-if="fld.type==='text'">
+                                    <input x-model="fld.val" :id="'filterval-'+idx" class="tom-input-tag w-full focus:ring-2 focus:ring-bluegray-400 focus:outline-none placeholder-gray-500 text-sm leading-none text-gray-800 bg-white border rounded border-gray-200" />
+                                </template>
+                                <template x-if="fld.type==='select'">
+                                    <select class="tom-select-search" :id="'filterval-'+idx" x-model="fld.val">
+                                        <option value="none" class="whitespace-nowrap">None</option>
+                                        <template x-for="sel in fld.select">
+                                            <option class="whitespace-nowrap" :value="sel.val" x-text="sel.label">
+                                            </option>
+                                        </template>
+                                    </select>
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+                    <div class="flex items-center justify-end mt-20 gap-x-2">
+                        <button @click="cancelFilter()" role="button" aria-label="close button" class="focus:ring-2 focus:ring-offset-2 focus:bg-gray-600 focus:ring-gray-500 focus:outline-none px-3 py-1 bg-gray-500 hover:bg-gray-400 shadow rounded text-sm text-white">Cancel</button>
+                        <button @click="updateFilter()" role="button" class="focus:ring-2 focus:ring-offset-2 focus:ring-blue-800 focus:outline-none px-3 py-1 bg-blue-700 hover:bg-opacity-80 shadow rounded text-sm text-white">Update
+                            Filter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div x-cloak x-data="create" x-show="show" x-bind="bind.self" class="z-50 fixed w-full flex justify-center inset-0">
+    <div @click="cancelCreate()" class="w-full h-full bg-bluegray-900 bg-opacity-70 z-0 absolute inset-0"></div>
+    <div class="mx-auto container">
+        <div class="flex items-center justify-center h-full w-full">
+            <div class="bg-white rounded-md shadow fixed overflow-y-auto sm:h-auto w-1/2">
+                <div class="px-5 py-4 max-h-96 overflow-y-auto scrollbar scrollbar-thumb-bluegray-400 scrollbar-track-bluegray-100 scrollbar-thin">
+                    <div class="">
+                        <div>
+                            <h3 x-text="title" :class="{'bg-green-700':data.id===null,'bg-indigo-700':data.id!==null}" class="text-xl leading-6 font-medium text-white py-2 px-2 rounded">
+                            </h3>
+                            <p class="mt-1 text-sm text-gray-500"></p>
+                        </div>
+                        <div class="md:flex gap-x-2 items-center mt-4 w-full">
+                            <div class="md:flex gap-x-2 items-center mt-4 w-full">
+                                <div class="w-3/6">
+                                    <label class="text-sm leading-none text-gray-800">Menu</label>
+                                    <select x-model="data.menu_id" name="redirect_route" class="w-full p-3 mt-3  border rounded border-gray-200 focus:outline-none focus:border-gray-600 text-sm font-medium leading-none text-gray-800">
+                                        <option value="--">--</option>
+                                        <?php
+                                        foreach ($this->menu as $k => $v) {
+                                            echo '<option value="' . $v["id"] . '" >' . $v["title"] . '</option>';
+                                        }
+                                        ?>
+                                    </select>
+                                    <div class="flex w-full">
+                                        <div class="relative w-28">
+                                            <p x-show="menu_msg!==''" class="absolute mt-1 text-xs text-red-600" x-html="menu_msg"></p>
+                                        </div>
+                                        <div class="w-5 relative inset-y-0 right-0 pr-3 pt-3 flex items-center pointer-events-none">
+                                            <svg x-show="menu_msg!=='' " class="absolute h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-3/6">
+                                    <label class="block text-sm font-medium text-gray-700">
+                                        Status
+                                    </label>
+                                    <div class="mt-3">
+                                        <div class="flex items-center">
+                                            <span class="mr-3">
+                                                <span x-bind="bind.status.label1" class="text-sm">Inactive</span>
+                                            </span>
+                                            <!-- Enabled: "bg-indigo-600", Not Enabled: "bg-gray-200" -->
+                                            <button type="button" x-bind="bind.status.btn" class="relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2" role="switch" aria-checked="false">
+                                                <!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0" -->
+                                                <span aria-hidden="true" x-bind="bind.status.btn_span" class="pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200"></span>
+                                            </button>
+                                            <span class="ml-3">
+                                                <span x-bind="bind.status.label2" class="text-sm">Active</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-end mt-10 gap-x-2">
+                        <button role="button" aria-label="close button" @click="cancelCreate()" class="focus:ring-2 focus:ring-offset-2 focus:bg-gray-600 focus:ring-gray-500 focus:outline-none px-3 py-1 bg-gray-500 hover:bg-gray-400 shadow rounded text-sm text-white">Cancel</button>
+                        <button @click="submitCreate()" role="button" :class="{'focus:ring-green-800 bg-green-700':data.id===null,'focus:ring-indigo-800 bg-indigo-700':data.id!==null}" class="focus:ring-2 focus:ring-offset-2 focus:outline-none px-3 py-1 hover:bg-opacity-80 shadow rounded text-sm text-white">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div x-cloak x-data="upload" x-show="show" x-bind="bind.self" class="z-50 fixed w-full flex justify-center inset-0">
+    <div @click="cancelUpload()" class="w-full h-full bg-bluegray-900 bg-opacity-70 z-0 absolute inset-0"></div>
+    <div class="mx-auto container">
+        <div class="flex items-center justify-center h-full w-full">
+            <div class="bg-white rounded-md shadow fixed overflow-y-auto sm:h-auto w-1/2">
+                <div class="px-5 py-4">
+                    <div>
+                        <div>
+                            <h3 class="text-center bg-green-700 text-xl leading-6 font-medium text-white py-2 px-2 rounded">
+                                Upload Role
+                            </h3>
+                            <p class="mt-1 text-sm text-gray-500"></p>
+                        </div>
+                        <div class="mt-6 grid grid-cols-1 gap-y-1">
+                            <div class="col-span-1" x-show="show_upload">
+                                <div class="rounded-md shadow-sm w-full" x-bind="bind.drop_area">
+                                    <div class="flex justify-center px-6 pt-5 pb-6 rounded-md" :class="{'shadow-outline-green border-green-600 border-4 border-solid':dropstat==='dragenter','border-2 border-gray-300 border-dashed':dropstat!=='dragenter'}">
+                                        <div class="space-y-1 text-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12" :class="{'text-green-600':dropstat==='dragenter','text-gray-400':dropstat!=='dragenter'}" stroke="currentColor" fill="none" viewBox="0 0 50 50" aria-hidden="true">
+                                                <path d="M 28.875 0 C 28.855469 0.0078125 28.832031 0.0195313 28.8125 0.03125 L 0.8125 5.34375 C 0.335938 5.433594 -0.0078125 5.855469 0 6.34375 L 0 43.65625 C -0.0078125 44.144531 0.335938 44.566406 0.8125 44.65625 L 28.8125 49.96875 C 29.101563 50.023438 29.402344 49.949219 29.632813 49.761719 C 29.859375 49.574219 29.996094 49.296875 30 49 L 30 44 L 47 44 C 48.09375 44 49 43.09375 49 42 L 49 8 C 49 6.90625 48.09375 6 47 6 L 30 6 L 30 1 C 30.003906 0.710938 29.878906 0.4375 29.664063 0.246094 C 29.449219 0.0546875 29.160156 -0.0351563 28.875 0 Z M 28 2.1875 L 28 6.53125 C 27.867188 6.808594 27.867188 7.128906 28 7.40625 L 28 42.8125 C 27.972656 42.945313 27.972656 43.085938 28 43.21875 L 28 47.8125 L 2 42.84375 L 2 7.15625 Z M 30 8 L 47 8 L 47 42 L 30 42 L 30 37 L 34 37 L 34 35 L 30 35 L 30 29 L 34 29 L 34 27 L 30 27 L 30 22 L 34 22 L 34 20 L 30 20 L 30 15 L 34 15 L 34 13 L 30 13 Z M 36 13 L 36 15 L 44 15 L 44 13 Z M 6.6875 15.6875 L 12.15625 25.03125 L 6.1875 34.375 L 11.1875 34.375 L 14.4375 28.34375 C 14.664063 27.761719 14.8125 27.316406 14.875 27.03125 L 14.90625 27.03125 C 15.035156 27.640625 15.160156 28.054688 15.28125 28.28125 L 18.53125 34.375 L 23.5 34.375 L 17.75 24.9375 L 23.34375 15.6875 L 18.65625 15.6875 L 15.6875 21.21875 C 15.402344 21.941406 15.199219 22.511719 15.09375 22.875 L 15.0625 22.875 C 14.898438 22.265625 14.710938 21.722656 14.5 21.28125 L 11.8125 15.6875 Z M 36 20 L 36 22 L 44 22 L 44 20 Z M 36 27 L 36 29 L 44 29 L 44 27 Z M 36 35 L 36 37 L 44 37 L 44 35 Z"></path>
+                                            </svg>
+                                            <div class="flex text-sm text-gray-600">
+                                                <form x-ref="form_upload">
+                                                    <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-green-600 hover:text-green-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-green-500">
+                                                        <span>Upload a file</span>
+                                                        <input id="file-upload" x-ref="input_file" :accept="_.join(allow,',')" multiple="false" name="file-upload" type="file" class="sr-only" x-bind="bind.input_file">
+                                                    </label>
+                                                </form>
+                                                <p class="pl-1">or drag and drop</p>
+                                            </div>
+                                            <p class="text-xs text-gray-500">
+                                                XLS, XLSX up to 10MB
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-span-1" x-show="show_progress">
+                                <div class="w-full mx-auto mt-1">
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <h2 role="heading" class="text-md pb-1 text-gray-600 font-bold" x-html="filename"></h2>
+                                            <h2 role="heading" class="text-sm pb-1 text-gray-400 font-bold">SIZE : <span x-html="size"></span></h2>
+                                        </div>
+                                        <p class="cursor-pointer text-xs font-medium bg-red-600 cursor text-white rounded py-1 px-2 ml-5" x-show="!on_upload" x-bind="bind.remove_btn">REMOVE</p>
+                                    </div>
+                                    <div class="flex justify-between items-center pb-1">
+                                        <p class="text-sm text-green-700 font-bold" x-show="on_upload"><span x-text="progress"></span>% Complete</p>
+                                        <p class="cursor-pointer text-xs font-medium cursor text-gray-600 rounded px-2" x-show="on_upload" x-text="status">uploading</p>
+                                    </div>
+                                    <div class="h-2 bg-gray-200 rounded" x-show="on_upload">
+                                        <div style="width:0%" x-ref="progress_bar" class="bg-green-700 h-2 rounded relative"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between mt-10 gap-x-2">
+                        <div>
+                            <a class="focus:ring-2 text-sm focus:ring-indigo-400 hover:bg-indigo-100 border-indigo-800 px-3 py-1 cursor-pointer text-indigo-800 dark:text-indigo-100 border rounded focus:outline-none" role="button" href="/dummy/role_template.xlsx" target="_blank">
+                                Template File
+                            </a>
+                        </div>
+                        <div>
+                            <button role="button" aria-label="close button" @click="abortUpload()" x-show="on_upload" class="focus:ring-2 focus:ring-offset-2 focus:bg-gray-600 focus:ring-gray-500 focus:outline-none px-3 py-1 bg-gray-500 hover:bg-gray-400 shadow rounded text-sm text-white">Abort</button>
+                            <button role="button" aria-label="close button" @click="cancelUpload()" x-show="!on_upload" class="focus:ring-2 focus:ring-offset-2 focus:bg-gray-600 focus:ring-gray-500 focus:outline-none px-3 py-1 bg-gray-500 hover:bg-gray-400 shadow rounded text-sm text-white">Cancel</button>
+                            <button @click="startUpload()" role="button" x-show="!on_upload" :class="{'bg-opacity-30 hover:bg-opacity-10 cursor-not-allowed':filename==='' || size==='','bg-opacity-100 hover:bg-opacity-80 cursor-pointer':filename!=='' && size!==''}" class="focus:ring-2 focus:ring-offset-2 focus:outline-none px-3 py-1 shadow rounded text-sm text-white focus:ring-green-800 bg-green-700">Start Upload</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

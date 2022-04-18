@@ -1,0 +1,105 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $me
+ */
+$me = $this;
+// !d($me);
+?>
+<!-- blank layout -->
+<?=$me->doctype()?>
+<?php
+$content = $me->content;
+// zdebug($content);die();
+$vars = $me->vars();
+// !d($vars);die();
+$_vars = $vars['_vars_']??[];
+$module = $_vars['module']??"";
+$controller = $_vars['controller']??"";
+$controller = str_replace("Controller", "", $controller);
+$action = $_vars['action']??"";
+$layout = $_vars['layout']??"";
+// !d($layout);die();
+$active_menu = $me->active_menu??"";
+// !d($layout);die();
+unset($vars['content']);
+?>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <?=$me->headMeta()?>
+  <?=$me->headTitle()->setAutoEscape(false)?>
+  <?=$me->headLink(['rel' => 'shortcut icon', 'type' => 'image/gif', 'href' => $me->basePath() . '/img/fav.ico']);?>
+  <!-- <script src="/js-lib/alpine-js/spruce.umd.js"></script>
+  <script src="/js-lib/alpine-js/alpine.min.js" defer></script> -->
+  <script src="/js-lib/alpine-js/morph-3.7.1.min.js" defer></script>
+  <script src="/js-lib/alpine-js/intersect-3.7.1.min.js" defer></script>
+  <script src="/js-lib/alpine-js/persist-3.7.1.min.js" defer></script>
+  <script src="/js-lib/alpine-js/trap-3.7.1.min.js" defer></script>
+  <script src="/js-lib/alpine-js/collapse-3.7.1.min.js" defer></script>
+  <script src="/js-lib/alpine-js/alpinejs-3.7.1.min.js" defer></script>
+  <script src="/js-lib/jquery/jquery-3.6.0.min.js"></script>
+  <script src="/js-lib/jquery/jquery-migrate-3.4.0.min.js"></script>
+  <script src="/js-lib/moment/luxon.min.js"></script>
+  <script src="/js-lib/lodash/lodash.js"></script>
+
+  <script>
+    mxBasePath = "/js-lib/mxgraph/src";
+  </script>
+
+  <!-- <script src="/dist/js/vendor/alpine-js/alpine-ie11.min.js" defer></script> -->
+  <link rel="stylesheet" href="<?=$this->basePath("font/inter/inter.css");?>">
+  <link rel="stylesheet" href="<?=$this->basePath("css-lib/remix-icon/remixicon.css");?>">
+  <link rel="stylesheet" href="<?=$this->basePath("css-lib/spinner/spinner.css");?>">
+  <link rel="stylesheet" href="<?=$this->basePath("css-lib/animate/animate.min.min.css");?>">
+  <link rel="stylesheet" href="<?=$this->basePath("css-lib/loading/loading.css");?>">
+  <link rel="stylesheet" href="<?=$this->basePath("css-lib/loading/loading.min.css");?>">
+
+  <?=$me->partial('partial-css.phtml', ['_vars' => $_vars,'_module'=>$module,'_controller'=>$controller,'_action'=>$action,'_layout'=>$layout,'_active_menu'=>$active_menu]);?>
+
+  <?=$me->headStyle()?>
+  <style>
+    [x-cloak] {
+      display: none !important;
+    }
+
+    header>div{
+      /* background: rgb(83,212,176);
+      background: linear-gradient(90deg, rgba(83,212,176,1) 0%, rgba(93,171,216,1) 61%, rgba(102,135,240,1) 100%); */
+      background: rgb(255,255,255);
+      background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(83,212,176,1) 34%, rgba(93,171,216,1) 78%, rgba(102,135,240,1) 100%);
+    }
+  </style>
+</head>
+
+<body x-data="{mobile_open:false,mainmodal_open:false}" 
+  @show-mobilemenu.window="mobile_open = $event.detail"
+  @show-mainmodal.window="mainmodal_open = $event.detail"
+  x-init="$watch('mainmodal_open', value => {(value)?$el.style.overflow = 'hidden':$el.style.overflow = 'auto';})"
+  :class="{'overflow-hidden':mobile_open}"
+  class="antialiased font-sans bg-ebis-n bg-opacity-70 min-h-screen">
+  <div x-cloak x-show="mainmodal_open" class="z-40 bg-gray-700 bg-opacity-90 dark:bg-gray-900 absolute min-h-screen w-full h-full pt-2 top-0" id="mainmodal"></div>
+  <?=$me->partial('tailwind-leftnav/header.phtml', ['_vars' => $_vars,'_module'=>$module,'_controller'=>$controller,'_action'=>$action,'_layout'=>$layout,'_active_menu'=>$active_menu]);?>  
+  <div class="mx-auto lg:grid grid-cols-12">
+    <div class="hidden lg:block lg:col-span-2">
+      <nav aria-label="Sidebar" class="sticky divide-y divide-gray-300 h-full">
+        <?=$me->partial('tailwind-leftnav/sidebar.phtml', ['_vars' => $_vars,'_module'=>$module,'_controller'=>$controller,'_action'=>$action,'_layout'=>$layout,'_active_menu'=>$active_menu]);?>
+      </nav>
+    </div>
+    <main class="col-span-12 lg:col-span-10 px-3 py-1">
+      <?= $content; ?>
+    </main>
+    <aside class="hidden xl:block xl:col-span-4">
+      <div class="sticky top-6 space-y-4">
+        <!-- Your content -->
+      </div>
+    </aside>
+  </div>
+  
+  <?=$me->headScript();?>
+
+  <?=$me->partial('partial-js.phtml', ['_vars' => $_vars,'_module'=>$module,'_controller'=>$controller,'_action'=>$action,'_layout'=>$layout,'_active_menu'=>$active_menu]);?>
+  <?=$me->inlineScript()?>
+</body>
+</html>

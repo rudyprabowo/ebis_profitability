@@ -1,0 +1,152 @@
+<div class="bg-white dark:bg-gray-800 px-8 py-6">
+  <div class="flex items-start">
+    <div class="w-1/5">
+      <p class="text-gray-600 dark:text-gray-400 font-normal text-xs">
+        Username</p>
+      <h5 class="text-gray-800 dark:text-gray-100 font-bold text-xs" x-text="row.username"></h5>
+    </div>
+    <div class="w-1/5">
+      <p class="text-gray-600 dark:text-gray-400 font-normal text-xs">Full
+        Name</p>
+      <h5 class="text-gray-800 dark:text-gray-100 font-bold text-xs" x-text="row.full_name"></h5>
+    </div>
+    <div class="w-1/5">
+      <p class="text-gray-600 dark:text-gray-400 font-normal text-xs">
+        Email</p>
+      <h5 class="text-gray-800 dark:text-gray-100 font-bold text-xs" x-text="row.email"></h5>
+    </div>
+    <div class="w-1/5">
+      <p class="text-gray-600 dark:text-gray-400 font-normal text-xs">
+        Created date</p>
+      <h5 class="text-gray-800 dark:text-gray-100 font-bold text-xs" x-text="row.created_date"></h5>
+    </div>
+    <div class="w-1/5">
+      <p class="text-gray-600 dark:text-gray-400 font-normal text-xs">
+        Status</p>
+      <h5 :class="{'bg-green-500':row.status===1,'bg-red-500':row.status===0,'bg-gray-600':row.status===3}"
+        class="text-white font-bold text-xs inline p-1 rounded" x-text="convertStatus(row.status)">
+      </h5>
+    </div>
+  </div>
+  <div class="flex items-start mt-2">
+    <div class="w-1/5">
+      <p class="text-gray-600 dark:text-gray-400 font-normal text-xs">Main
+        Role</p>
+      <h5 class="text-gray-800 dark:text-gray-100 font-bold text-xs" x-text="row.main_role"></h5>
+    </div>
+    <div class="w-1/5">
+      <p class="text-gray-600 dark:text-gray-400 font-normal text-xs">
+        Business Unit</p>
+      <h5 class="text-gray-800 dark:text-gray-100 font-bold text-xs" x-text="row.bu"></h5>
+    </div>
+    <div class="w-1/5">
+      <p class="text-gray-600 dark:text-gray-400 font-normal text-xs">
+        Position</p>
+      <h5 class="text-gray-800 dark:text-gray-100 font-bold text-xs" x-text="row.position"></h5>
+    </div>
+    <div class="w-1/5">
+      <p class="text-gray-600 dark:text-gray-400 font-normal text-xs">
+        Location</p>
+      <h5 class="text-gray-800 dark:text-gray-100 font-bold text-xs" x-text="row.location"></h5>
+    </div>
+  </div>
+  <hr class="my-6 border-t border-gray-300 w-full" />
+  <div class="flex items-start">
+    <div class="w-1/4" x-data="{ roles: ['Role A', 'Role B', 'Role C'] }">
+      <h5 class="text-gray-600 dark:text-gray-400 text-xs mb-2 font-bold">
+        Roles</h5>
+      <p class="text-gray-800 dark:text-gray-100 font-normal text-xs w-5/6 leading-6">
+        <template x-for="role in roles">
+          <span class="bg-gray-500 p-1 rounded text-white m-1" x-text="role"></span></span>
+        </template>
+      </p>
+    </div>
+    <div class="w-1/4">
+      <h5 class="text-gray-600 dark:text-gray-400 text-xs mb-2 font-bold">
+        Business Unit</h5>
+      <div class="text-gray-800 dark:text-gray-100 font-normal text-xs w-5/6 leading-6">
+        <table class="table-auto w-full text-center">
+          <thead>
+            <tr>
+              <th class="border-b-2 border-gray-500 px-1">id</th>
+              <th class="border-b-2 border-gray-500 px-1">name
+              </th>
+              <th class="border-b-2 border-gray-500 px-1">start
+                date</th>
+              <th class="border-b-2 border-gray-500 px-1">end date
+              </th>
+            </tr>
+          </thead>
+          <tbody x-data="{ ubis: ['Ubis A', 'Ubis B', 'Ubis C'] }">
+            <template x-for="ub in ubis">
+              <tr>
+                <td class="px-1">id</td>
+                <td class="px-1" x-text="ub"></td>
+                <td class="px-1">start date</td>
+                <td class="px-1">end date</td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="w-1/4">
+      <h5 class="text-gray-600 dark:text-gray-400 text-xs mb-2 font-bold">
+        Position</h5>
+      <div class="text-gray-800 dark:text-gray-100 font-normal text-xs w-5/6 leading-6">
+        <table class="table-auto w-full text-center">
+          <thead>
+            <tr>
+              <th class="border-b-2 border-gray-500 px-1">id</th>
+              <th class="border-b-2 border-gray-500 px-1">name
+              </th>
+              <th class="border-b-2 border-gray-500 px-1">start
+                date</th>
+              <th class="border-b-2 border-gray-500 px-1">end date
+              </th>
+            </tr>
+          </thead>
+          <tbody x-data="{ position: ['Position A', 'Position B', 'Position C'] }">
+            <template x-for="pos in position">
+              <tr>
+                <td class="px-1">id</td>
+                <td class="px-1" x-text="pos"></td>
+                <td class="px-1">start date</td>
+                <td class="px-1">end date</td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="w-1/4">
+      <h5 class="text-gray-600 dark:text-gray-400 text-xs mb-2 font-bold">
+        Location</h5>
+      <div class="text-gray-800 dark:text-gray-100 font-normal text-xs w-5/6 leading-6">
+        <table class="table-auto w-full text-center">
+          <thead>
+            <tr>
+              <th class="border-b-2 border-gray-500 px-1">id</th>
+              <th class="border-b-2 border-gray-500 px-1">name
+              </th>
+              <th class="border-b-2 border-gray-500 px-1">start
+                date</th>
+              <th class="border-b-2 border-gray-500 px-1">end date
+              </th>
+            </tr>
+          </thead>
+          <tbody x-data="{ location: ['Location A', 'Location B', 'Location C'] }">
+            <template x-for="loc in location">
+              <tr>
+                <td class="px-1">id</td>
+                <td class="px-1" x-text="loc"></td>
+                <td class="px-1">start date</td>
+                <td class="px-1">end date</td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

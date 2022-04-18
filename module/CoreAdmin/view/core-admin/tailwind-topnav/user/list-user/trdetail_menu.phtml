@@ -1,0 +1,56 @@
+<ul>
+  <li class="cursor-pointer text-sm leading-3 tracking-normal flex items-center justify-center">
+    <a @click="tab=0" :class="{'text-white bg-mygreen/60':tab===0,'text-gray-800 dark:text-gray-100':tab!==0}"
+      class="p-3 border border-transparent hover:bg-mygreen/60 focus:bg-mygreen/60 focus:text-white"
+      href="javascript: void(0)">
+      <svg aria-label="Option 1" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-grid" width="20"
+        height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z"></path>
+        <rect x="4" y="4" width="6" height="6" rx="1"></rect>
+        <rect x="14" y="4" width="6" height="6" rx="1"></rect>
+        <rect x="4" y="14" width="6" height="6" rx="1"></rect>
+        <rect x="14" y="14" width="6" height="6" rx="1"></rect>
+      </svg>
+    </a>
+  </li>
+  <li class="cursor-pointer flex items-center justify-center">
+    <a @click="tab=1" :class="{'text-white bg-mygreen/60':tab===1,'text-gray-800 dark:text-gray-100':tab!==1}"
+      class="p-3 border border-transparent hover:bg-mygreen/60 focus:bg-mygreen/60 focus:text-white"
+      href="javascript:void(0)">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" stroke-width="0.1"
+        stroke="currentColor" fill="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <path
+          d="M3.783 2.826L12 1l8.217 1.826a1 1 0 0 1 .783.976v9.987a6 6 0 0 1-2.672 4.992L12 23l-6.328-4.219A6 6 0 0 1 3 13.79V3.802a1 1 0 0 1 .783-.976zM5 4.604v9.185a4 4 0 0 0 1.781 3.328L12 20.597l5.219-3.48A4 4 0 0 0 19 13.79V4.604L12 3.05 5 4.604zM12 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm-4.473 5a4.5 4.5 0 0 1 8.946 0H7.527z" />
+      </svg>
+    </a>
+  </li>
+  <li class="cursor-pointer text-sm leading-3 tracking-normal flex items-center justify-center">
+    <a @click="tab=2" :class="{'text-white bg-mygreen/60':tab===2,'text-gray-800 dark:text-gray-100':tab!==2}"
+      class="p-3 border border-transparent hover:bg-mygreen/60 focus:bg-mygreen/60 focus:text-white"
+      href="javascript:void(0)">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-briefcase" width="20" height="20"
+        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <rect x="3" y="7" width="18" height="13" rx="2" />
+        <path d="M8 7v-2a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v2" />
+        <line x1="12" y1="12" x2="12" y2="12.01" />
+        <path d="M3 13a20 20 0 0 0 18 0" />
+      </svg>
+    </a>
+  </li>
+  <li class="cursor-pointer text-sm leading-3 tracking-normal flex items-center justify-center">
+    <a @click="tab=3" :class="{'text-white bg-mygreen/60':tab===3,'text-gray-800 dark:text-gray-100':tab!==3}"
+      class="p-3 border border-transparent hover:bg-mygreen/60 focus:bg-mygreen/60 focus:text-white"
+      href="javascript:void(0)">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-layers-linked" width="20" height="20"
+        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M19 8.268a2 2 0 0 1 1 1.732v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2v-8a2 2 0 0 1 2 -2h3" />
+        <path d="M5.003 15.734a2 2 0 0 1 -1.003 -1.734v-8a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-3" />
+      </svg>
+    </a>
+  </li>
+</ul>

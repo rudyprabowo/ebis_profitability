@@ -1,0 +1,140 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $me
+ */
+$me = $this;
+// !d($me);
+$headScript = $me->headScript();
+$headScript->captureStart();
+?>
+var _is_login_error = "<?= $me->is_login_error;?>";
+var _msg = "<?= $me->msg;?>";
+var _wait = <?= $me->wait_time;?>;
+<?php
+$headScript->captureEnd();
+
+$ini_reader = new \Laminas\Config\Reader\Ini();
+$conf = $ini_reader->fromFile(conf_path() . env('APPLICATION_ENV') . ".conf");
+$app_conf = $conf['app-config'];
+/** @var \Laminas\View\Helper\HeadStyle $headStyle */
+$headStyle = $this->headLink();
+?>
+<?php $this->headStyle()->captureStart() ?>
+body {
+  /* The image used */
+  background-image: url("/img/login/bg-1.png");
+
+  width: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+<?php $this->headStyle()->captureEnd() ?>
+<main class="min-h-screen font-montserrat relative">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-3">
+    <div class="col-start-2 col-end-2 w-full pr-3">
+      <img class="w-32 float-right" src="/img/welcome/image7.gif" />
+    </div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-2 p-3">
+    <div class=""></div>
+    <div class="md:col-span-5 text-center md:-mt-10">
+      <h1 class="font-medium text-[1.7rem] md:text-[2rem] leading-[2rem] md:leading-[2.5rem] text-ebis-g tracking-wide">EBIS Profitability Analytics Platform</h1>
+      <h1 class="text-[1.3rem] md:text-[1.5rem] leading-[2rem] md:leading-[2.5rem] text-ebis-g tracking-wide">for Healthy Business Monitoring in CFUE</h1>
+      <div class="mx-auto w-3/4 md:w-3/5 mt-5">
+        <form class="space-y-6" action="#" method="POST">
+          <div>
+            <!-- <label for="username" class="block text-sm font-medium text-red-800">
+              Username
+            </label> -->
+            <div class="mt-1" x-data>
+              <input x-on:blur="$store.login_form.readonly.username = true" x-on:focus="$store.login_form.readonly.username = false" 
+                x-on:click="$store.login_form.readonly.username = false" x-model="$store.login_form.value.username" 
+                x-bind:readonly="$store.login_form.readonly.username" id="username" name="username" type="text" 
+                autocomplete="off" placeholder="NIK" class="text-center appearance-none form-input block w-full px-3 py-1 text-ebis-c border border-gray-300 rounded-xl shadow-sm placeholder-ebis-c caret-ebis-c focus:outline-none focus:ring-ebis-c focus:border-ebis-c text-lg">
+              <span x-cloak x-show="$store.msg.form.username!=''" x-html="$store.msg.form.username" class="w-full text-xs block bg-red-200 mt-1 rounded px-2 py-1 text-right text-red-900"></span>
+            </div>
+          </div>
+
+          <div>
+            <!-- <label for="password" class="block text-sm font-medium text-red-800">
+              Password
+            </label> -->
+            <div x-data class="mt-1">
+              <input x-on:blur="$store.login_form.readonly.password = true" x-on:focus="$store.login_form.readonly.password = false" 
+                x-on:click="$store.login_form.readonly.password = false" x-model="$store.login_form.value.password" 
+                x-bind:readonly="$store.login_form.readonly.password" id="password" name="password" type="password" 
+                autocomplete="off"  placeholder="Password" class="text-center appearance-none form-input block w-full px-3 py-1 text-ebis-c border border-gray-300 rounded-xl shadow-sm placeholder-ebis-c caret-ebis-c focus:outline-none focus:ring-ebis-c focus:border-ebis-c text-lg">
+              <span x-cloak x-show="$store.msg.form.password!=''" x-html="$store.msg.form.password" class="w-full text-xs block bg-red-200 mt-1 rounded px-2 py-1 text-right text-red-900"></span>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <input id="remember_me" name="remember_me" type="checkbox" class="h-4 w-4 text-ebis-c focus:ring-ebis-c border-gray-300 rounded form-checkbox">
+              <label for="remember_me" class="ml-2 block text-sm text-ebis-g">
+                Remember Me
+              </label>
+            </div>
+            <a href="#" class="ml-2 block font-bold text-sm bg-ebis-i text-white py-1 px-2 rounded">
+                Reset Password
+            </a>
+          </div>
+
+          <div class="flex items-center justify-between w-full">
+            <div x-data class="flex flex-col items-center w-full">
+              <img class="grow w-full bg-none" src="<?= $captcha->getImgUrl().$captcha->getId().'.png'; ?>" />
+              <input x-on:blur="$store.login_form.readonly.captcha = true" x-on:focus="$store.login_form.readonly.captcha = false" x-on:click="$store.login_form.readonly.captcha = false" x-model="$store.login_form.value.captcha" x-bind:readonly="$store.login_form.readonly.captcha" id="captcha_val" name="captcha[input]" type="text" autocomplete="off"
+              class="grow w-full bg-transparent appearance-none block px-3 py-2 mt-2 text-ebis-g border-b-2 border-ebis-g placeholder-ebis-g caret-ebis-g text-2xl font-bold focus-visible:outline-none text-center" />
+              <div x-cloak x-show="$store.msg.form.captcha!=''" x-html="$store.msg.form.captcha"
+              class="grow w-full text-xs block bg-red-200 mt-1 rounded px-2 py-1 text-center text-red-900"></div>
+            </div>
+          </div>
+
+          <div>
+            <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-ebis-d hover:bg-ebis-c focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ebis-c">
+              Sign in
+            </button>
+          </div>
+
+          <div x-data class="mt-3" x-show="$store.msg.info!=''">
+            <span class="w-full block bg-blue-200 mt-1 rounded p-2 text-center text-blue-900" x-html="$store.msg.info"></span>
+          </div>
+
+          <input id="captcha_id" name="captcha[id]" type="hidden" value="<?= $captcha_id ?>" />
+          <?=$this->formElement($form->get('redirect_url'));?>
+          <?=$this->formElement($form->get('csrf'))?>
+          <input type="hidden" name="meta_csrf_name" x-model="$store.login_form.value.meta_csrf_name">
+          <input type="hidden" name="meta_csrf_value" x-model="$store.login_form.value.meta_csrf_value">
+        </form>
+      </div>
+    </div>
+    <div class="md:col-span-6 w-full mb-5">
+      <img class="w-full md:w-3/4 m-auto" src="/img/login/img-1.png" />
+    </div>
+  </div>
+  <div class="flex flex-wrap w-full text-ebis-h space-x-reverse justify-center items-center space-y-5 space-x-5 px-3 pb-3">
+    <div class="mt-5">
+      <h1 class="text-sm md:text-lg">
+        2022 Profitability Analytics EBIS - PT Telkom Indonesia Tbk
+      </h1>
+    </div>
+  </div>
+
+  <div x-data x-show="$store.loader.main" class="loader top-0 w-full h-full absolute text-center mx-auto bg-bluegray-800 opacity-70">
+      <div class="ball-grid-pulse text-center absolute left-1/2 top-1/2 mt-[-30px] ml-[-30px]">
+          <div class="bg-ebis-d"></div>
+          <div class="bg-ebis-d"></div>
+          <div class="bg-ebis-d"></div>
+          <div class="bg-ebis-d"></div>
+          <div class="bg-ebis-d"></div>
+          <div class="bg-ebis-d"></div>
+          <div class="bg-ebis-d"></div>
+          <div class="bg-ebis-d"></div>
+          <div class="bg-ebis-d"></div>
+          <span class=" text-white text-lg ml-[-25px]">processing....</span>
+      </div>
+  </div>
+</main>

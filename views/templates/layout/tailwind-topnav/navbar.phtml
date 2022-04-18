@@ -1,0 +1,118 @@
+<?php
+$me = $this;
+$ini_reader = new \Laminas\Config\Reader\Ini();
+$conf = $ini_reader->fromFile(conf_path() . env('APPLICATION_ENV') . ".conf");
+$app_conf = $conf['app-config'];
+$identity = $me->identity();
+/** @var Core\Helper\Layout\TailwindTopNav $layoutHelper */
+$layoutHelper = $me->TailwindTopNavLayout();
+$layoutHelper->generateMenu($identity, $me->_module);
+/** @var Core\Helper\View\Routing $routingHelper */
+$routingHelper = $me->Routing();
+// zdebug($_module);die();
+$logoutRoute = strtolower($_module)."/auth/logout";
+if (!$routingHelper->hasRoute($logoutRoute)) {
+    $logoutRoute = 'app/auth/logout';
+    if (!$routingHelper->hasRoute($logoutRoute)) {
+        $logoutRoute = 'coreadmin/auth/logout';
+    }
+}
+?>
+
+<!-- Static sidebar for desktop -->
+<div class="flex flex-col min-w-0 flex-1 overflow-hidden">
+  <div class="">
+    <div class="flex items-center justify-between space-x-5 bg-bluegray-800 border-b border-gray-200 px-4 py-1.5">
+      <div>
+        <img class="h-8 w-auto inline-block align-middle" src="<?=$me->basePath("img/open_source.png");?>"
+          alt="<?= $app_conf['app_name']; ?>">
+        <span class="text-white font-extrabold inline-block text-2  xl align-middle"><?= $app_conf['app_name']; ?></span>
+      </div>
+      <div class="hidden lg:block flex-grow">
+        <div class="flex space-x-1 justify-start">
+          <!-- Current: "bg-bluegray-900 text-white", Default: "text-bluegray-300 hover:bg-bluegray-700 hover:text-white" -->
+          <div x-data="{ open_0: false }" @keydown.escape="open_0 = false" @click.away="open_0 = false"
+            class="relative inline-block text-left">
+            <div>
+              <button @click="open_0 = !open_0" type="button"
+                class="flex items-center hover:bg-bluegray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium focus:outline-none"
+                x-bind:class="{ 'bg-white': open_0 ,'text-bluegray-300': !open_0,'text-bluegray-900': open_0 }"
+                 aria-haspopup="true" aria-expanded="true" x-bind:aria-expanded="open_0">
+                <em class="ri-apps-fill"></em>
+              </button>
+            </div>
+
+            <div x-cloak x-show="open_0"
+              x-transition:enter="transition ease-out duration-100"
+              x-transition:enter-start="transform opacity-0 scale-95"
+              x-transition:enter-end="transform opacity-100 scale-100"
+              x-transition:leave="transition ease-in duration-75"
+              x-transition:leave-start="transform opacity-100 scale-100"
+              x-transition:leave-end="transform opacity-0 scale-95"
+              class="origin-top-left absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 z-10"
+              role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+              <?= $layoutHelper->generateTopMenu($me); ?>
+            </div>
+          </div>
+          <?= $layoutHelper->generateSideMenu($me); ?>
+        </div>
+      </div>
+      <div class="hidden lg:block text-white font-bold">
+        <?= $identity['full_name']??"Guest"; ?>
+      </div>
+      <div class="hidden lg:block">
+        <div class="flex items-center">
+          <!-- Profile dropdown -->
+          <div @click.away="open = false" class="ml-3 relative" x-data="{ open: false }">
+            <div>
+              <button @click="open = !open"
+                class="bg-bluegray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-bluegray-800 focus:ring-white"
+                id="user-menu" aria-haspopup="true" x-bind:aria-expanded="open">
+                <span class="sr-only">Open user menu</span>
+                <img class="h-8 w-8 rounded-full" src="<?=$me->basePath("img/open_source.png");?>" alt="">
+              </button>
+            </div>
+            <div x-show="open" x-description="Profile dropdown panel, show/hide based on dropdown state."
+              x-transition:enter="transition ease-out duration-100"
+              x-transition:enter-start="transform opacity-0 scale-95"
+              x-transition:enter-end="transform opacity-100 scale-100"
+              x-transition:leave="transition ease-in duration-75"
+              x-transition:leave-start="transform opacity-100 scale-100"
+              x-transition:leave-end="transform opacity-0 scale-95"
+              class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 z-20"
+              role="menu" aria-orientation="vertical" aria-labelledby="user-menu" style="display: none;">
+              <!-- <a href="#" class="block px-4 py-2 text-sm text-bluegray-700 hover:bg-bluegray-100" role="menuitem">Your
+                Profile</a> -->
+              <!-- <a href="#" class="block px-4 py-2 text-sm text-bluegray-700 hover:bg-bluegray-100"
+                role="menuitem">Settings</a> -->
+              <a href="<?= $me->url($logoutRoute);?>" class="block px-4 py-2 text-sm text-bluegray-700 hover:bg-bluegray-100 align-middle" role="menuitem"><em class="align-middle font-bold ri-logout-box-line"></em> Sign out</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lg:hidden">
+        <button type="button" @click.stop="sidebarOpen = true"
+          class="-mr-3 h-12 w-12 inline-flex items-center justify-center rounded-md text-white hover:text-mygreen lg:invisible">
+          <span class="sr-only">Open sidebar</span>
+          <svg class="h-6 w-6" x-description="Heroicon name: menu" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <?=$me->partial('tailwind-topnav/breadcrumb.phtml', ['_vars' => $me->_vars,'_module'=>$me->module,'_controller'=>$me->controller,'_action'=>$me->action,'_layout'=>$me->layout,'_active_menu'=>$me->active_menu]);?>
+  <div class="flex-1 relative z-0 flex overflow-hidden">
+    <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none xl:order-last" tabindex="0" x-data=""
+      x-init="$el.focus()">
+      <!-- Start main area-->
+      <div class="absolute inset-0 py-3 px-2 sm:px-3 lg:px-4">
+        <div class="relative">
+        <?= $me->content; ?>
+        </div>
+      </div>
+      <!-- End main area -->
+    </main>
+  </div>
+</div>

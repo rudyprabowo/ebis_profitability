@@ -1,0 +1,21 @@
+<?php
+$me = $this;
+$headScript = $me->headScript();
+$headScript->appendFile($me->basePath("js-lib/alpine-js/alpinejs-3.3.3.min.js"));
+$headScript->appendFile($me->basePath("js-lib/ckeditor5/ckeditor.js"));
+?>
+<div id="editor"></div>
+<div class="flex gap-4 justify-center mt-3">
+  <button class="py-1 px-2 text-white bg-green-500 hover:bg-green-700 rounded" onclick="submitForm()">SUBMIT via FORM</button>
+  <button class="py-1 px-2 text-white bg-red-500 hover:bg-red-700 rounded" onclick="submitAjax()">SUBMIT via AJAX</button>
+  <button class="py-1 px-2 text-white bg-blue-500 hover:bg-blue-700 rounded" onclick="submitFetch()">SUBMIT via FETCH</button>
+  <button class="py-1 px-2 text-black bg-gray-300 hover:bg-gray-700 hover:text-white rounded" onclick="resetEditor()">RESET</button>
+</div>
+<div class="full-screen p-5">
+  <h4>Editor Data</h4>
+  <div class="border border-gray-300 min-h-[20vh] full-screen py-1 px-3" id="show-content"></div>
+</div>
+<div class="full-screen p-5">
+  <h4>Encode Data</h4>
+  <div class="border border-gray-300 min-h-[20vh] full-screen py-1 px-3" id="show-content2"></div>
+</div>

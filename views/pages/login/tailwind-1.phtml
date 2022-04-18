@@ -1,0 +1,146 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $me
+ */
+$me = $this;
+// !d($me);
+$headScript = $me->headScript();
+$headScript->captureStart();
+?>
+var _is_login_error = "<?= $me->is_login_error;?>";
+var _msg = "<?= $me->msg;?>";
+var _wait = <?= $me->wait_time;?>;
+<?php
+$headScript->captureEnd();
+?>
+<!-- blank layout -->
+<?=$me->doctype()?>
+<?php
+$content = $me->content;
+// zdebug($content);die();
+// !d(get_class_methods($me));//die();
+$vars = $me->vars();
+// !d($vars);die();
+$_vars = $vars['_vars_']??[];
+$module = $_vars['module']??"";
+$controller = $_vars['controller']??"";
+$controller = str_replace("Controller", "", $controller);
+$action = $_vars['action']??"";
+$layout = $_vars['layout']??"";
+// !d($layout);die();
+$active_menu = $me->active_menu??"";
+if (isset($vars['content'])) {
+    unset($vars['content']);
+}
+
+$ini_reader = new \Laminas\Config\Reader\Ini();
+$conf = $ini_reader->fromFile(conf_path() . env('APPLICATION_ENV') . ".conf");
+$app_conf = $conf['app-config'];
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+  <?=$me->headMeta()?>
+  <?=$me->headTitle()->setAutoEscape(false)?>
+  <?=$me->headLink(['rel' => 'shortcut icon', 'type' => 'image/png', 'href' => $me->basePath() . '/img/open_source.png']);?>
+  <link rel="stylesheet" href="<?=$this->basePath("css-lib/spinner/spinner.css");?>">
+  <?=$me->partial('partial-css.phtml', ['_vars' => $_vars,'_module'=>$module,'_controller'=>$controller,'_action'=>$action,'_layout'=>$layout,'_active_menu'=>$active_menu]);?>
+
+  <script src="/js-lib/alpine-js/alpinejs-3.0.6.min.js" defer></script>
+
+  <?=$me->headStyle()?>
+</head>
+<body>
+
+  <div class="min-h-screen bg-gray-50 flex flex-col justify-center py-8 sm:px-6 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-md">
+      <img class="mx-auto h-36 w-auto" src="<?= $me->basePath() . '/img/open_source.png';?>" alt="Workflow">
+      <h1 class="mt-0 text-center text-4xl font-extrabold text-mygreen-dark">
+        <?= strtoupper($app_conf['app_name']); ?>
+      </h1>
+      <h2 class="mt-6 text-center text-2xl font-bold text-gray-900">
+        Sign in to your account
+      </h2>
+    </div>
+
+    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+      <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 ring-mygreen-dark/30 ring-1">
+        <form class="space-y-6" action="#" method="POST">
+          <div>
+            <label for="username" class="block text-sm font-medium text-mygreen-dark">
+              Username
+            </label>
+            <div class="mt-1" x-data>
+              <input x-on:blur="$store.login_form.readonly.username = true" x-on:focus="$store.login_form.readonly.username = false" x-on:click="$store.login_form.readonly.username = false" x-model="$store.login_form.value.username" x-bind:readonly="$store.login_form.readonly.username" id="username" name="username" type="text" autocomplete="off" class="appearance-none form-input block w-full px-3 py-2 bg-mygreen/10 text-mygreen-dark border border-gray-300 rounded-md shadow-sm placeholder-mygreen caret-mygreen focus:outline-none focus:ring-mygreen focus:border-mygreen sm:text-sm">
+              <span x-cloak x-show="$store.msg.form.username!=''" x-html="$store.msg.form.username" class="w-full text-xs block bg-red-200 mt-1 rounded px-2 py-1 text-right text-red-900"></span>
+            </div>
+          </div>
+
+          <div>
+            <label for="password" class="block text-sm font-medium text-mygreen-dark">
+              Password
+            </label>
+            <div x-data class="mt-1">
+              <input x-on:blur="$store.login_form.readonly.password = true" x-on:focus="$store.login_form.readonly.password = false" x-on:click="$store.login_form.readonly.password = false" x-model="$store.login_form.value.password" x-bind:readonly="$store.login_form.readonly.password" id="password" name="password" type="password" autocomplete="off" class="appearance-none block w-full px-3 py-2 bg-mygreen/10 text-mygreen-dark border border-gray-300 rounded-md shadow-sm placeholder-mygreen caret-mygreen focus:outline-none focus:ring-mygreen focus:border-mygreen sm:text-sm">
+              <span x-cloak x-show="$store.msg.form.password!=''" x-html="$store.msg.form.password" class="w-full text-xs block bg-red-200 mt-1 rounded px-2 py-1 text-right text-red-900"></span>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <input id="remember_me" name="remember_me" type="checkbox" class="h-4 w-4 text-mygreen focus:ring-mygreen border-gray-300 rounded form-checkbox">
+              <label for="remember_me" class="ml-2 block text-sm text-mygreen-dark">
+                Remember me
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-mygreen/90 hover:bg-mygreen focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-mygreen-light">
+              Sign in
+            </button>
+          </div>
+
+          <div x-data class="mt-3" x-show="$store.msg.info!=''">
+            <span class="w-full block bg-blue-200 mt-1 rounded p-2 text-center text-blue-900" x-html="$store.msg.info"></span>
+          </div>
+          <?=$me->formElement($form->get('redirect_url'));?>
+          <?=$me->formElement($form->get('csrf'))?>
+          <input type="hidden" name="meta_csrf_name" x-model="$store.login_form.value.meta_csrf_name">
+          <input type="hidden" name="meta_csrf_value" x-model="$store.login_form.value.meta_csrf_value">
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <div x-data x-show="$store.loader.main" class="loader top-0 w-full h-full absolute text-center mx-auto bg-bluegray-800 opacity-70">
+      <div class="ball-grid-pulse text-center absolute left-1/2 top-1/2 mt-[-30px] ml-[-30px]">
+          <div class="bg-mygreen"></div>
+          <div class="bg-mygreen"></div>
+          <div class="bg-mygreen"></div>
+          <div class="bg-mygreen"></div>
+          <div class="bg-mygreen"></div>
+          <div class="bg-mygreen"></div>
+          <div class="bg-mygreen"></div>
+          <div class="bg-mygreen"></div>
+          <div class="bg-mygreen"></div>
+          <span class=" text-white text-lg ml-[-25px]">processing....</span>
+      </div>
+  </div>
+
+  <script src="<?=$me->basePath("js-lib/lodash/lodash.js");?>"></script>
+  <script src="<?=$me->basePath("js-lib/validate/validate.min.js");?>"></script>
+  <!-- END GLOBAL MANDATORY SCRIPTS -->
+  <script src="<?=$me->basePath("js/him/validate.js");?>"></script>
+
+  <?=$me->headScript();?>
+
+  <?=$me->partial('partial-js.phtml', ['_vars' => $_vars,'_module'=>$module,'_controller'=>$controller,'_action'=>$action,'_layout'=>$layout,'_active_menu'=>$active_menu]);?>
+  <?=$me->inlineScript()?>
+
+</body>
+</html>

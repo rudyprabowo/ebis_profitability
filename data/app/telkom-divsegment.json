@@ -1,0 +1,30 @@
+{
+    "DES": [
+        "CTS",
+        "MCS",
+        "EMS",
+        "MMS",
+        "ERS",
+        "HWS",
+        "MLS",
+        "AFS",
+        "BMS",
+        "TMS",
+        "FMS",
+        "RDS",
+        "PNBS"
+    ],
+    "DBS": [
+        "TRB",
+        "CCS",
+        "MCB",
+        "HTB",
+        "LEF"
+    ],
+    "DGS": [
+        "GAS",
+        "MPS",
+        "LGS",
+        "CGS"
+    ]
+}
